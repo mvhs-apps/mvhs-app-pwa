@@ -10,7 +10,7 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const OfflinePlugin = require('offline-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const ShakePlugin = require('webpack-common-shake').Plugin;
 
 const paths = require('./paths');
@@ -44,7 +44,7 @@ const cssFilename = 'static/css/[name].[contenthash:8].css';
 // To have this structure working with relative paths, we have to use custom options.
 const extractTextPluginOptions = shouldUseRelativeAssetPaths
   ? // Making sure that the publicPath goes back to to build folder.
-    { publicPath: Array(cssFilename.split('/').length).join('../') }
+  {publicPath: Array(cssFilename.split('/').length).join('../')}
   : {};
 
 // This is the production configuration.
@@ -254,7 +254,7 @@ module.exports = {
       inject: true,
       template: paths.appHtml,
       //Workaround to get the correct order in index.html
-      chunksSortMode: function(chunk1, chunk2) {
+      chunksSortMode: function (chunk1, chunk2) {
         const orders = ['manifest', 'vendor', 'main'];
         const order1 = orders.indexOf(chunk1.names[0]);
         const order2 = orders.indexOf(chunk2.names[0]);
@@ -328,7 +328,7 @@ module.exports = {
         '/icons/android-chrome-512x512.png'
       ],
       AppCache: {
-        FALLBACK: { '/': '/' }
+        FALLBACK: {'/': '/'}
       },
       ServiceWorker: {
         output: 'service-worker.js',
@@ -339,7 +339,7 @@ module.exports = {
     //Code split with vendor chunk
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: function(module) {
+      minChunks: function (module) {
         // this assumes your vendor imports exist in the node_modules directory
         return module.context && module.context.indexOf('node_modules') !== -1;
       }

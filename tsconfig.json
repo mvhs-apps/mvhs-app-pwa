@@ -3,7 +3,10 @@
     "outDir": "build/dist",
     "module": "esnext",
     "target": "es6",
-    "lib": ["es6", "dom"],
+    "lib": [
+      "es6",
+      "dom"
+    ],
     "sourceMap": true,
     "allowJs": false,
     "jsx": "react",
@@ -27,5 +30,7 @@
     "jest",
     "src/setupTests.ts"
   ],
-  "types": ["typePatches"]
+  "types": [
+    "typePatches"
+  ]
 }

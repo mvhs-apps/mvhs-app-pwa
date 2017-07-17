@@ -18,10 +18,8 @@ import rootReducer from './reducers/index';
 import 'default-passive-events/default-passive-events';
 import 'preact/devtools';
 
-
 const epicMiddleware = createEpicMiddleware(rootEpic, {
-  dependencies: {
-  }
+  dependencies: {}
 });
 const store = createStore(
   rootReducer,

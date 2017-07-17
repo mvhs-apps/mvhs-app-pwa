@@ -6,10 +6,8 @@ export interface Action extends ReduxAction {
   error?: boolean;
 }
 
-export interface StoreState {
-}
+export interface StoreState {}
 
-const rootReducer = combineReducers({
-});
+const rootReducer = combineReducers({});
 
 export default rootReducer;
