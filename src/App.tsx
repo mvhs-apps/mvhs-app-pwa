@@ -5,9 +5,9 @@ import { createStyleSheet, withStyles } from 'material-ui/styles';
 import BottomNavigation, {
   BottomNavigationButton
 } from 'material-ui/BottomNavigation';
-import RestoreIcon from 'material-ui-icons/Restore';
-import FavoriteIcon from 'material-ui-icons/Favorite';
-import LocationOnIcon from 'material-ui-icons/LocationOn';
+import NotificationIcon from 'material-ui-icons/Notifications';
+import MapIcon from 'material-ui-icons/Map';
+import SearchIcon from 'material-ui-icons/Search';
 import 'typeface-roboto';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -53,10 +53,10 @@ class App extends Component {
           >
             <BottomNavigationButton
               label="Bell Schedule"
-              icon={<RestoreIcon />}
+              icon={<NotificationIcon />}
             />
-            <BottomNavigationButton label="Map" icon={<FavoriteIcon />} />
-            <BottomNavigationButton label="Search" icon={<LocationOnIcon />} />
+            <BottomNavigationButton label="Map" icon={<MapIcon />} />
+            <BottomNavigationButton label="Search" icon={<SearchIcon />} />
           </BottomNavigation>
         </div>
       </MuiThemeProvider>
