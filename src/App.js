@@ -2,9 +2,7 @@ import * as React from 'react';
 
 import './App.css';
 
-import BottomNavigation, {
-  BottomNavigationButton
-} from 'material-ui/BottomNavigation';
+import BottomNavigation, {BottomNavigationButton} from 'material-ui/BottomNavigation';
 import NotificationIcon from 'material-ui-icons/Notifications';
 import MapIcon from 'material-ui-icons/Map';
 import SearchIcon from 'material-ui-icons/Search';
@@ -20,11 +18,11 @@ class App extends React.Component {
   };
 
   handleChange = (event, value) => {
-    this.setState({ index: value });
+    this.setState({index: value});
   };
 
   render() {
-    const classes = { root: 'App' };
+    const classes = {root: 'App'};
     const value = this.state.index;
 
     return (
@@ -34,10 +32,7 @@ class App extends React.Component {
         {this.state.index === 2 && <Search />}
 
         <BottomNavigation value={value} onChange={this.handleChange} showLabels>
-          <BottomNavigationButton
-            label="Bell Schedule"
-            icon={<NotificationIcon />}
-          />
+          <BottomNavigationButton label="Bell Schedule" icon={<NotificationIcon />} />
           <BottomNavigationButton label="Map" icon={<MapIcon />} />
           <BottomNavigationButton label="Search" icon={<SearchIcon />} />
         </BottomNavigation>
