@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import './App.css';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+// import {createStyleSheet, withStyles} from "material-ui/styles";
 import BottomNavigation, {
   BottomNavigationButton
 } from 'material-ui/BottomNavigation';
@@ -17,35 +17,27 @@ import Search from './components/search';
 
 class App extends Component {
   state = {
-    value: 0
+    index: 0
   };
 
-  handleChange = (event: any, value: any) => {
+  handleChange = (event, value) => {
+    console.log('setting state to ' + value);
     this.setState({ value });
   };
 
   render() {
     const classes = { root: 'App' };
-    const value = this.state.value;
+    const value = this.state.index;
 
-    let CurrentComponent = React.createClass({
-      render: function() {
-        // make sure this var starts with a capital letter
-        if (value == 0) {
-          return <BellSchedule />;
-        } else if (value == 1) {
-          return <Map />;
-        } else {
-          return <Search />;
-        }
-      }
-    });
-
-    let thingToReturn = (
+    return (
       <MuiThemeProvider>
         <div className={classes.root}>
-          {/*Put stuff here*/}
-          <CurrentComponent />
+          {this.state.index === 1 && <Map />}
+
+          {this.state.index === 0 && <BellSchedule />}
+
+          {this.state.index === 2 && <Search />}
+
           <BottomNavigation
             value={value}
             onChange={this.handleChange}
@@ -61,9 +53,11 @@ class App extends Component {
         </div>
       </MuiThemeProvider>
     );
-
-    return thingToReturn;
   }
 }
+
+App.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
 export default App;
