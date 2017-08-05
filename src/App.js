@@ -20,8 +20,7 @@ class App extends React.Component {
   };
 
   handleChange = (event, value) => {
-    console.log('setting state to ' + value);
-    this.setState({ value });
+    this.setState({ index: value });
   };
 
   render() {
@@ -30,17 +29,11 @@ class App extends React.Component {
 
     return (
       <div className={classes.root}>
-        {this.state.index === 1 && <Map />}
-
         {this.state.index === 0 && <BellSchedule />}
-
+        {this.state.index === 1 && <Map />}
         {this.state.index === 2 && <Search />}
 
-        <BottomNavigation
-          value={value}
-          onChange={this.handleChange}
-          showLabels={true}
-        >
+        <BottomNavigation value={value} onChange={this.handleChange} showLabels>
           <BottomNavigationButton
             label="Bell Schedule"
             icon={<NotificationIcon />}
@@ -50,14 +43,6 @@ class App extends React.Component {
         </BottomNavigation>
       </div>
     );
-
-    /*return       <div className={classes.root}>
-     <BottomNavigation value={value} onChange={this.handleChange} showLabels>
-     <BottomNavigationButton label="Recents" icon={<NotificationIcon/>} />
-     <BottomNavigationButton label="Favorites" icon={<MapIcon />} />
-     <BottomNavigationButton label="Nearby" icon={<SearchIcon/>} />
-     </BottomNavigation>
-     </div>*/
   }
 }
 
