@@ -86,7 +86,7 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/290
     // `web` extension prefixes have been added for better support
     // for React Native Web.
-    extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx', '.ts', '.tsx'],
+    extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx', '.ts'],
     alias: {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -125,12 +125,6 @@ module.exports = {
         ],
         include: paths.appSrc
       },
-      {
-        test: /\.(ts|tsx)$/,
-        loader: require.resolve('tslint-loader'),
-        enforce: 'pre',
-        include: paths.appSrc
-      },
       // ** ADDING/UPDATING LOADERS **
       // The "file" loader handles all assets unless explicitly excluded.
       // The `exclude` list *must* be updated with every change to loader extensions.
@@ -144,7 +138,6 @@ module.exports = {
         exclude: [
           /\.html$/,
           /\.(js|jsx)$/,
-          /\.(ts|tsx)$/,
           /\.css$/,
           /\.json$/,
           /\.bmp$/,
@@ -178,15 +171,6 @@ module.exports = {
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
           cacheDirectory: true
-        }
-      },
-      {
-        test: /\.(ts|tsx)$/,
-        include: paths.appSrc,
-        loader: require.resolve('awesome-typescript-loader'),
-        query: {
-          useBabel: true,
-          useCache: true
         }
       },
       // "postcss" loader applies autoprefixer to our CSS.
