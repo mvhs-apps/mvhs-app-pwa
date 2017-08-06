@@ -1,44 +1,73 @@
-import * as React from 'react';
+// @flow
+
+import React from 'react';
 
 import './App.css';
 
-import BottomNavigation, {BottomNavigationButton} from 'material-ui/BottomNavigation';
 import NotificationIcon from 'material-ui-icons/Notifications';
 import MapIcon from 'material-ui-icons/Map';
 import SearchIcon from 'material-ui-icons/Search';
-import 'typeface-roboto';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import Tabs, { Tab } from 'material-ui/Tabs';
 
 import BellSchedule from './components/bellSchedule';
 import Map from './components/map';
 import Search from './components/search';
 
-class App extends React.Component {
-  state = {
-    index: 0
-  };
+import {
+  BrowserRouter as Router,
+  Route,
+  withRouter
+} from 'react-router-dom'
+import type {RouterHistory} from 'react-router-dom';
 
-  handleChange = (event, value) => {
-    this.setState({index: value});
-  };
+const LinkTab = withRouter(({to, history, ...props}: {to: string, history: RouterHistory}) => (
+  <Tab
+    onClick={() => { history.push(to)}}
+    {...props}
+  />
+));
 
-  render() {
-    const classes = {root: 'App'};
-    const value = this.state.index;
+const handleTabChange = () => {};
+const RouterTabs = withRouter(({history, routes, ...props}: {history: RouterHistory, routes: string[]}) => {
+  const index = routes.indexOf(history.location.pathname);
+  return (
+    <Tabs
+      index={index || 0}
+      onChange={handleTabChange}
+      {...props}
+    />
+  );
+});
 
-    return (
-      <div className={classes.root}>
-        {this.state.index === 0 && <BellSchedule />}
-        {this.state.index === 1 && <Map />}
-        {this.state.index === 2 && <Search />}
+const routes = ['/', '/map', '/search'];
 
-        <BottomNavigation value={value} onChange={this.handleChange} showLabels>
-          <BottomNavigationButton label="Bell Schedule" icon={<NotificationIcon />} />
-          <BottomNavigationButton label="Map" icon={<MapIcon />} />
-          <BottomNavigationButton label="Search" icon={<SearchIcon />} />
-        </BottomNavigation>
+const App = () => {
+  return (
+    <Router>
+      <div>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography type="title" color="inherit">
+              MVHS App
+            </Typography>
+          </Toolbar>
+
+          <RouterTabs routes={routes} fullWidth={true} centered={true}>
+            <LinkTab icon={<NotificationIcon />} to={routes[0]}/>
+            <LinkTab icon={<MapIcon />} to={routes[1]}/>
+            <LinkTab icon={<SearchIcon />} to={routes[2]}/>
+          </RouterTabs>
+        </AppBar>
+
+        <Route exact path={routes[0]} component={BellSchedule}/>
+        <Route path={routes[1]} component={Map}/>
+        <Route path={routes[2]} component={Search}/>
       </div>
-    );
-  }
-}
+    </Router>
+  );
+};
 
 export default App;

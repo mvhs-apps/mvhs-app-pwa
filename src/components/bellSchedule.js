@@ -1,10 +1,9 @@
-import { Component } from 'react';
-import * as React from 'react';
+import React from 'react';
 
-class BellSchedule extends Component {
-  render() {
-    return <div>Bell Schedule</div>;
-  }
-}
+const BellSchedule = () => {
+  return <div>Bell Schedule</div>;
+};
+
+BellSchedule.propTypes = {};
 
 export default BellSchedule;
