@@ -12,7 +12,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Tabs, { Tab } from 'material-ui/Tabs';
 
-import BellSchedule from './components/bellSchedule';
+import CurrentBellSchedule from './containers/CurrentBellSchedule';
 import Map from './components/map';
 import Search from './components/search';
 
@@ -62,7 +62,7 @@ const App = () => {
           </RouterTabs>
         </AppBar>
 
-        <Route exact path={routes[0]} component={BellSchedule}/>
+        <Route exact path={routes[0]} component={CurrentBellSchedule}/>
         <Route path={routes[1]} component={Map}/>
         <Route path={routes[2]} component={Search}/>
       </div>
