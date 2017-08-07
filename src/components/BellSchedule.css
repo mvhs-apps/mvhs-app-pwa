@@ -1,3 +1,13 @@
 .bell-schedule {
   padding: 16px;
 }
+
+.bell-schedule-empty {
+  padding: 24px;
+}
+
+.bell-schedule-loading {
+  padding: 24px;
+  text-align: center;
+  width: 100%;
+}

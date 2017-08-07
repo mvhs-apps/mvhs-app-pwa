@@ -8,7 +8,8 @@ import type {Period} from '../components/BellSchedule';
 
 class CurrentBellSchedule extends React.PureComponent {
   state = {
-    periods: []
+    periods: [],
+    loading: true
   };
 
   db: Database;
@@ -20,18 +21,27 @@ class CurrentBellSchedule extends React.PureComponent {
     this.getBellSchedule().then(
       (periods: Period[]) => {
         this.setState({
-          periods: periods
+          periods: periods,
+          loading: false
         });
       },
       err => {
         console.log(err);
+        this.setState({
+          loading: false
+        });
       }
     );
   }
 
+  to12Hour(hour: string){
+    const hourInt = parseInt(hour);
+    return hourInt > 12 ? hourInt - 12 : hourInt;
+  }
+
   async getBellSchedule() {
     const now = new Date();
-    const dayOfWeek = now.getDay();
+    const dayOfWeek = /*now.getDay()*/ 1;
 
     let snapshot = await this.db.ref('/weekday-map').once('value');
     const weekdayMap = snapshot.val();
@@ -41,13 +51,13 @@ class CurrentBellSchedule extends React.PureComponent {
     const periods: Period[] = [];
     const scheduleData = snapshot.val();
     for (const periodTime: string in scheduleData) {
-      const startHour = periodTime.substr(0, 2);
+      const startHour = this.to12Hour(periodTime.substr(0, 2));
       const startMin = periodTime.substr(2, 2);
-      const endHour = periodTime.substr(5, 2);
+      const endHour = this.to12Hour(periodTime.substr(5, 2));
       const endMin = periodTime.substr(7, 2);
       periods.push({
         period: scheduleData[periodTime],
-        time: `${startHour}:${startMin}-${endHour}:${endMin}`
+        time: `${startHour}:${startMin} - ${endHour}:${endMin}`
       });
     }
 
@@ -55,7 +65,7 @@ class CurrentBellSchedule extends React.PureComponent {
   }
 
   render() {
-    return <BellSchedule periods={this.state.periods} />;
+    return <BellSchedule periods={this.state.periods} loading={this.state.loading}/>;
   }
 }
 

@@ -11,6 +11,7 @@ import Table, {
   TableRow
 } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
+import { CircularProgress } from 'material-ui/Progress';
 
 export type Period = {
   period: string,
@@ -18,35 +19,41 @@ export type Period = {
 };
 
 type Props = {
+  loading: boolean,
   periods: Period[]
 };
 
-const BellSchedule = ({ periods }: Props) => {
+const BellSchedule = ({ periods, loading }: Props) => {
   return (
     <div className="bell-schedule">
       <Paper>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell numeric>Period</TableCell>
-              <TableCell>Time</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {periods.map(n => {
-              return (
-                <TableRow key={n.period}>
-                  <TableCell numeric>
-                    {n.period}
-                  </TableCell>
-                  <TableCell>
-                    {n.time}
-                  </TableCell>
+        {loading
+          ? <div className="bell-schedule-loading"><CircularProgress/></div>
+          : periods.length > 0
+            ? <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell numeric>Period</TableCell>
+                  <TableCell>Time</TableCell>
                 </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+              </TableHead>
+              <TableBody>
+                {periods.map(n => {
+                  return (
+                    <TableRow key={n.period}>
+                      <TableCell numeric>
+                        {n.period}
+                      </TableCell>
+                      <TableCell>
+                        {n.time}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+            : <div className="bell-schedule-empty">No school!</div>
+        }
       </Paper>
     </div>
   );
