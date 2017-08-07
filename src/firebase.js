@@ -1,6 +1,7 @@
 // @flow
 
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 const config = {
   apiKey: 'AIzaSyCfRrWtuQjgV2ekSGkmDn_BROYje60T61c',
