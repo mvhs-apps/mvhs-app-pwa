@@ -11,6 +11,10 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Tabs, { Tab } from 'material-ui/Tabs';
+import { MuiThemeProvider } from 'material-ui/styles';
+import createMuiTheme from 'material-ui/styles/theme';
+import createPalette from 'material-ui/styles/palette';
+import amber from 'material-ui/colors/amber';
 
 import CurrentBellSchedule from './containers/CurrentBellSchedule';
 import Map from './components/map';
@@ -46,8 +50,15 @@ const RouterTabs = withRouter(
 
 const routes = ['/', '/map', '/search'];
 
+const theme = createMuiTheme({
+  palette: createPalette({
+    primary: amber
+  }),
+});
+
 const App = () => {
   return (
+    <MuiThemeProvider theme={theme}>
     <Router>
       <div>
         <AppBar position="static">
@@ -69,6 +80,7 @@ const App = () => {
         <Route path={routes[2]} component={Search} />
       </div>
     </Router>
+    </MuiThemeProvider>
   );
 };
 
