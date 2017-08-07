@@ -16,31 +16,33 @@ import CurrentBellSchedule from './containers/CurrentBellSchedule';
 import Map from './components/map';
 import Search from './components/search';
 
-import {
-  BrowserRouter as Router,
-  Route,
-  withRouter
-} from 'react-router-dom'
-import type {RouterHistory} from 'react-router-dom';
+import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
+import type { RouterHistory } from 'react-router-dom';
 
-const LinkTab = withRouter(({to, history, ...props}: {to: string, history: RouterHistory}) => (
-  <Tab
-    onClick={() => { history.push(to)}}
-    {...props}
-  />
-));
-
-const handleTabChange = () => {};
-const RouterTabs = withRouter(({history, routes, ...props}: {history: RouterHistory, routes: string[]}) => {
-  const index = routes.indexOf(history.location.pathname);
-  return (
-    <Tabs
-      index={index || 0}
-      onChange={handleTabChange}
+const LinkTab = withRouter(
+  ({ to, history, ...props }: { to: string, history: RouterHistory }) =>
+    <Tab
+      onClick={() => {
+        history.push(to);
+      }}
       {...props}
     />
-  );
-});
+);
+
+const handleTabChange = () => {};
+const RouterTabs = withRouter(
+  ({
+    history,
+    routes,
+    ...props
+  }: {
+    history: RouterHistory,
+    routes: string[]
+  }) => {
+    const index = routes.indexOf(history.location.pathname);
+    return <Tabs index={index || 0} onChange={handleTabChange} {...props} />;
+  }
+);
 
 const routes = ['/', '/map', '/search'];
 
@@ -56,15 +58,15 @@ const App = () => {
           </Toolbar>
 
           <RouterTabs routes={routes} fullWidth={true} centered={true}>
-            <LinkTab icon={<NotificationIcon />} to={routes[0]}/>
-            <LinkTab icon={<MapIcon />} to={routes[1]}/>
-            <LinkTab icon={<SearchIcon />} to={routes[2]}/>
+            <LinkTab icon={<NotificationIcon />} to={routes[0]} />
+            <LinkTab icon={<MapIcon />} to={routes[1]} />
+            <LinkTab icon={<SearchIcon />} to={routes[2]} />
           </RouterTabs>
         </AppBar>
 
-        <Route exact path={routes[0]} component={CurrentBellSchedule}/>
-        <Route path={routes[1]} component={Map}/>
-        <Route path={routes[2]} component={Search}/>
+        <Route exact path={routes[0]} component={CurrentBellSchedule} />
+        <Route path={routes[1]} component={Map} />
+        <Route path={routes[2]} component={Search} />
       </div>
     </Router>
   );

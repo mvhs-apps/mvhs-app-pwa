@@ -4,19 +4,24 @@ import React from 'react';
 
 import './BellSchedule.css';
 
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Table, {
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow
+} from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 
 type Period = {
-  period: string;
-  time: string;
-}
+  period: string,
+  time: string
+};
 
 type Props = {
   periods: Period[]
-}
+};
 
-const BellSchedule = ({periods}: Props) => {
+const BellSchedule = ({ periods }: Props) => {
   return (
     <div className="bell-schedule">
       <Paper>

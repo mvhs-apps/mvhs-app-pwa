@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "date-fns": "^2.0.0-alpha.1",
     "default-passive-events": "^0.1.1",
     "enzyme": "^2.9.1",
+    "firebase": "^4.2.0",
     "flow-bin": "^0.52.0",
+    "flow-typed": "^2.1.5",
     "material-ui": "^1.0.0-beta.4",
     "material-ui-icons": "^1.0.0-alpha.19",
     "preact": "^8.2.1",
