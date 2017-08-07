@@ -4,20 +4,11 @@ import React from 'react';
 
 import BellSchedule from '../components/BellSchedule';
 import firebase from '../firebase';
+import type {Period} from '../components/BellSchedule';
 
 class CurrentBellSchedule extends React.PureComponent {
   state = {
-    periods: [
-      { period: '0', time: '07:15-08:05' },
-      { period: '1', time: '07:15-08:05' },
-      { period: '2', time: '07:15-08:05' },
-      { period: 'Brunch', time: '07:15-08:05' },
-      { period: '3', time: '07:15-08:05' },
-      { period: '4', time: '07:15-08:05' },
-      { period: 'Lunch', time: '07:15-08:05' },
-      { period: '5', time: '07:15-08:05' },
-      { period: '6', time: '07:15-08:05' }
-    ]
+    periods: []
   };
 
   db: Database;
@@ -27,8 +18,10 @@ class CurrentBellSchedule extends React.PureComponent {
     this.db = firebase.database();
 
     this.getBellSchedule().then(
-      () => {
-        this.setState({});
+      (periods: Period[]) => {
+        this.setState({
+          periods: periods
+        });
       },
       err => {
         console.log(err);
@@ -38,20 +31,27 @@ class CurrentBellSchedule extends React.PureComponent {
 
   async getBellSchedule() {
     const now = new Date();
-    const dayOfWeek = /*now.getDay()*/ 1;
+    const dayOfWeek = now.getDay();
 
     let snapshot = await this.db.ref('/weekday-map').once('value');
     const weekdayMap = snapshot.val();
     const schedule: string = weekdayMap[dayOfWeek];
 
-    console.log(weekdayMap);
-
     snapshot = await this.db.ref(`/schedules/${schedule}`).once('value');
+    const periods: Period[] = [];
     const scheduleData = snapshot.val();
     for (const periodTime: string in scheduleData) {
-      const start = periodTime.substr(0, 4);
-      const end = periodTime.substr(5, 4);
+      const startHour = periodTime.substr(0, 2);
+      const startMin = periodTime.substr(2, 2);
+      const endHour = periodTime.substr(5, 2);
+      const endMin = periodTime.substr(7, 2);
+      periods.push({
+        period: scheduleData[periodTime],
+        time: `${startHour}:${startMin}-${endHour}:${endMin}`
+      });
     }
+
+    return periods;
   }
 
   render() {

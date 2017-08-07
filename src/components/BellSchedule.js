@@ -12,7 +12,7 @@ import Table, {
 } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 
-type Period = {
+export type Period = {
   period: string,
   time: string
 };
