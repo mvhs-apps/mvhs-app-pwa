@@ -1,12 +1,17 @@
 .date-picker {
   padding: 8px 8px 0 8px;
+  margin: 0 auto;
+  width: fit-content
 }
 
-.DayPicker {
-  margin: 0 auto;
-  box-shadow: none !important;
+.SingleDatePicker__picker  {
+  left: calc(-50% - 12px) !important;
 }
 
 .DayPickerKeyboardShortcuts__show{
   display: none;
+}
+
+.DateInput--with-caret::before, .DateInput--with-caret::after {
+  left: 64px !important;
 }

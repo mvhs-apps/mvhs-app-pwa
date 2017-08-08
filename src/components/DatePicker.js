@@ -2,33 +2,45 @@
 
 import React from 'react';
 
-import DayPickerSingleDateController from 'react-dates/lib/components/DayPickerSingleDateController';
+import SingleDatePicker from 'react-dates/lib/components/SingleDatePicker';
 import 'react-dates/lib/css/_datepicker.css';
 
 import './DatePicker.css';
-
-const noop = _ => {};
 
 type Props = {
   date: moment$Moment,
   onDateChange: (date: moment$Moment) => void
 };
 
-const DatePicker = ({
-  date,
-  onDateChange
-}: Props) => {
-  return (
-    <div className="date-picker">
-        <DayPickerSingleDateController
+class DatePicker extends React.PureComponent {
+  state = {
+    focused: false
+  };
+
+  handleFocusChange = ({focused}: {focused: boolean}) => {
+    this.setState({
+      focused: focused
+    });
+  };
+
+  render() {
+    const {
+       date,
+       onDateChange
+     }: Props = this.props;
+
+    return (
+      <div className="date-picker">
+        <SingleDatePicker
           date={date}
           onDateChange={onDateChange}
-          focused={true}
-          onFocusChange={noop}
+          focused={this.state.focused}
+          onFocusChange={this.handleFocusChange}
           numberOfMonths={1}
         />
-    </div>
-  );
-};
+      </div>
+    )
+  }
+}
 
 export default DatePicker;

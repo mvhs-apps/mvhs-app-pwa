@@ -120,7 +120,7 @@ class CurrentBellSchedule extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(!this.state.date.isSame(prevState.date)){
+    if(this.state.date && !this.state.date.isSame(prevState.date)){
       this.loadBellSchedule();
     }
   }
