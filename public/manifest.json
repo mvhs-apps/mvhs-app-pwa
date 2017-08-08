@@ -1,10 +1,15 @@
 {
-  "short_name": "MVHS",
+  "short_name": "MVHS App",
   "name": "MVHS App",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "/icons/android-chrome-192x192.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ],
