@@ -12,6 +12,8 @@ import Table, {
 } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import { CircularProgress } from 'material-ui/Progress';
+import Typography from 'material-ui/Typography';
+import Loadable from "./Loadable";
 
 export type Period = {
   period: string,
@@ -20,17 +22,34 @@ export type Period = {
 
 type Props = {
   loading: boolean,
-  periods: Period[]
+  periods: Period[],
+  scheduleName: string
 };
 
-const BellSchedule = ({ periods, loading }: Props) => {
+const BellSchedule = ({ periods, loading, scheduleName }: Props) => {
   return (
     <div className="bell-schedule">
       <Paper>
-        {loading
-          ? <div className="bell-schedule-loading"><CircularProgress/></div>
-          : periods.length > 0
-            ? <Table>
+        <Loadable
+          loading={loading}
+          data={periods}
+          LoadingComponent={
+            <div className="bell-schedule-loading center">
+              <CircularProgress />
+            </div>
+          }
+          EmptyComponent={
+            <div className="bell-schedule-empty center">No school!</div>
+          }
+        >
+          <div>
+
+            {scheduleName !== 'none' &&
+              <Typography type="title" className="bell-schedule-name">
+                {scheduleName}
+              </Typography>}
+
+            <Table>
               <TableHead>
                 <TableRow>
                   <TableCell numeric>Period</TableCell>
@@ -52,8 +71,8 @@ const BellSchedule = ({ periods, loading }: Props) => {
                 })}
               </TableBody>
             </Table>
-            : <div className="bell-schedule-empty">No school!</div>
-        }
+          </div>
+        </Loadable>
       </Paper>
     </div>
   );

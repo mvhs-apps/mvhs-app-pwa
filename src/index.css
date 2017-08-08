@@ -12,6 +12,7 @@ body {
   font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   overflow-y: hidden;
+  overflow-x: hidden;
   position: fixed;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -19,4 +20,10 @@ body {
 #root {
   width: 100%;
   height: 100%;
+}
+
+[data-reactroot] {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
 }
