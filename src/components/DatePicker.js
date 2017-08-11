@@ -4,8 +4,11 @@ import React from 'react';
 
 import SingleDatePicker from 'react-dates/lib/components/SingleDatePicker';
 import 'react-dates/lib/css/_datepicker.css';
+import CaretDownIcon from 'material-ui-icons/KeyboardArrowDown';
 
 import './DatePicker.css';
+import moment from "moment";
+import isInclusivelyAfterDay from "react-dates/lib/utils/isInclusivelyAfterDay";
 
 type Props = {
   date: moment$Moment,
@@ -23,6 +26,16 @@ class DatePicker extends React.PureComponent {
     });
   };
 
+  handleCaretClick = () => {
+    this.setState({
+      focused: true
+    });
+  };
+
+  isOutsideRange = (day: moment$Moment) =>
+    !isInclusivelyAfterDay(day, moment()) ||
+    isInclusivelyAfterDay(day, moment().add(2, 'weeks'));
+
   render() {
     const {
        date,
@@ -36,8 +49,10 @@ class DatePicker extends React.PureComponent {
           onDateChange={onDateChange}
           focused={this.state.focused}
           onFocusChange={this.handleFocusChange}
+          isOutsideRange={this.isOutsideRange}
           numberOfMonths={1}
         />
+        <CaretDownIcon className="date-picker-caret" onClick={this.handleCaretClick}/>
       </div>
     )
   }

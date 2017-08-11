@@ -4,8 +4,22 @@
   width: fit-content
 }
 
+.date-picker-caret {
+  vertical-align: middle;
+}
+
+.DateInput {
+  font-weight: 500;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+}
+
+.SingleDatePickerInput {
+  border: none;
+}
+
 .SingleDatePicker__picker  {
-  left: calc(-50% - 12px) !important;
+  left: calc(-50% - 2px) !important;
 }
 
 .DayPickerKeyboardShortcuts__show{
