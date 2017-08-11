@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "default-passive-events": "^0.1.1",
-    "enhanced-resolve": "^3.4.1",
     "enzyme": "^2.9.1",
     "firebase": "^4.2.0",
     "flow-bin": "^0.52.0",
@@ -12,8 +11,6 @@
     "material-ui": "^1.0.0-beta.4",
     "material-ui-icons": "^1.0.0-alpha.19",
     "moment": "^2.18.1",
-    "preact": "^8.2.1",
-    "preact-compat": "^3.17.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-addons-shallow-compare": "^15.6.0",
@@ -23,11 +20,6 @@
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
     "react-virtualized": "^9.9.0",
-    "redux": "^3.7.2",
-    "redux-devtools-extension": "^2.13.2",
-    "redux-observable": "^0.15.0",
-    "reselect": "^3.0.1",
-    "rxjs": "^5.4.3",
     "uglifyjs-webpack-plugin": "^0.4.6"
   },
   "devDependencies": {
