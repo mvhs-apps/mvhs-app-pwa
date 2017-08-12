@@ -3,10 +3,15 @@
 import React from 'react';
 
 import BellSchedule from '../components/BellSchedule';
-import firebase from '../firebase';
 import type { Period } from '../components/BellSchedule';
 import moment from 'moment';
 import DatePicker from '../components/DatePicker';
+import Calendar from '../components/Calendar';
+
+import firebase from '../firebase';
+import axios from 'axios';
+
+import calendarURL from '../schoolCalendar';
 
 const pad = (num, size) => {
   let s = num + '';
@@ -24,7 +29,10 @@ class CurrentBellSchedule extends React.PureComponent {
     periods: [],
     loading: true,
     date: moment(),
-    scheduleName: ''
+    scheduleName: '',
+    events: {
+      eventList: []
+    }
   };
 
   db: Database;
@@ -36,6 +44,55 @@ class CurrentBellSchedule extends React.PureComponent {
 
   componentDidMount() {
     this.loadBellSchedule();
+    this.loadCalendar();
+  }
+
+  loadCalendar() {
+    let today = this.state.date
+      .clone()
+      .hour(0)
+      .minute(0)
+      .second(0)
+      .millisecond(0);
+    let tomorrow = today.clone().add(1, 'days'); // yiks
+
+    let url = calendarURL + 'timeMin=' + today.toISOString() + '&';
+    url += 'timeMax=' + tomorrow.toISOString();
+
+    axios
+      .get(url)
+      .then(response => {
+        let eventList = [];
+        response.data.items
+          .map(event => {
+            return {
+              summary: event.summary,
+              description: event.description,
+              location: event.location,
+              mapURL:
+                'https://www.google.com/maps/search/' +
+                encodeURI(event.location),
+              start: new Date(event.start.dateTime).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+              }),
+              end: new Date(event.end.dateTime).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+              })
+            };
+          })
+          .forEach(event => {
+            eventList.push(event);
+          });
+        this.setState({
+          loading: false,
+          events: { eventList }
+        });
+      })
+      .catch(err => {
+        console.error('error getting calendar entries ' + err);
+      });
   }
 
   loadBellSchedule() {
@@ -44,7 +101,6 @@ class CurrentBellSchedule extends React.PureComponent {
     });
     this.getBellSchedule().then(
       result => {
-        console.log(result);
         this.setState({
           scheduleName: result.scheduleName,
           periods: result.periods,
@@ -52,7 +108,7 @@ class CurrentBellSchedule extends React.PureComponent {
         });
       },
       err => {
-        console.log(err);
+        console.error(err);
         this.setState({
           scheduleName: 'Loading Error',
           loading: false
@@ -84,7 +140,6 @@ class CurrentBellSchedule extends React.PureComponent {
       ) {
         schedule = specialDays[specDay];
         special = true;
-        console.log(`Special schedule: ${schedule}`);
         break;
       }
     }
@@ -125,6 +180,7 @@ class CurrentBellSchedule extends React.PureComponent {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.date && !this.state.date.isSame(prevState.date)) {
       this.loadBellSchedule();
+      this.loadCalendar();
     }
   }
 
@@ -145,6 +201,10 @@ class CurrentBellSchedule extends React.PureComponent {
           periods={this.state.periods}
           loading={this.state.loading}
           scheduleName={this.state.scheduleName}
+        />
+        <Calendar
+          loading={this.state.loading}
+          events={this.state.events.eventList}
         />
       </div>
     );

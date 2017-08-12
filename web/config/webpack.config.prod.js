@@ -150,7 +150,7 @@ module.exports = {
           name: 'static/media/[name].[hash:8].[ext]'
         }
       },
-      // "url" loader works just like "file" loader but it also embeds
+      // "calendarURL" loader works just like "file" loader but it also embeds
       // assets smaller than specified size as data URLs to avoid requests.
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
