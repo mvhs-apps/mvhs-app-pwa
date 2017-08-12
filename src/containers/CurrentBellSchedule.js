@@ -60,7 +60,28 @@ class CurrentBellSchedule extends React.PureComponent {
       }
     );
   }
-
+  getCurrentPeriod() {
+    //getting current time and date
+    const currentDate = new Date();
+    const currentHour = currentdate.getHours();
+    const currentMinute = currentdate.getMinutes();
+    for (const periodTime: string in scheduleData) {
+      const startHour = to12Hour(periodTime.substr(0, 2));
+      const startMin = periodTime.substr(2, 2);
+      const endHour = to12Hour(periodTime.substr(5, 2));
+      const endMin = periodTime.substr(7, 2);
+      //check to see if time is inbetween the time for each period
+      //Multiplying each hour by 60 to find total mins and compare those
+      if (
+        startHour * 60 + startMin <= currentHour * 60 + currentMinute &&
+        endHour * 60 + endMin > currentHour * 60 + currentMinute
+      ) {
+        //If it is, return that period number
+        break;
+        return periodTime;
+      }
+    }
+  }
   async getFirebaseVal(ref: string) {
     return (await this.db.ref(ref).once('value')).val();
   }
