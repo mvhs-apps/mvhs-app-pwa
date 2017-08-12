@@ -7,8 +7,8 @@ import 'react-dates/lib/css/_datepicker.css';
 import CaretDownIcon from 'material-ui-icons/KeyboardArrowDown';
 
 import './DatePicker.css';
-import moment from "moment";
-import isInclusivelyAfterDay from "react-dates/lib/utils/isInclusivelyAfterDay";
+import moment from 'moment';
+import isInclusivelyAfterDay from 'react-dates/lib/utils/isInclusivelyAfterDay';
 
 type Props = {
   date: moment$Moment,
@@ -20,7 +20,7 @@ class DatePicker extends React.PureComponent {
     focused: false
   };
 
-  handleFocusChange = ({focused}: {focused: boolean}) => {
+  handleFocusChange = ({ focused }: { focused: boolean }) => {
     this.setState({
       focused: focused
     });
@@ -37,10 +37,7 @@ class DatePicker extends React.PureComponent {
     isInclusivelyAfterDay(day, moment().add(2, 'weeks'));
 
   render() {
-    const {
-       date,
-       onDateChange
-     }: Props = this.props;
+    const { date, onDateChange }: Props = this.props;
 
     return (
       <div className="date-picker">
@@ -52,9 +49,12 @@ class DatePicker extends React.PureComponent {
           isOutsideRange={this.isOutsideRange}
           numberOfMonths={1}
         />
-        <CaretDownIcon className="date-picker-caret" onClick={this.handleCaretClick}/>
+        <CaretDownIcon
+          className="date-picker-caret"
+          onClick={this.handleCaretClick}
+        />
       </div>
-    )
+    );
   }
 }
 

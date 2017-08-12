@@ -166,7 +166,11 @@ module.exports = {
         include: paths.appSrc,
         loader: require.resolve('babel-loader'),
         options: {
-          compact: true
+          babelrc: false,
+          compact: true,
+          presets: [
+            "react-app"
+          ]
         }
       },
       // The notation here is somewhat confusing.

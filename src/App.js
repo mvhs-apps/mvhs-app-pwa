@@ -53,33 +53,33 @@ const routes = ['/', '/map', '/search'];
 const theme = createMuiTheme({
   palette: createPalette({
     primary: amber
-  }),
+  })
 });
 
 const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
-    <Router>
-      <div>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography type="title" color="inherit">
-              MVHS App
-            </Typography>
-          </Toolbar>
+      <Router>
+        <div>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography type="title" color="inherit">
+                MVHS App
+              </Typography>
+            </Toolbar>
 
-          <RouterTabs routes={routes} fullWidth={true} centered={true}>
-            <LinkTab icon={<NotificationIcon />} to={routes[0]} />
-            <LinkTab icon={<MapIcon />} to={routes[1]} />
-            <LinkTab icon={<SearchIcon />} to={routes[2]} />
-          </RouterTabs>
-        </AppBar>
+            <RouterTabs routes={routes} fullWidth={true} centered={true}>
+              <LinkTab icon={<NotificationIcon />} to={routes[0]} />
+              <LinkTab icon={<MapIcon />} to={routes[1]} />
+              <LinkTab icon={<SearchIcon />} to={routes[2]} />
+            </RouterTabs>
+          </AppBar>
 
-        <Route exact path={routes[0]} component={CurrentBellSchedule} />
-        <Route path={routes[1]} component={Map} />
-        <Route path={routes[2]} component={Search} />
-      </div>
-    </Router>
+          <Route exact path={routes[0]} component={CurrentBellSchedule} />
+          <Route path={routes[1]} component={Map} />
+          <Route path={routes[2]} component={Search} />
+        </div>
+      </Router>
     </MuiThemeProvider>
   );
 };

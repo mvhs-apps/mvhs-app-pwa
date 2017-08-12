@@ -13,7 +13,7 @@ import Table, {
 import Paper from 'material-ui/Paper';
 import { CircularProgress } from 'material-ui/Progress';
 import Typography from 'material-ui/Typography';
-import Loadable from "./Loadable";
+import Loadable from './Loadable';
 
 export type Period = {
   period: string,
@@ -43,7 +43,6 @@ const BellSchedule = ({ periods, loading, scheduleName }: Props) => {
           }
         >
           <div>
-
             {scheduleName !== 'none' &&
               <Typography type="title" className="bell-schedule-name">
                 {scheduleName}

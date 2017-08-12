@@ -1,12 +1,12 @@
 import React from 'react';
 
 const Loadable = ({
-                    loading,
-                    data,
-                    LoadingComponent,
-                    EmptyComponent,
-                    children
-                  }) => {
+  loading,
+  data,
+  LoadingComponent,
+  EmptyComponent,
+  children
+}) => {
   if (loading) {
     return LoadingComponent;
   } else {

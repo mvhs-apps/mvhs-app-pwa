@@ -4,13 +4,13 @@ import React from 'react';
 
 import BellSchedule from '../components/BellSchedule';
 import firebase from '../firebase';
-import type {Period} from '../components/BellSchedule';
+import type { Period } from '../components/BellSchedule';
 import moment from 'moment';
-import DatePicker from "../components/DatePicker";
+import DatePicker from '../components/DatePicker';
 
 const pad = (num, size) => {
-  let s = num+"";
-  while (s.length < size) s = "0" + s;
+  let s = num + '';
+  while (s.length < size) s = '0' + s;
   return s;
 };
 
@@ -43,7 +43,7 @@ class CurrentBellSchedule extends React.PureComponent {
       loading: true
     });
     this.getBellSchedule().then(
-      (result) => {
+      result => {
         console.log(result);
         this.setState({
           scheduleName: result.scheduleName,
@@ -61,7 +61,7 @@ class CurrentBellSchedule extends React.PureComponent {
     );
   }
 
-  async getFirebaseVal(ref: string){
+  async getFirebaseVal(ref: string) {
     return (await this.db.ref(ref).once('value')).val();
   }
 
@@ -78,7 +78,10 @@ class CurrentBellSchedule extends React.PureComponent {
       const end = specDay.substr(9, 8);
       const startDate = moment(start, 'MMDDYYYY');
       const endDate = moment(end, 'MMDDYYYY').endOf('day');
-      if (selectedDate.getTime() >= startDate.valueOf() && selectedDate.getTime() < endDate.valueOf()) {
+      if (
+        selectedDate.getTime() >= startDate.valueOf() &&
+        selectedDate.getTime() < endDate.valueOf()
+      ) {
         schedule = specialDays[specDay];
         special = true;
         console.log(`Special schedule: ${schedule}`);
@@ -109,7 +112,7 @@ class CurrentBellSchedule extends React.PureComponent {
       }
     }
 
-    if (special){
+    if (special) {
       schedule += '*';
     }
 
@@ -119,8 +122,8 @@ class CurrentBellSchedule extends React.PureComponent {
     };
   }
 
-  componentDidUpdate(prevProps, prevState){
-    if(this.state.date && !this.state.date.isSame(prevState.date)){
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.date && !this.state.date.isSame(prevState.date)) {
       this.loadBellSchedule();
     }
   }
@@ -134,8 +137,15 @@ class CurrentBellSchedule extends React.PureComponent {
   render() {
     return (
       <div>
-        <DatePicker date={this.state.date} onDateChange={this.handleDateChange}/>
-        <BellSchedule periods={this.state.periods} loading={this.state.loading} scheduleName={this.state.scheduleName}/>
+        <DatePicker
+          date={this.state.date}
+          onDateChange={this.handleDateChange}
+        />
+        <BellSchedule
+          periods={this.state.periods}
+          loading={this.state.loading}
+          scheduleName={this.state.scheduleName}
+        />
       </div>
     );
   }
