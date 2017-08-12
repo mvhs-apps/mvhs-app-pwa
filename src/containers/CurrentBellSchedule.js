@@ -8,8 +8,10 @@ import moment from 'moment';
 import DatePicker from '../components/DatePicker';
 import Calendar from '../components/Calendar';
 
-import getCalendarEvents from '../schoolCalendar';
 import firebase from '../firebase';
+import axios from 'axios';
+
+import calendarURL from '../schoolCalendar';
 
 const pad = (num, size) => {
   let s = num + '';
@@ -27,7 +29,10 @@ class CurrentBellSchedule extends React.PureComponent {
     periods: [],
     loading: true,
     date: moment(),
-    scheduleName: ''
+    scheduleName: '',
+    events: {
+      eventList: []
+    }
   };
 
   db: Database;
@@ -43,17 +48,50 @@ class CurrentBellSchedule extends React.PureComponent {
   }
 
   loadCalendar() {
-    let currentDay = new Date().setHours(0, 0, 0, 0);
-    let tomorrow = new Date().setDate(currentDay.getDate() - 1);
-    getCalendarEvents(currentDay, tomorrow)
-      .then(events => {
+    let today = this.state.date
+      .clone()
+      .hour(0)
+      .minute(0)
+      .second(0)
+      .millisecond(0);
+    let tomorrow = today.clone().add(1, 'days'); // yiks
+
+    let url = calendarURL + 'timeMin=' + today.toISOString() + '&';
+    url += 'timeMax=' + tomorrow.toISOString();
+
+    axios
+      .get(url)
+      .then(response => {
+        let eventList = [];
+        response.data.items
+          .map(event => {
+            return {
+              summary: event.summary,
+              description: event.description,
+              location: event.location,
+              mapURL:
+                'https://www.google.com/maps/search/' +
+                encodeURI(event.location),
+              start: new Date(event.start.dateTime).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+              }),
+              end: new Date(event.end.dateTime).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+              })
+            };
+          })
+          .forEach(event => {
+            eventList.push(event);
+          });
         this.setState({
-          events: events,
-          loading: false
+          loading: false,
+          events: { eventList }
         });
       })
       .catch(err => {
-        console.error('error getting todays events ' + err);
+        console.error('error getting calendar entries ' + err);
       });
   }
 
@@ -166,7 +204,10 @@ class CurrentBellSchedule extends React.PureComponent {
           loading={this.state.loading}
           scheduleName={this.state.scheduleName}
         />
-        <Calendar loading={this.state.loading} event={this.state.events} />
+        <Calendar
+          loading={this.state.loading}
+          events={this.state.events.eventList}
+        />
       </div>
     );
   }

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.16.2",
     "default-passive-events": "^0.1.1",
     "enzyme": "^2.9.1",
     "firebase": "^4.2.0",
