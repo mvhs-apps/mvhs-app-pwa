@@ -1,8 +1,8 @@
 .bell-schedule {
   padding: 8px;
-  width: fit-content;
   margin: 0 auto;
   min-width: 300px;
+  width: fit-content;
 }
 
 .center {
