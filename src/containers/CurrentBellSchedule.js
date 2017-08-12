@@ -3,10 +3,13 @@
 import React from 'react';
 
 import BellSchedule from '../components/BellSchedule';
-import firebase from '../firebase';
 import type { Period } from '../components/BellSchedule';
 import moment from 'moment';
 import DatePicker from '../components/DatePicker';
+import Calendar from '../components/Calendar';
+
+import getCalendarEvents from '../schoolCalendar';
+import firebase from '../firebase';
 
 const pad = (num, size) => {
   let s = num + '';
@@ -36,6 +39,22 @@ class CurrentBellSchedule extends React.PureComponent {
 
   componentDidMount() {
     this.loadBellSchedule();
+    this.loadCalendar();
+  }
+
+  loadCalendar() {
+    let currentDay = new Date().setHours(0, 0, 0, 0);
+    let tomorrow = new Date().setDate(currentDay.getDate() - 1);
+    getCalendarEvents(currentDay, tomorrow)
+      .then(events => {
+        this.setState({
+          events: events,
+          loading: false
+        });
+      })
+      .catch(err => {
+        console.error('error getting todays events ' + err);
+      });
   }
 
   loadBellSchedule() {
@@ -125,6 +144,7 @@ class CurrentBellSchedule extends React.PureComponent {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.date && !this.state.date.isSame(prevState.date)) {
       this.loadBellSchedule();
+      this.loadCalendar();
     }
   }
 
@@ -146,6 +166,7 @@ class CurrentBellSchedule extends React.PureComponent {
           loading={this.state.loading}
           scheduleName={this.state.scheduleName}
         />
+        <Calendar loading={this.state.loading} event={this.state.events} />
       </div>
     );
   }
