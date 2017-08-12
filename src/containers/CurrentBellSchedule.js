@@ -101,7 +101,6 @@ class CurrentBellSchedule extends React.PureComponent {
     });
     this.getBellSchedule().then(
       result => {
-        console.log(result);
         this.setState({
           scheduleName: result.scheduleName,
           periods: result.periods,
@@ -109,7 +108,7 @@ class CurrentBellSchedule extends React.PureComponent {
         });
       },
       err => {
-        console.log(err);
+        console.error(err);
         this.setState({
           scheduleName: 'Loading Error',
           loading: false
@@ -141,7 +140,6 @@ class CurrentBellSchedule extends React.PureComponent {
       ) {
         schedule = specialDays[specDay];
         special = true;
-        console.log(`Special schedule: ${schedule}`);
         break;
       }
     }
