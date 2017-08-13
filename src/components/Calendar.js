@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { Avatar, Paper } from 'material-ui';
-import { CircularProgress } from '../../node_modules/material-ui/Progress/index';
-import Loadable from './Loadable';
+
 import './Calendar.css';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+
+import Paper from 'material-ui/Paper';
+import Avatar from 'material-ui/Avatar';
+import { CircularProgress } from 'material-ui/Progress';
+import List, { ListItem, ListItemText, ListItemAvatar} from 'material-ui/List';
 import MapIcon from 'material-ui-icons/Map';
-import { ListItemAvatar } from '../../node_modules/material-ui/List/index';
+
+import Loadable from './Loadable';
 
 const Calendar = ({ loading, events }) => {
   return (
