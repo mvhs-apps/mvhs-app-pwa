@@ -70,6 +70,7 @@ class DatePickerContainer extends React.PureComponent<void, Props, State> {
         response.data.items
           .map(event => {
             return {
+              id: event.id,
               summary: event.summary,
               description: event.description,
               location: event.location,
