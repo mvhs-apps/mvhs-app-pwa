@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-import BellSchedule from '../components/BellSchedule';
 import type { Period } from '../components/BellSchedule';
+import BellSchedule from '../components/BellSchedule';
 import moment from 'moment';
 
 import firebase from '../firebase';
@@ -68,18 +68,20 @@ class BellScheduleContainer extends React.PureComponent<void, Props, State> {
       }
     );
   }
-  getCurrentPeriod() {
+
+  getCurrentPeriod(scheduleData: string[]) {
     //getting current time and date
     const currentDate = new Date();
-    const currentHour = currentdate.getHours();
-    const currentMinute = currentdate.getMinutes();
-    for (const periodTime: string in scheduleData) {
-      const startHour = to12Hour(periodTime.substr(0, 2));
-      const startMin = periodTime.substr(2, 2);
-      const endHour = to12Hour(periodTime.substr(5, 2));
-      const endMin = periodTime.substr(7, 2);
-      //check to see if time is inbetween the time for each period
-      //Multiplying each hour by 60 to find total mins and compare those
+    const currentHour = parseInt(currentDate.getHours(), 12);
+    const currentMinute = parseInt(currentDate.getMinutes(), 12);
+    scheduleData.forEach(periodTime => {
+      const startHour = parseInt(to12Hour(periodTime.substr(0, 2)), 12);
+      const startMin = parseInt(periodTime.substr(2, 2), 60);
+      const endHour = parseInt(to12Hour(periodTime.substr(5, 2)), 12);
+      const endMin = parseInt(periodTime.substr(7, 2), 60);
+
+      // check to see if time is in between the time for each period
+      // Multiplying each hour by 60 to find total mins and compare those
       if (
         startHour * 60 + startMin <= currentHour * 60 + currentMinute &&
         endHour * 60 + endMin > currentHour * 60 + currentMinute
@@ -87,8 +89,9 @@ class BellScheduleContainer extends React.PureComponent<void, Props, State> {
         //If it is, return that period number
         return periodTime;
       }
-    }
+    });
   }
+
   async getFirebaseVal(ref: string) {
     return (await this.db.ref(ref).once('value')).val();
   }
