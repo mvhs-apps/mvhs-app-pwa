@@ -3,10 +3,10 @@
 import React from 'react';
 
 import BellSchedule from '../components/BellSchedule';
-import firebase from '../firebase';
 import type { Period } from '../components/BellSchedule';
 import moment from 'moment';
-import DatePicker from '../components/DatePicker';
+
+import firebase from '../firebase';
 
 const pad = (num, size) => {
   let s = num + '';
@@ -19,11 +19,20 @@ const to12Hour = (hour: string) => {
   return pad(hourInt > 12 ? hourInt - 12 : hourInt, 2);
 };
 
-class CurrentBellSchedule extends React.PureComponent {
+type Props = {
+  date: moment$Moment
+};
+
+type State = {
+  periods: Period[],
+  loading: boolean,
+  scheduleName: string
+};
+
+class BellScheduleContainer extends React.PureComponent<void, Props, State> {
   state = {
     periods: [],
     loading: true,
-    date: moment(),
     scheduleName: ''
   };
 
@@ -44,7 +53,6 @@ class CurrentBellSchedule extends React.PureComponent {
     });
     this.getBellSchedule().then(
       result => {
-        console.log(result);
         this.setState({
           scheduleName: result.scheduleName,
           periods: result.periods,
@@ -52,7 +60,7 @@ class CurrentBellSchedule extends React.PureComponent {
         });
       },
       err => {
-        console.log(err);
+        console.error(err);
         this.setState({
           scheduleName: 'Loading Error',
           loading: false
@@ -87,7 +95,7 @@ class CurrentBellSchedule extends React.PureComponent {
   }
 
   async getBellSchedule() {
-    const selectedDate = this.state.date.toDate();
+    const selectedDate = this.props.date.toDate();
     const dayOfWeek = selectedDate.getDay();
 
     let schedule = '';
@@ -105,7 +113,6 @@ class CurrentBellSchedule extends React.PureComponent {
       ) {
         schedule = specialDays[specDay];
         special = true;
-        console.log(`Special schedule: ${schedule}`);
         break;
       }
     }
@@ -143,33 +150,21 @@ class CurrentBellSchedule extends React.PureComponent {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.date && !this.state.date.isSame(prevState.date)) {
+  componentDidUpdate(prevProps: Props) {
+    if (this.props.date && !this.props.date.isSame(prevProps.date)) {
       this.loadBellSchedule();
     }
   }
 
-  handleDateChange = (date: moment$Moment) => {
-    this.setState({
-      date: date
-    });
-  };
-
   render() {
     return (
-      <div>
-        <DatePicker
-          date={this.state.date}
-          onDateChange={this.handleDateChange}
-        />
-        <BellSchedule
-          periods={this.state.periods}
-          loading={this.state.loading}
-          scheduleName={this.state.scheduleName}
-        />
-      </div>
+      <BellSchedule
+        periods={this.state.periods}
+        loading={this.state.loading}
+        scheduleName={this.state.scheduleName}
+      />
     );
   }
 }
 
-export default CurrentBellSchedule;
+export default BellScheduleContainer;

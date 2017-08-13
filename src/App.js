@@ -16,7 +16,7 @@ import createMuiTheme from 'material-ui/styles/theme';
 import createPalette from 'material-ui/styles/palette';
 import amber from 'material-ui/colors/amber';
 
-import CurrentBellSchedule from './containers/CurrentBellSchedule';
+import SchedulePageContainer from './containers/SchedulePageContainer';
 import Map from './components/map';
 import Search from './components/search';
 
@@ -75,7 +75,7 @@ const App = () => {
             </RouterTabs>
           </AppBar>
 
-          <Route exact path={routes[0]} component={CurrentBellSchedule} />
+          <Route exact path={routes[0]} component={SchedulePageContainer} />
           <Route path={routes[1]} component={Map} />
           <Route path={routes[2]} component={Search} />
         </div>
