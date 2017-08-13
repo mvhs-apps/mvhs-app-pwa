@@ -85,7 +85,6 @@ class BellScheduleContainer extends React.PureComponent<void, Props, State> {
         endHour * 60 + endMin > currentHour * 60 + currentMinute
       ) {
         //If it is, return that period number
-        break;
         return periodTime;
       }
     }
