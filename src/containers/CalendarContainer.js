@@ -43,6 +43,10 @@ class DatePickerContainer extends React.PureComponent<void, Props, State> {
   }
 
   loadCalendar() {
+    this.setState({
+      loading: true
+    });
+
     const today = this.props.date
       .clone()
       .hour(0)
