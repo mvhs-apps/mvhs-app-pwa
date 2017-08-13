@@ -5,7 +5,7 @@ import './Calendar.css';
 import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
 import { CircularProgress } from 'material-ui/Progress';
-import List, { ListItem, ListItemText, ListItemAvatar} from 'material-ui/List';
+import List, { ListItem, ListItemText, ListItemAvatar } from 'material-ui/List';
 import MapIcon from 'material-ui-icons/Map';
 
 import Loadable from './Loadable';
