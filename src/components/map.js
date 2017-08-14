@@ -1,11 +1,23 @@
 import { Component } from 'react';
 import * as React from 'react';
 
+import ReactPDF from 'react-pdf/build/entry.webpack';
+
+import map from '../assets/SchoolMap.JPG';
+
 class Map extends Component {
+  onDocumentLoad({ total }) {
+    this.setState({ total });
+  }
+
+  onPageLoad() {}
+
   render() {
-    // Write the code here
-    // react-pdf library
-    return <div>Map</div>;
+    return (
+      <div>
+        <img src={map} />
+      </div>
+    );
   }
 }
 
