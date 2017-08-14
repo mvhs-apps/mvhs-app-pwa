@@ -48,7 +48,7 @@ const RouterTabs = withRouter(
   }
 );
 
-const routes = ['/', '/map', '/search', '/assets/SchoolMap.pdf'];
+const routes = ['/', '/map', '/search'];
 
 const theme = createMuiTheme({
   palette: createPalette({
