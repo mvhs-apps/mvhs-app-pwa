@@ -1,8 +1,6 @@
 import { Component } from 'react';
 import * as React from 'react';
 
-import ReactPDF from 'react-pdf/build/entry.webpack';
-
 import map from '../assets/SchoolMap.JPG';
 
 import './map.css';
@@ -17,7 +15,7 @@ class Map extends Component {
   render() {
     return (
       <div>
-        <img className="schoolmap" src={map} />
+        <img alt="map" className="schoolmap" src={map} />
       </div>
     );
   }
