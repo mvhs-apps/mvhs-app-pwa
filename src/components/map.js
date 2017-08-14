@@ -5,6 +5,8 @@ import ReactPDF from 'react-pdf/build/entry.webpack';
 
 import map from '../assets/SchoolMap.JPG';
 
+import './map.css';
+
 class Map extends Component {
   onDocumentLoad({ total }) {
     this.setState({ total });
@@ -15,7 +17,7 @@ class Map extends Component {
   render() {
     return (
       <div>
-        <img src={map} />
+        <img className="schoolmap" src={map} />
       </div>
     );
   }

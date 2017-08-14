@@ -1,0 +1,9 @@
+.schoolmap {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  left: 0;
+  display: block;
+  right: 0;
+  padding-top: 10px;
+}
