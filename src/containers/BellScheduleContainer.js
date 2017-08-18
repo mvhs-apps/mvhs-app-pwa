@@ -29,7 +29,7 @@ type State = {
   scheduleName: string
 };
 
-class BellScheduleContainer extends React.PureComponent<void, Props, State> {
+class BellScheduleContainer extends React.PureComponent<Props, State> {
   state = {
     periods: [],
     loading: true,
