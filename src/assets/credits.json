@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Daniel Ciao",
+    "role": "Lead Developer, CS Club VP of Tech, Class of 2018",
+    "desc": "Overall app framework and design",
+    "profiles": {
+      "Website": "https://pluscubed.com",
+      "Email": "pluscubed@gmail.com",
+      "LinkedIn": "https://www.linkedin.com/in/dciao/"
+    }
+  },
+  {
+    "name": "Marc Bacvanski",
+    "role": "CS Club President, Class of 2019",
+    "desc": "Overall team management",
+    "profiles": {
+      "LinkedIn": "https://www.linkedin.com/in/mbacvanski/"
+    }
+  }
+]
