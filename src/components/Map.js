@@ -1,6 +1,6 @@
 import React from 'react';
 
-import map from '../assets/SchoolMap.JPG';
+import map from '../assets/schoolmap.svg';
 
 import './Map.css';
 
