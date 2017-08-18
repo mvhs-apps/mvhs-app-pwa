@@ -15,10 +15,11 @@ import { MuiThemeProvider } from 'material-ui/styles';
 import createMuiTheme from 'material-ui/styles/theme';
 import createPalette from 'material-ui/styles/palette';
 import amber from 'material-ui/colors/amber';
+import blue from 'material-ui/colors/blue';
 
 import SchedulePageContainer from './containers/SchedulePageContainer';
-import Map from './components/map';
-import Search from './components/search';
+import Map from './components/Map';
+import Search from './components/Search';
 
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import type { RouterHistory } from 'react-router-dom';
@@ -44,7 +45,7 @@ const RouterTabs = withRouter(
     routes: string[]
   }) => {
     const index = routes.indexOf(history.location.pathname);
-    return <Tabs index={index || 0} onChange={handleTabChange} {...props} />;
+    return <Tabs value={index || 0} onChange={handleTabChange} {...props} />;
   }
 );
 
@@ -52,7 +53,8 @@ const routes = ['/', '/map', '/search'];
 
 const theme = createMuiTheme({
   palette: createPalette({
-    primary: amber
+    primary: amber,
+    accent: blue
   })
 });
 

@@ -26,7 +26,7 @@ type State = {
   events: SchoolEvent[]
 };
 
-class DatePickerContainer extends React.PureComponent<void, Props, State> {
+class DatePickerContainer extends React.PureComponent<Props, State> {
   state = {
     loading: true,
     events: []

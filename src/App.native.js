@@ -45,7 +45,12 @@ const FirstRoute = () =>
 const SecondRoute = () =>
   <View style={[styles.container, { backgroundColor: '#673ab7' }]} />;
 
-class App extends React.PureComponent {
+type State = {
+  index: number,
+  routes: { key: string, title: string }[]
+};
+
+class App extends React.PureComponent<void, State> {
   state = {
     index: 0,
     routes: [
