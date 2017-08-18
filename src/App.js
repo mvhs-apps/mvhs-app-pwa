@@ -24,6 +24,8 @@ import Search from './components/Search';
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import type { RouterHistory } from 'react-router-dom';
 
+import logo from './assets/outlinelogo.svg';
+
 const LinkTab = withRouter(
   ({ to, history, ...props }: { to: string, history: RouterHistory }) =>
     <Tab
@@ -65,6 +67,7 @@ const App = () => {
         <div>
           <AppBar position="static">
             <Toolbar>
+              <img src={logo} className="school-logo" />
               <Typography type="title" color="inherit">
                 MVHS App
               </Typography>
