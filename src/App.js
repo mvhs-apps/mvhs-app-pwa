@@ -69,7 +69,7 @@ const App = () => {
         <div>
           <AppBar position="static">
             <Toolbar>
-              <img src={logo} className="school-logo" />
+              <img src={logo} className="school-logo" alt="MVHS Logo" />
               <Typography type="title" color="inherit">
                 MVHS App
               </Typography>
