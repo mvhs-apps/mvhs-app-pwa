@@ -342,9 +342,7 @@ module.exports = {
     new webpack.NamedChunksPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new ShakePlugin(),
-    //Web interface for analyzing bundles
-    new BundleAnalyzerPlugin()
+    new ShakePlugin()
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
