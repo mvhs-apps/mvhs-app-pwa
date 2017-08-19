@@ -2,6 +2,7 @@
   margin: 0 auto;
   min-width: 400px;
   width: fit-content;
+  max-width: 500px;
 }
 
 .about-card {
