@@ -21,7 +21,7 @@ import blue from 'material-ui/colors/blue';
 import SchedulePageContainer from './containers/SchedulePageContainer';
 import Map from './components/Map';
 import Search from './components/Search';
-import Credit from './components/Credit';
+import AboutPage from './components/AboutPage';
 
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import type { RouterHistory } from 'react-router-dom';
@@ -51,7 +51,7 @@ const RouterTabs = withRouter(
   }
 );
 
-const routes = ['/', '/map', '/search', '/credit'];
+const routes = ['/', '/map', '/search', '/about'];
 
 const theme = createMuiTheme({
   palette: createPalette({
@@ -83,7 +83,7 @@ const App = () => {
           <Route exact path={routes[0]} component={SchedulePageContainer} />
           <Route path={routes[1]} component={Map} />
           <Route path={routes[2]} component={Search} />
-          <Route path={routes[3]} component={Credit} />
+          <Route path={routes[3]} component={AboutPage} />
         </div>
       </Router>
     </MuiThemeProvider>

@@ -1,20 +1,33 @@
 [
   {
     "name": "Daniel Ciao",
-    "role": "Lead Developer, CS Club VP of Tech, Class of 2018",
-    "desc": "Overall app framework and design",
-    "profiles": {
-      "Website": "https://pluscubed.com",
-      "Email": "pluscubed@gmail.com",
+    "role": "CS Club VP of Tech • Class of 2018",
+    "desc": "Lead developer, overall app framework and design",
+    "image": "avatar-daniel.jpg",
+    "links": {
+      "Website": "http://pluscubed.com",
+      "Email": "mailto:pluscubed@gmail.com",
       "LinkedIn": "https://www.linkedin.com/in/dciao/"
     }
   },
   {
     "name": "Marc Bacvanski",
-    "role": "CS Club President, Class of 2019",
-    "desc": "Overall team management",
-    "profiles": {
+    "role": "CS Club President • Class of 2019",
+    "desc": "",
+    "image": "",
+    "links": {
+      "Email": "mailto:marc.bacvanski@gmail.com",
       "LinkedIn": "https://www.linkedin.com/in/mbacvanski/"
+    }
+  },
+  {
+    "name": "Ly Nguyen",
+    "role": "CS Club Advisor • Computer Science Teacher",
+    "desc": "",
+    "image": "",
+    "links": {
+      "Website": "http://www.mvla.net/MVHS/Class/230-Mr-Nguyen-Class-Page",
+      "Email": "mailto:ly.nguyen@mvla.net"
     }
   }
 ]
