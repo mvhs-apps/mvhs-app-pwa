@@ -1,13 +1,13 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 import { Font } from 'expo';
 
 import { View, Text, StyleSheet, StatusBar, Platform } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import { COLOR, ThemeProvider, Toolbar } from 'react-native-material-ui';
-import BellScheduleContainer from './containers/BellScheduleContainer';
-import moment from 'moment';
+
+import SchedulePageContainer from './containers/SchedulePageContainer';
 
 const styles = StyleSheet.create({
   container: {
@@ -46,9 +46,7 @@ const uiTheme = {
   }
 };
 
-const date = moment();
-
-const FirstRoute = () => <BellScheduleContainer date={date} />;
+const FirstRoute = () => <SchedulePageContainer />;
 const SecondRoute = () =>
   <View style={[styles.container, { backgroundColor: '#673ab7' }]} />;
 
@@ -80,12 +78,6 @@ class App extends React.PureComponent<void, State> {
     schedule: FirstRoute,
     map: SecondRoute
   });
-
-  componentDidMount() {
-    Font.loadAsync({
-      'Material Icons': require('../native/assets/MaterialIcons.ttf')
-    });
-  }
 
   render() {
     return (

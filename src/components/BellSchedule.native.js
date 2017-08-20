@@ -3,8 +3,7 @@
 import * as React from 'react';
 
 import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
-import { COLOR } from 'react-native-material-ui';
-import { Card } from 'react-native-material-ui';
+import { COLOR, Card } from 'react-native-material-ui';
 import Loadable from './Loadable';
 
 export type Period = {
@@ -45,15 +44,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 32
   },
-  numericRow: {
+  rowText: {
+    fontSize: 13
+  },
+  numericRowText: {
     textAlign: 'right'
   },
   headingRow: {
-    height: 56
+    height: 56,
+    marginTop: 8
   },
-  heading: {
+  headingRowText: {
     fontWeight: '500',
-    color: 'rgba(0,0,0,0.54)'
+    color: 'rgba(0,0,0,0.54)',
+    fontSize: 12
   },
   scheduleName: {
     fontSize: 21,
@@ -69,11 +73,21 @@ const Column = ({ children, ...props }) =>
   </View>;
 
 const HeadingRow = props =>
-  <Row style={styles.headingRow} textStyle={styles.heading} {...props} />;
+  <Row
+    style={styles.headingRow}
+    textStyle={styles.headingRowText}
+    {...props}
+  />;
 
 const Row = ({ style, ...props }: { style?: any }) =>
   <View style={[styles.row, style]} {...props}>
-    <Text style={[props.numeric && styles.numericRow, props.textStyle]}>
+    <Text
+      style={[
+        styles.rowText,
+        props.numeric && styles.numericRowText,
+        props.textStyle
+      ]}
+    >
       {props.children}
     </Text>
   </View>;
@@ -95,7 +109,9 @@ const Empty = (
 const BellSchedule = ({ periods, loading, scheduleName }: Props) => {
   const cardStyle = {
     container: [
-      { height: periods.length === 0 ? 64 : periods.length * 48 + 116 }
+      {
+        height: loading || periods.length === 0 ? 64 : periods.length * 48 + 116
+      }
     ]
   };
   return (
@@ -107,37 +123,39 @@ const BellSchedule = ({ periods, loading, scheduleName }: Props) => {
           LoadingComponent={Loading}
           EmptyComponent={Empty}
         >
-          {scheduleName !== 'none' &&
-            <View>
-              <Text style={styles.scheduleName}>
-                {scheduleName}
-              </Text>
-            </View>}
+          <View>
+            {scheduleName !== 'none' &&
+              <View>
+                <Text style={styles.scheduleName}>
+                  {scheduleName}
+                </Text>
+              </View>}
 
-          <View style={styles.columnsContainer}>
-            {/*Period column*/}
-            <Column>
-              <HeadingRow numeric={true}>Period</HeadingRow>
-              {periods.map(n => {
-                return (
-                  <Row key={n.period} numeric={true}>
-                    {n.period}
-                  </Row>
-                );
-              })}
-            </Column>
+            <View style={styles.columnsContainer}>
+              {/*Period column*/}
+              <Column>
+                <HeadingRow numeric={true}>Period</HeadingRow>
+                {periods.map(n => {
+                  return (
+                    <Row key={n.period} numeric={true}>
+                      {n.period}
+                    </Row>
+                  );
+                })}
+              </Column>
 
-            {/*Time column*/}
-            <Column>
-              <HeadingRow>Time</HeadingRow>
-              {periods.map(n => {
-                return (
-                  <Row key={n.period}>
-                    {n.time}
-                  </Row>
-                );
-              })}
-            </Column>
+              {/*Time column*/}
+              <Column>
+                <HeadingRow>Time</HeadingRow>
+                {periods.map(n => {
+                  return (
+                    <Row key={n.period}>
+                      {n.time}
+                    </Row>
+                  );
+                })}
+              </Column>
+            </View>
           </View>
         </Loadable>
       </Card>
