@@ -4,11 +4,14 @@
     "slug": "mvhs-app",
     "sdkVersion": "20.0.0",
     "icon": "./native/assets/android.png",
-    "android" :{
+    "android": {
       "icon": "./native/assets/android.png"
     },
-    "ios" :{
+    "ios": {
       "icon": "./native/assets/ios.png"
+    },
+    "loading": {
+      "icon": "./native/assets/android.png"
     }
   }
 }
