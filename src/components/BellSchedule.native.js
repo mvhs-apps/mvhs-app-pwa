@@ -2,9 +2,10 @@
 
 import * as React from 'react';
 
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { COLOR } from 'react-native-material-ui';
 import { Card } from 'react-native-material-ui';
+import Loadable from './Loadable';
 
 export type Period = {
   period: string,
@@ -22,7 +23,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLOR.grey100
   },
-  card: {},
+  spinner: {
+    padding: 16
+  },
+  emptyText: {
+    padding: 24,
+    textAlign: 'center'
+  },
   columnsContainer: {
     flex: 1,
     flexDirection: 'row'
@@ -71,45 +78,68 @@ const Row = ({ style, ...props }: { style?: any }) =>
     </Text>
   </View>;
 
+const Loading = (
+  <ActivityIndicator
+    color={COLOR.amber500}
+    size="large"
+    style={styles.spinner}
+  />
+);
+
+const Empty = (
+  <View>
+    <Text style={styles.emptyText}>No school!</Text>
+  </View>
+);
+
 const BellSchedule = ({ periods, loading, scheduleName }: Props) => {
   const cardStyle = {
-    container: [styles.card, { height: periods.length * 48 + 116 }]
+    container: [
+      { height: periods.length === 0 ? 64 : periods.length * 48 + 116 }
+    ]
   };
   return (
     <View className="bell-schedule" style={styles.container}>
       <Card style={cardStyle}>
-        {scheduleName !== 'none' &&
-          <View>
-            <Text style={styles.scheduleName}>
-              {scheduleName}
-            </Text>
-          </View>}
+        <Loadable
+          loading={loading}
+          data={periods}
+          LoadingComponent={Loading}
+          EmptyComponent={Empty}
+        >
+          {scheduleName !== 'none' &&
+            <View>
+              <Text style={styles.scheduleName}>
+                {scheduleName}
+              </Text>
+            </View>}
 
-        <View style={styles.columnsContainer}>
-          {/*Period column*/}
-          <Column>
-            <HeadingRow numeric={true}>Period</HeadingRow>
-            {periods.map(n => {
-              return (
-                <Row key={n.period} numeric={true}>
-                  {n.period}
-                </Row>
-              );
-            })}
-          </Column>
+          <View style={styles.columnsContainer}>
+            {/*Period column*/}
+            <Column>
+              <HeadingRow numeric={true}>Period</HeadingRow>
+              {periods.map(n => {
+                return (
+                  <Row key={n.period} numeric={true}>
+                    {n.period}
+                  </Row>
+                );
+              })}
+            </Column>
 
-          {/*Time column*/}
-          <Column>
-            <HeadingRow>Time</HeadingRow>
-            {periods.map(n => {
-              return (
-                <Row key={n.period}>
-                  {n.time}
-                </Row>
-              );
-            })}
-          </Column>
-        </View>
+            {/*Time column*/}
+            <Column>
+              <HeadingRow>Time</HeadingRow>
+              {periods.map(n => {
+                return (
+                  <Row key={n.period}>
+                    {n.time}
+                  </Row>
+                );
+              })}
+            </Column>
+          </View>
+        </Loadable>
       </Card>
     </View>
   );
