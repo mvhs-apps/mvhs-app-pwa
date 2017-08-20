@@ -13,9 +13,10 @@
   {
     "name": "Marc Bacvanski",
     "role": "CS Club President • Class of 2019",
-    "desc": "",
-    "image": "",
+    "desc": "Project lead",
+    "image": "avatar-marc.jpg",
     "links": {
+      "Github": "http://github.com/mbacvanski",
       "Email": "mailto:marc.bacvanski@gmail.com",
       "LinkedIn": "https://www.linkedin.com/in/mbacvanski/"
     }
