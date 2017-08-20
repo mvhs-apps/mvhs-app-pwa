@@ -26,6 +26,14 @@ type Props = {
   scheduleName: string
 };
 
+const Loading = (
+  <div className="bell-schedule-loading center">
+    <CircularProgress />
+  </div>
+);
+
+const Empty = <div className="bell-schedule-empty center">No school!</div>;
+
 const BellSchedule = ({ periods, loading, scheduleName }: Props) => {
   return (
     <div className="bell-schedule">
@@ -33,14 +41,8 @@ const BellSchedule = ({ periods, loading, scheduleName }: Props) => {
         <Loadable
           loading={loading}
           data={periods}
-          LoadingComponent={
-            <div className="bell-schedule-loading center">
-              <CircularProgress />
-            </div>
-          }
-          EmptyComponent={
-            <div className="bell-schedule-empty center">No school!</div>
-          }
+          LoadingComponent={Loading}
+          EmptyComponent={Empty}
         >
           <div>
             {scheduleName !== 'none' &&

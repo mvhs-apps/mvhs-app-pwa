@@ -6,6 +6,8 @@ import { Font } from 'expo';
 import { View, Text, StyleSheet, StatusBar, Platform } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import { COLOR, ThemeProvider, Toolbar } from 'react-native-material-ui';
+import BellScheduleContainer from './containers/BellScheduleContainer';
+import moment from 'moment';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,13 +23,17 @@ const styles = StyleSheet.create({
   },
   tabLabel: {
     color: 'rgba(0, 0, 0, 0.87)'
+  },
+  tabIndicator: {
+    backgroundColor: COLOR.blue500
   }
 });
 
 const uiTheme = {
   fontFamily: null,
   palette: {
-    primaryColor: COLOR.amber500
+    primaryColor: COLOR.amber500,
+    accentColor: COLOR.blue500
   },
   toolbar: {
     container: {
@@ -40,8 +46,9 @@ const uiTheme = {
   }
 };
 
-const FirstRoute = () =>
-  <View style={[styles.container, { backgroundColor: '#ff4081' }]} />;
+const date = moment();
+
+const FirstRoute = () => <BellScheduleContainer date={date} />;
 const SecondRoute = () =>
   <View style={[styles.container, { backgroundColor: '#673ab7' }]} />;
 
@@ -62,7 +69,12 @@ class App extends React.PureComponent<void, State> {
   handleIndexChange = (index: number) => this.setState({ index });
 
   renderHeader = (props: any) =>
-    <TabBar labelStyle={styles.tabLabel} style={styles.tabBar} {...props} />;
+    <TabBar
+      labelStyle={styles.tabLabel}
+      style={styles.tabBar}
+      indicatorStyle={styles.tabIndicator}
+      {...props}
+    />;
 
   renderScene = SceneMap({
     schedule: FirstRoute,

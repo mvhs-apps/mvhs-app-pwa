@@ -1,4 +1,6 @@
-import React from 'react';
+// @flow
+
+import * as React from 'react';
 
 const Loadable = ({
   loading,
@@ -6,6 +8,12 @@ const Loadable = ({
   LoadingComponent,
   EmptyComponent,
   children
+}: {
+  loading: boolean,
+  data: any,
+  LoadingComponent: React.Element<any>,
+  EmptyComponent: React.Element<any>,
+  children: React.Node
 }) => {
   if (loading) {
     return LoadingComponent;
