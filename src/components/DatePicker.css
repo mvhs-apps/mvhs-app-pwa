@@ -18,15 +18,15 @@
   border: none;
 }
 
-.SingleDatePicker__picker {
-  left: calc(-50% - 2px) !important;
-}
-
-.DayPickerKeyboardShortcuts__show {
-  display: none;
-}
-
 .DateInput--with-caret::before,
 .DateInput--with-caret::after {
   left: 64px !important;
+}
+
+/*
+Disable iOS focus zoom:
+https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone
+*/
+input[type="text"] {
+  font-size: 18px;
 }

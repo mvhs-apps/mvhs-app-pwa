@@ -43,6 +43,9 @@ const DatePicker = ({
         onFocusChange={onFocusChange}
         isOutsideRange={isOutsideRange(lastDate)}
         numberOfMonths={1}
+        withPortal={true}
+        hideKeyboardShortcutsPanel={true}
+        readOnly={true}
       />
       <CaretDownIcon className="date-picker-caret" onClick={onCaretClick} />
     </div>
