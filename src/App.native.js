@@ -1,13 +1,13 @@
 // @flow
 
 import * as React from 'react';
-import { Font } from 'expo';
 
 import { View, Text, StyleSheet, StatusBar, Platform } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import { COLOR, ThemeProvider, Toolbar } from 'react-native-material-ui';
 
 import SchedulePageContainer from './containers/SchedulePageContainer';
+import Map from './components/Map.native';
 
 const styles = StyleSheet.create({
   container: {
@@ -47,8 +47,7 @@ const uiTheme = {
 };
 
 const FirstRoute = () => <SchedulePageContainer />;
-const SecondRoute = () =>
-  <View style={[styles.container, { backgroundColor: '#673ab7' }]} />;
+const SecondRoute = () => <Map />;
 
 type State = {
   index: number,

@@ -9,7 +9,7 @@ type State = {
   date: moment$Moment
 };
 
-class SchedulePageContainer extends React.PureComponent<void, State> {
+class SchedulePageContainer extends React.PureComponent<{}, State> {
   state = {
     date: moment()
   };
