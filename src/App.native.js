@@ -8,6 +8,7 @@ import { COLOR, ThemeProvider, Toolbar } from 'react-native-material-ui';
 
 import SchedulePageContainer from './containers/SchedulePageContainer';
 import Map from './components/Map.native';
+import Icon from './components/Icon.native';
 
 const styles = StyleSheet.create({
   container: {
@@ -46,20 +47,20 @@ const uiTheme = {
   }
 };
 
-const FirstRoute = () => <SchedulePageContainer />;
-const SecondRoute = () => <Map />;
+const ScheduleRoute = () => <SchedulePageContainer />;
+const MapRoute = () => <Map />;
 
 type State = {
   index: number,
-  routes: { key: string, title: string }[]
+  routes: { key: string, icon: string }[]
 };
 
 class App extends React.PureComponent<void, State> {
   state = {
     index: 0,
     routes: [
-      { key: 'schedule', title: 'schedule' },
-      { key: 'map', title: 'map' }
+      { key: 'schedule', icon: 'notifications' },
+      { key: 'map', icon: 'map' }
     ]
   };
 
@@ -70,12 +71,21 @@ class App extends React.PureComponent<void, State> {
       labelStyle={styles.tabLabel}
       style={styles.tabBar}
       indicatorStyle={styles.tabIndicator}
+      renderIcon={this.renderIcon}
       {...props}
     />;
 
+  renderIcon = ({ route }: any) => {
+    return (
+      <Icon>
+        {route.icon}
+      </Icon>
+    );
+  };
+
   renderScene = SceneMap({
-    schedule: FirstRoute,
-    map: SecondRoute
+    schedule: ScheduleRoute,
+    map: MapRoute
   });
 
   render() {

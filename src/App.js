@@ -53,7 +53,7 @@ const RouterTabs = withRouter(
   }
 );
 
-const routes = ['/', '/map', '/search', '/about'];
+const routes = ['/', '/map', /*'/search', */ '/about'];
 
 const theme = createMuiTheme({
   palette: createPalette({
@@ -78,15 +78,15 @@ const App = () => {
             <RouterTabs routes={routes} fullWidth={true} centered={true}>
               <LinkTab icon={<NotificationIcon />} to={routes[0]} />
               <LinkTab icon={<MapIcon />} to={routes[1]} />
-              <LinkTab icon={<SearchIcon />} to={routes[2]} />
-              <LinkTab icon={<InfoIcon />} to={routes[3]} />
+              {/*<LinkTab icon={<SearchIcon />} to={routes[2]} />*/}
+              <LinkTab icon={<InfoIcon />} to={routes[2]} />
             </RouterTabs>
           </AppBar>
 
           <Route exact path={routes[0]} component={SchedulePageContainer} />
           <Route path={routes[1]} component={Map} />
-          <Route path={routes[2]} component={Search} />
-          <Route path={routes[3]} component={AboutPage} />
+          {/*<Route path={routes[2]} component={Search} />*/}
+          <Route path={routes[2]} component={AboutPage} />
         </div>
       </Router>
     </MuiThemeProvider>
