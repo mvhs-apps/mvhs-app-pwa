@@ -30,7 +30,7 @@ const Calendar = ({ loading, events }) => {
             <List>
               {events.map(event => {
                 return (
-                  <ListItem button>
+                  <ListItem button={true} key={event.id}>
                     <ListItemAvatar>
                       <a
                         href={event.mapURL}
@@ -43,9 +43,8 @@ const Calendar = ({ loading, events }) => {
                       </a>
                     </ListItemAvatar>
                     <ListItemText
-                      primary={
-                        event.summary + ' | ' + event.start + ' - ' + event.end
-                      }
+                      className="calendar-desc"
+                      primary={`${event.summary} • ${event.start} - ${event.end}`}
                       secondary={event.description}
                     />
                   </ListItem>
