@@ -23,4 +23,6 @@ OfflinePluginRuntime.install({
   }
 });
 
-window.addToHomescreen();
+window.addToHomescreen({
+  validLocation: [/^\/$/]
+});

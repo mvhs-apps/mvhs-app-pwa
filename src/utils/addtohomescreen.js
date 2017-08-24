@@ -236,7 +236,7 @@
     // check if this is a valid location
     var isValidLocation = !this.options.validLocation.length;
     for (var i = this.options.validLocation.length; i--; ) {
-      if (this.options.validLocation[i].test(document.location.href)) {
+      if (this.options.validLocation[i].test(document.location.pathname)) {
         isValidLocation = true;
         break;
       }
