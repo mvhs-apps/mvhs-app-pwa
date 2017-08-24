@@ -6,6 +6,9 @@ import './index.css';
 import App from './App';
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 
+import './utils/addtohomescreen.js';
+import './utils/addtohomescreen.css';
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 OfflinePluginRuntime.install({
@@ -19,3 +22,5 @@ OfflinePluginRuntime.install({
     window.location.reload();
   }
 });
+
+window.addToHomescreen();
