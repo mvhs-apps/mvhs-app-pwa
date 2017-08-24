@@ -30,7 +30,7 @@ const Calendar = ({ loading, events }) => {
             <List>
               {events.map(event => {
                 return (
-                  <ListItem button={true} key={event.id}>
+                  <ListItem key={event.id}>
                     <ListItemAvatar>
                       <a
                         href={event.mapURL}
