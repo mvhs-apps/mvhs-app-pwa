@@ -24,5 +24,8 @@ OfflinePluginRuntime.install({
 });
 
 window.addToHomescreen({
+  lifespan: 0,
+  skipFirstVisit: true,
+  maxDisplayCount: 1,
   validLocation: [/^\/$/]
 });
