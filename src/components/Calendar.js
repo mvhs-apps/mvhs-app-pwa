@@ -10,6 +10,13 @@ import MapIcon from 'material-ui-icons/Map';
 
 import Loadable from './Loadable';
 
+const Empty = <div className="calendar-empty center">No school events</div>;
+const Loading = (
+  <div className="calendar-loading center">
+    <CircularProgress />
+  </div>
+);
+
 const Calendar = ({ loading, events }) => {
   return (
     <div className="calendar">
@@ -17,31 +24,25 @@ const Calendar = ({ loading, events }) => {
         <Loadable
           loading={loading}
           data={events}
-          LoadingComponent={
-            <div className="calendar-loading center">
-              <CircularProgress />
-            </div>
-          }
-          EmptyComponent={
-            <div className="calendar-empty center">No school events</div>
-          }
+          LoadingComponent={Loading}
+          EmptyComponent={Empty}
         >
           <div>
             <List>
-              {events.map(event => {
+              {events.map((event, index) => {
                 return (
-                  <ListItem key={event.id}>
-                    <ListItemAvatar>
-                      <a
-                        href={event.mapURL}
-                        target="_blank"
-                        title="Open in Maps"
-                      >
+                  <ListItem
+                    key={event.id}
+                    dense={false}
+                    divider={index !== events.length - 1}
+                  >
+                    <a href={event.mapURL} target="_blank" title="Open in Maps">
+                      <ListItemAvatar>
                         <Avatar>
                           <MapIcon />
                         </Avatar>
-                      </a>
-                    </ListItemAvatar>
+                      </ListItemAvatar>
+                    </a>
                     <ListItemText
                       className="calendar-desc"
                       primary={`${event.summary} • ${event.start} - ${event.end}`}

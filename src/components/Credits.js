@@ -13,6 +13,7 @@ export type Profile = {
   name: string,
   role: string,
   desc: string,
+  image: string,
   links: { [string]: string }
 };
 
@@ -48,7 +49,8 @@ const Credits = ({ profiles }: { profiles: Profile[] }) => {
             {Object.keys(profile.links).map((name: string) => {
               return (
                 <Button
-                  dense
+                  key={name}
+                  dense={true}
                   href={profile.links[name]}
                   target="_blank"
                   rel="noopener noreferrer"
