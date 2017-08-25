@@ -68,6 +68,7 @@
     "react-native-cli": "^2.0.1",
     "react-native-scripts": "^1.2.1",
     "style-loader": "^0.18.2",
+    "sw-precache-webpack-plugin": "^0.11.4",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "url-loader": "^0.5.9",
     "webpack": "^3.5.5",
