@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import './disclaimer.css';
 
 import BellScheduleContainer from '../containers/BellScheduleContainer';
 import DatePickerContainer from '../containers/DatePickerContainer';
