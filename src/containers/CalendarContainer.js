@@ -2,8 +2,7 @@
 
 import React from 'react';
 
-import moment from 'moment';
-import axios from 'axios';
+import type Moment from 'moment';
 import Calendar from '../components/Calendar';
 
 import calendarURL from '../schoolCalendar';
@@ -18,7 +17,7 @@ type SchoolEvent = {
 };
 
 type Props = {
-  date: moment$Moment
+  date: Moment
 };
 
 type State = {
@@ -33,16 +32,16 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
   };
 
   componentDidMount() {
-    this.loadCalendar();
+    this.loadCalendar().then();
   }
 
   componentDidUpdate(prevProps: Props) {
     if (this.props.date && !this.props.date.isSame(prevProps.date)) {
-      this.loadCalendar();
+      this.loadCalendar().then();
     }
   }
 
-  loadCalendar() {
+  async loadCalendar() {
     this.setState({
       loading: true
     });
@@ -53,7 +52,7 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
       .minute(0)
       .second(0)
       .millisecond(0);
-    const tomorrow = today.clone().add(1, 'days'); // yiks
+    const tomorrow = today.clone().add(1, 'days');
 
     const url =
       calendarURL +
@@ -63,41 +62,45 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
       'timeMax=' +
       tomorrow.toISOString();
 
-    axios
-      .get(url)
-      .then(response => {
-        const eventList: SchoolEvent[] = [];
-        response.data.items
-          .map(event => {
-            return {
-              id: event.id,
-              summary: event.summary,
-              description: event.description,
-              location: event.location,
-              mapURL:
-                'https://www.google.com/maps/search/' +
-                encodeURI(event.location),
-              start: new Date(event.start.dateTime).toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit'
-              }),
-              end: new Date(event.end.dateTime).toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit'
-              })
-            };
-          })
-          .forEach(event => {
-            eventList.push(event);
-          });
-        this.setState({
-          loading: false,
-          events: eventList
+    try {
+      const response = await fetch(url);
+      const json = await response.json();
+
+      const eventList: SchoolEvent[] = [];
+      json.items
+        .map(event => {
+          return {
+            id: event.id,
+            summary: event.summary,
+            description: event.description,
+            location: event.location,
+            mapURL:
+              'https://www.google.com/maps/search/' + encodeURI(event.location),
+            start: new Date(event.start.dateTime).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit'
+            }),
+            end: new Date(event.end.dateTime).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit'
+            })
+          };
+        })
+        .forEach(event => {
+          eventList.push(event);
         });
-      })
-      .catch(err => {
-        console.error('error getting calendar entries ' + err);
+
+      this.setState({
+        loading: false,
+        events: eventList
       });
+    } catch (err) {
+      console.error('Error getting calendar entries: ' + err);
+      this.setState({
+        loading: false,
+        events: []
+      });
+    }
   }
 
   render() {
