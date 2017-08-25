@@ -10,22 +10,28 @@ import MapIcon from 'material-ui-icons/Map';
 
 import Loadable from './Loadable';
 
-const Empty = <div className="calendar-empty center">No school events</div>;
+const Empty = <div className="card-padding center">No school events</div>;
 const Loading = (
-  <div className="calendar-loading center">
+  <div className="card-padding center">
     <CircularProgress />
   </div>
 );
+const Error = (error: string) =>
+  <div className="card-padding center">
+    {error}
+  </div>;
 
-const Calendar = ({ loading, events }) => {
+const Calendar = ({ loading, events, error }) => {
   return (
     <div className="calendar">
       <Paper>
         <Loadable
           loading={loading}
           data={events}
+          error={error}
           LoadingComponent={Loading}
           EmptyComponent={Empty}
+          ErrorComponent={Error(error)}
         >
           <div>
             <List>

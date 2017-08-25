@@ -10,11 +10,7 @@
   text-align: center;
 }
 
-.calendar-empty {
-  padding: 24px;
-}
-
-.calendar-loading {
+.card-padding {
   padding: 24px;
 }
 

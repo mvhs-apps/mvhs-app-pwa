@@ -22,12 +22,14 @@ type Props = {
 
 type State = {
   loading: boolean,
+  error: any,
   events: SchoolEvent[]
 };
 
 class DatePickerContainer extends React.PureComponent<Props, State> {
   state = {
     loading: true,
+    error: '',
     events: []
   };
 
@@ -92,19 +94,32 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
 
       this.setState({
         loading: false,
+        error: '',
         events: eventList
       });
     } catch (err) {
+      let errorMessage = err;
       console.error('Error getting calendar entries: ' + err);
+
+      if (!navigator.onLine) {
+        errorMessage = 'No Internet connection';
+      }
       this.setState({
         loading: false,
+        error: errorMessage,
         events: []
       });
     }
   }
 
   render() {
-    return <Calendar loading={this.state.loading} events={this.state.events} />;
+    return (
+      <Calendar
+        loading={this.state.loading}
+        events={this.state.events}
+        error={this.state.error.toString()}
+      />
+    );
   }
 }
 

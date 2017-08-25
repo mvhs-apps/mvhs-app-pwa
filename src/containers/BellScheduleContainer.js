@@ -26,6 +26,7 @@ type Props = {
 type State = {
   periods: Period[],
   loading: boolean,
+  error: any,
   scheduleName: string
 };
 
@@ -35,6 +36,7 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
   state = {
     periods: [],
     loading: true,
+    error: '',
     scheduleName: ''
   };
 
@@ -58,12 +60,13 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
       this.setState({
         scheduleName: result.scheduleName,
         periods: result.periods,
+        error: '',
         loading: false
       });
     } catch (err) {
       console.error(err);
       this.setState({
-        scheduleName: 'Loading Error',
+        error: err,
         loading: false
       });
     }
@@ -145,6 +148,7 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
         periods={this.state.periods}
         loading={this.state.loading}
         scheduleName={this.state.scheduleName}
+        error={this.state.error.toString()}
       />
     );
   }

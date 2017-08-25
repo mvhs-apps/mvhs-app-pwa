@@ -9,11 +9,7 @@
   text-align: center;
 }
 
-.bell-schedule-empty {
-  padding: 24px;
-}
-
-.bell-schedule-loading {
+.card-padding {
   padding: 24px;
 }
 
