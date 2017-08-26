@@ -13,7 +13,7 @@ import Table, {
 import Paper from 'material-ui/Paper';
 import { CircularProgress } from 'material-ui/Progress';
 import Typography from 'material-ui/Typography';
-import Loadable from './Loadable';
+import Loadable from './LCEComponent';
 
 export type Period = {
   period: string,

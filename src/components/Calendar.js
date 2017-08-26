@@ -8,7 +8,7 @@ import { CircularProgress } from 'material-ui/Progress';
 import List, { ListItem, ListItemText, ListItemAvatar } from 'material-ui/List';
 import MapIcon from 'material-ui-icons/Map';
 
-import Loadable from './Loadable';
+import Loadable from './LCEComponent';
 
 const Empty = <div className="card-padding center">No school events</div>;
 const Loading = (

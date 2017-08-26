@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 
-const Loadable = ({
+//LCE: Loading-Content-Error
+const LCEComponent = ({
   loading,
   data,
   error,
@@ -34,4 +35,4 @@ const Loadable = ({
   }
 };
 
-export default Loadable;
+export default LCEComponent;

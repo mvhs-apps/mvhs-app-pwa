@@ -1,22 +1,37 @@
 // @flow
 
 import React from 'react';
-
-import BellScheduleContainer from '../containers/BellScheduleContainer';
-import DatePickerContainer from '../containers/DatePickerContainer';
-import CalendarContainer from '../containers/CalendarContainer';
+import Loadable from 'react-loadable';
 
 type Props = {
   date: moment$Moment,
   onDateChange: (date: moment$Moment) => void
 };
 
+const AsyncBellSchedule = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "bell-schedule" */ '../containers/BellScheduleContainer'),
+  loading: () => null
+});
+
+const AsyncDatePicker = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "date-picker" */ '../containers/DatePickerContainer'),
+  loading: () => null
+});
+
+const AsyncCalendar = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "calendar-events" */ '../containers/CalendarContainer'),
+  loading: () => null
+});
+
 const SchedulePage = ({ date, onDateChange }: Props) => {
   return (
     <div>
-      <DatePickerContainer date={date} onDateChange={onDateChange} />
-      <BellScheduleContainer date={date} />
-      <CalendarContainer date={date} />
+      <AsyncDatePicker date={date} onDateChange={onDateChange} />
+      <AsyncBellSchedule date={date} />
+      <AsyncCalendar date={date} />
     </div>
   );
 };

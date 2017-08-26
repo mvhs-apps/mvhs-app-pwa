@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import { COLOR, Card } from 'react-native-material-ui';
-import Loadable from './Loadable';
+import Loadable from './LCEComponent';
 
 export type Period = {
   period: string,

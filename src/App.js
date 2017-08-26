@@ -18,15 +18,16 @@ import createPalette from 'material-ui/styles/palette';
 import amber from 'material-ui/colors/amber';
 import blue from 'material-ui/colors/blue';
 
-import SchedulePageContainer from './containers/SchedulePageContainer';
-import Map from './components/Map';
-import Search from './components/Search';
-import AboutPage from './components/AboutPage';
-
-import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  withRouter
+} from 'react-router-dom/es';
 import type { RouterHistory } from 'react-router-dom';
 
 import logo from './assets/outlinelogo.svg';
+import asyncComponent from './components/asyncComponent';
 
 const LinkTab = withRouter(
   ({ to, history, ...props }: { to: string, history: RouterHistory }) =>
@@ -62,6 +63,16 @@ const theme = createMuiTheme({
   })
 });
 
+const AsyncSchedulePage = asyncComponent(() =>
+  import(/* webpackChunkName: "page-schedule" */ './containers/SchedulePageContainer')
+);
+const AsyncMap = asyncComponent(() =>
+  import(/* webpackChunkName: "page-map" */ './components/Map')
+);
+const AsyncAbout = asyncComponent(() =>
+  import(/* webpackChunkName: "page-about" */ './components/AboutPage')
+);
+
 const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
@@ -83,10 +94,12 @@ const App = () => {
             </RouterTabs>
           </AppBar>
 
-          <Route exact path={routes[0]} component={SchedulePageContainer} />
-          <Route path={routes[1]} component={Map} />
-          {/*<Route path={routes[2]} component={Search} />*/}
-          <Route path={routes[2]} component={AboutPage} />
+          <Switch>
+            <Route exact path={routes[0]} component={AsyncSchedulePage} />
+            <Route path={routes[1]} component={AsyncMap} />
+            {/*<Route path={routes[2]} component={Search} />*/}
+            <Route path={routes[2]} component={AsyncAbout} />
+          </Switch>
         </div>
       </Router>
     </MuiThemeProvider>

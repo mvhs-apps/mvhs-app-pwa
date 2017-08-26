@@ -8,10 +8,15 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const OfflinePlugin = require('offline-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+
+const OfflinePlugin = require('offline-plugin');
 const ShakePlugin = require('webpack-common-shake').Plugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const WebpackChunkHash = require('webpack-chunk-hash');
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
@@ -57,7 +62,13 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: 'source-map',
   // In production, we only want to load the polyfills and the app code.
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: {
+    main: [require.resolve('./polyfills'), paths.appIndexJs],
+    vendor: [
+      'react',
+      'react-dom'
+    ]
+  },
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -269,6 +280,10 @@ module.exports = {
         minifyURLs: true
       }
     }),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      include: ['vendor', 'main']
+    }),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.
@@ -291,7 +306,8 @@ module.exports = {
     }),
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     new ExtractTextPlugin({
-      filename: cssFilename
+      filename: cssFilename,
+      allChunks: true
     }),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
@@ -341,15 +357,12 @@ module.exports = {
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
     //CUSTOM------------------------------------------------------------------------------
-
     // Generate a service worker script that will precache, and keep up to date,
     // the HTML & assets that are part of the Webpack build.
     new OfflinePlugin({
       excludes: ['**/.*', '**/*.map', 'asset-manifest.json'],
       externals: [
         '/manifest.json',
-        '/icons/android-chrome-192x192.png',
-        '/icons/android-chrome-512x512.png',
         '/icons/apple-touch-icon.png'
       ],
       AppCache: {
@@ -360,18 +373,21 @@ module.exports = {
     //Code split with vendor chunk
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: function (module) {
-        // this assumes your vendor imports exist in the node_modules directory
-        return module.context && module.context.indexOf('node_modules') !== -1;
-      }
+      minChunks: Infinity
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest'
+      async: false,
+      children: true,
+      minChunks: 3
     }),
-    new webpack.NamedChunksPlugin(),
-    new webpack.NamedModulesPlugin(),
+    new webpack.HashedModuleIdsPlugin(),
+    new WebpackChunkHash(),
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer'
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new ShakePlugin()
+    new ShakePlugin(),
+    new BundleAnalyzerPlugin()
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
