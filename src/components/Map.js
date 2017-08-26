@@ -6,8 +6,8 @@ import './Map.css';
 
 const Map = () => {
   return (
-    <div>
-      <img alt="map" className="schoolmap" src={map} />
+    <div className="map-container">
+      <img alt="map" className="map" src={map} />
     </div>
   );
 };
