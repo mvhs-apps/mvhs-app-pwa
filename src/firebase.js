@@ -1,5 +1,7 @@
 // @flow
 
+import * as storage from './utils/storage';
+
 const config = {
   apiKey: 'AIzaSyCfRrWtuQjgV2ekSGkmDn_BROYje60T61c',
   authDomain: 'mvhs-app-d04d2.firebaseapp.com',
@@ -43,7 +45,7 @@ const fbCacheKey = 'fbCache';
 const fbResetTimestampKey = 'fbResetTimestamp';
 
 export const getFirebaseVal = async (ref: string, forceFetch: boolean): any => {
-  const fbCacheString = localStorage.getItem(fbCacheKey);
+  const fbCacheString = await storage.getItem(fbCacheKey);
   let fbCache = !fbCacheString ? {} : JSON.parse(fbCacheString);
 
   const deepPath = ref.slice(1);
@@ -52,30 +54,35 @@ export const getFirebaseVal = async (ref: string, forceFetch: boolean): any => {
 
   //If value is not in the cache, or if we need to fetch
   if (!val || forceFetch) {
-    console.log(`Fetching "${ref}" from the Internets`);
+    console.log(`Fetching "${ref}" from web`);
 
     const response = await fetch(`${config.databaseURL + ref}.json`);
     val = await response.json();
 
     if (val) {
       //If last reset was over 1 week ago, clear the cache
-      const fbResetTimestampString = localStorage.getItem(fbResetTimestampKey);
+      const fbResetTimestampString = await storage.getItem(fbResetTimestampKey);
       if (fbResetTimestampString) {
         const fbResetTimestamp = JSON.parse(fbResetTimestampString);
 
         //If timestamp exists, reset cache if needed
         if (Date.now() - fbResetTimestamp > 6.048e8) {
           fbCache = {};
-          localStorage.setItem(fbResetTimestampKey, JSON.stringify(Date.now()));
+          await storage.setItem(
+            fbResetTimestampKey,
+            JSON.stringify(Date.now())
+          );
         }
       } else {
         //If timestamp doesn't exist, initialize it
-        localStorage.setItem(fbResetTimestampKey, JSON.stringify(Date.now()));
+        await storage.setItem(fbResetTimestampKey, JSON.stringify(Date.now()));
       }
 
       const updatedCache = deep(fbCache, deepPath, val);
-      localStorage.setItem(fbCacheKey, JSON.stringify(updatedCache));
+      await storage.setItem(fbCacheKey, JSON.stringify(updatedCache));
     }
+  } else {
+    console.log(`Fetching "${ref}" from cache`);
   }
 
   return val;

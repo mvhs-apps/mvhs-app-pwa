@@ -4,11 +4,7 @@ import React from 'react';
 import CreditsContainer from '../containers/CreditsContainer';
 
 const AboutPage = () => {
-  return (
-    <div>
-      <CreditsContainer />
-    </div>
-  );
+  return <CreditsContainer />;
 };
 
 export default AboutPage;

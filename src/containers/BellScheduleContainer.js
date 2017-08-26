@@ -7,6 +7,7 @@ import type { Period } from '../components/BellSchedule';
 import moment from 'moment';
 import type Moment from 'moment';
 import { getFirebaseVal } from '../firebase';
+import * as storage from '../utils/storage';
 
 const pad = (num, size) => {
   let s = num + '';
@@ -73,12 +74,12 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
   }
 
   async getBellSchedule() {
-    const fbTimestampString = localStorage.getItem(fbTimestampKey);
+    const fbTimestampString = await storage.getItem(fbTimestampKey);
     //If last fetch was over 30 minutes ago, force fetch from Internet
     const forceFetch =
       !fbTimestampString || Date.now() - JSON.parse(fbTimestampString) > 1.8e6;
     if (!fbTimestampString || forceFetch) {
-      localStorage.setItem(fbTimestampKey, JSON.stringify(Date.now()));
+      await storage.setItem(fbTimestampKey, JSON.stringify(Date.now()));
     }
 
     const selectedDate = this.props.date.toDate();
