@@ -6,7 +6,7 @@ import BellSchedule from '../components/BellSchedule';
 import type { Period } from '../components/BellSchedule';
 import moment from 'moment';
 import type Moment from 'moment';
-import { getFirebaseVal } from '../firebase';
+import { getFirebaseVal } from '../utils/firebase';
 import * as storage from '../utils/storage';
 
 const pad = (num, size) => {

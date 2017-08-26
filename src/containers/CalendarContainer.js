@@ -5,7 +5,7 @@ import React from 'react';
 import type Moment from 'moment';
 import Calendar from '../components/Calendar';
 
-import calendarURL from '../schoolCalendar';
+import calendarURL from '../utils/schoolCalendar';
 
 type SchoolEvent = {
   summary: string,

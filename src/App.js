@@ -77,7 +77,7 @@ const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <Router>
-        <div>
+        <div className="App">
           <AppBar position="static">
             <Toolbar>
               <img src={logo} className="school-logo" alt="MVHS Logo" />

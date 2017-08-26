@@ -3,6 +3,10 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 
+import './SchedulePage.css';
+
+import Disclaimer from './Disclaimer';
+
 type Props = {
   date: moment$Moment,
   onDateChange: (date: moment$Moment) => void
@@ -28,10 +32,12 @@ const AsyncCalendar = Loadable({
 
 const SchedulePage = ({ date, onDateChange }: Props) => {
   return (
-    <div>
+    <div className="schedule-page">
       <AsyncDatePicker date={date} onDateChange={onDateChange} />
       <AsyncBellSchedule date={date} />
       <AsyncCalendar date={date} />
+      <div className="spacer" />
+      <Disclaimer />
     </div>
   );
 };

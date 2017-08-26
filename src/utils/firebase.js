@@ -1,6 +1,6 @@
 // @flow
 
-import * as storage from './utils/storage';
+import * as storage from './storage';
 
 const config = {
   apiKey: 'AIzaSyCfRrWtuQjgV2ekSGkmDn_BROYje60T61c',
