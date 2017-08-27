@@ -9,26 +9,17 @@ import type { Profile } from './Credits';
 const Credits = ({ profiles }: { profiles: Profile[] }) => {
   return (
     <View className="about">
-      {profiles.map((profile: Profile) =>
+      {profiles.map((profile: Profile) => (
         <Card key={profile.name}>
           <View>
             <Avatar
               image={profile.image && require('../assets/' + profile.image)}
               text={!profile.image && profile.name.replace(/[^A-Z]/g, '')}
             />
-            <Text>
-              {profile.name}
-            </Text>
-            <Text>
-              {profile.role}
-            </Text>
+            <Text>{profile.name}</Text>
+            <Text>{profile.role}</Text>
           </View>
-          <View>
-            {profile.desc &&
-              <Text>
-                {profile.desc}
-              </Text>}
-          </View>
+          <View>{profile.desc && <Text>{profile.desc}</Text>}</View>
           <View>
             {Object.keys(profile.links).map((name: string) => {
               return (
@@ -37,7 +28,7 @@ const Credits = ({ profiles }: { profiles: Profile[] }) => {
             })}
           </View>
         </Card>
-      )}
+      ))}
     </View>
   );
 };

@@ -67,19 +67,17 @@ const styles = StyleSheet.create({
   }
 });
 
-const Column = ({ children, ...props }) =>
+const Column = ({ children, ...props }) => (
   <View style={styles.column} {...props}>
     {children}
-  </View>;
+  </View>
+);
 
-const HeadingRow = props =>
-  <Row
-    style={styles.headingRow}
-    textStyle={styles.headingRowText}
-    {...props}
-  />;
+const HeadingRow = props => (
+  <Row style={styles.headingRow} textStyle={styles.headingRowText} {...props} />
+);
 
-const Row = ({ style, ...props }: { style?: any }) =>
+const Row = ({ style, ...props }: { style?: any }) => (
   <View style={[styles.row, style]} {...props}>
     <Text
       style={[
@@ -90,7 +88,8 @@ const Row = ({ style, ...props }: { style?: any }) =>
     >
       {props.children}
     </Text>
-  </View>;
+  </View>
+);
 
 const Loading = (
   <ActivityIndicator
@@ -124,12 +123,11 @@ const BellSchedule = ({ periods, loading, scheduleName }: Props) => {
           EmptyComponent={Empty}
         >
           <View>
-            {scheduleName !== 'none' &&
+            {scheduleName !== 'none' && (
               <View>
-                <Text style={styles.scheduleName}>
-                  {scheduleName}
-                </Text>
-              </View>}
+                <Text style={styles.scheduleName}>{scheduleName}</Text>
+              </View>
+            )}
 
             <View style={styles.columnsContainer}>
               {/*Period column*/}
@@ -148,11 +146,7 @@ const BellSchedule = ({ periods, loading, scheduleName }: Props) => {
               <Column>
                 <HeadingRow>Time</HeadingRow>
                 {periods.map(n => {
-                  return (
-                    <Row key={n.period}>
-                      {n.time}
-                    </Row>
-                  );
+                  return <Row key={n.period}>{n.time}</Row>;
                 })}
               </Column>
             </View>

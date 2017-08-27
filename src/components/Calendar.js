@@ -16,10 +16,9 @@ const Loading = (
     <CircularProgress />
   </div>
 );
-const Error = (error: string) =>
-  <div className="card-padding center">
-    {error}
-  </div>;
+const Error = (error: string) => (
+  <div className="card-padding center">{error}</div>
+);
 
 const Calendar = ({ loading, events, error }) => {
   return (

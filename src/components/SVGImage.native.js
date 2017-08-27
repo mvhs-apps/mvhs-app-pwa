@@ -25,7 +25,7 @@ export default class SVGImage extends React.PureComponent<Props> {
     height: null
   };
 
-  renderLoader = () =>
+  renderLoader = () => (
     <View
       style={[
         this.props.style,
@@ -33,7 +33,8 @@ export default class SVGImage extends React.PureComponent<Props> {
       ]}
     >
       <ActivityIndicator />
-    </View>;
+    </View>
+  );
 
   render() {
     const { showWebviewLoader, svgString, style, ...restOfProps } = this.props;

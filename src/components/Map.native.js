@@ -6,9 +6,10 @@ import SVGImage from './SVGImage.native';
 import map from './schoolMap.native';
 import { View } from 'react-native';
 
-const Map = () =>
+const Map = () => (
   <View style={{ flex: 1 }}>
     <SVGImage style={{ flex: 1 }} svgString={map} />
-  </View>;
+  </View>
+);
 
 export default Map;

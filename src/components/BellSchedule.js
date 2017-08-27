@@ -36,10 +36,9 @@ const Loading = (
 
 const Empty = <div className="card-padding center">No school!</div>;
 
-const Error = (error: string) =>
-  <div className="card-padding center">
-    {error}
-  </div>;
+const Error = (error: string) => (
+  <div className="card-padding center">{error}</div>
+);
 
 const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
   return (
@@ -54,10 +53,11 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
           ErrorComponent={Error(error)}
         >
           <div>
-            {scheduleName !== 'none' &&
+            {scheduleName !== 'none' && (
               <Typography type="title" className="bell-schedule-name">
                 {scheduleName}
-              </Typography>}
+              </Typography>
+            )}
 
             <Table>
               <TableHead>
@@ -73,12 +73,8 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
                       key={n.period}
                       className={n.current ? 'bell-schedule-current' : ''}
                     >
-                      <TableCell numeric>
-                        {n.period}
-                      </TableCell>
-                      <TableCell>
-                        {n.time}
-                      </TableCell>
+                      <TableCell numeric>{n.period}</TableCell>
+                      <TableCell>{n.time}</TableCell>
                     </TableRow>
                   );
                 })}

@@ -26,11 +26,7 @@ const SimpleSnackbar = ({
       }}
       open={open}
       autoHideDuration={null}
-      message={
-        <span id="message-id">
-          {message}
-        </span>
-      }
+      message={<span id="message-id">{message}</span>}
       action={[
         <Button color="accent" dense onClick={onButtonClick}>
           {buttonMessage}

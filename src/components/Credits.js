@@ -20,7 +20,7 @@ export type Profile = {
 const Credits = ({ profiles }: { profiles: Profile[] }) => {
   return (
     <div className="about">
-      {profiles.map((profile: Profile) =>
+      {profiles.map((profile: Profile) => (
         <Card className="about-card" key={profile.name}>
           <CardHeader
             className={profile.desc ? '' : 'about-header-no-body'}
@@ -40,10 +40,7 @@ const Credits = ({ profiles }: { profiles: Profile[] }) => {
               'about-content ' + (profile.desc ? '' : 'about-content-no-body')
             }
           >
-            {profile.desc &&
-              <Typography>
-                {profile.desc}
-              </Typography>}
+            {profile.desc && <Typography>{profile.desc}</Typography>}
           </CardContent>
           <CardActions>
             {Object.keys(profile.links).map((name: string) => {
@@ -61,7 +58,7 @@ const Credits = ({ profiles }: { profiles: Profile[] }) => {
             })}
           </CardActions>
         </Card>
-      )}
+      ))}
     </div>
   );
 };

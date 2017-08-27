@@ -66,21 +66,18 @@ class App extends React.PureComponent<void, State> {
 
   handleIndexChange = (index: number) => this.setState({ index });
 
-  renderHeader = (props: any) =>
+  renderHeader = (props: any) => (
     <TabBar
       labelStyle={styles.tabLabel}
       style={styles.tabBar}
       indicatorStyle={styles.tabIndicator}
       renderIcon={this.renderIcon}
       {...props}
-    />;
+    />
+  );
 
   renderIcon = ({ route }: any) => {
-    return (
-      <Icon>
-        {route.icon}
-      </Icon>
-    );
+    return <Icon>{route.icon}</Icon>;
   };
 
   renderScene = SceneMap({

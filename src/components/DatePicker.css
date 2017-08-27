@@ -10,8 +10,8 @@
 
 .DateInput {
   font-weight: 500;
-  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif !important;
 }
 
 .SingleDatePickerInput {
@@ -27,6 +27,6 @@
 Disable iOS focus zoom:
 https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone
 */
-input[type="text"] {
+input[type='text'] {
   font-size: 18px;
 }

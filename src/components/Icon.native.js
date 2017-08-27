@@ -22,11 +22,13 @@ class Icon extends React.PureComponent<void, State> {
   textStyle = { fontFamily: 'Material Icons', fontSize: 24 };
 
   render() {
-    return this.state.fontLoaded
-      ? <Text style={[this.textStyle, this.props.style]}>
-          {this.props.children}
-        </Text>
-      : <Text style={this.props.style} />;
+    return this.state.fontLoaded ? (
+      <Text style={[this.textStyle, this.props.style]}>
+        {this.props.children}
+      </Text>
+    ) : (
+      <Text style={this.props.style} />
+    );
   }
 }
 

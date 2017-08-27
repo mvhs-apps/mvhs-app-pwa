@@ -32,13 +32,14 @@ import asyncComponent from './components/asyncComponent';
 import SimpleSnackbar from './components/SimpleSnackbar';
 
 const LinkTab = withRouter(
-  ({ to, history, ...props }: { to: string, history: RouterHistory }) =>
+  ({ to, history, ...props }: { to: string, history: RouterHistory }) => (
     <Tab
       onClick={() => {
         history.push(to);
       }}
       {...props}
     />
+  )
 );
 
 const handleTabChange = () => {};
