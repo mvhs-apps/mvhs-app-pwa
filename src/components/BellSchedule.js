@@ -17,7 +17,8 @@ import Loadable from './LCEComponent';
 
 export type Period = {
   period: string,
-  time: string
+  time: string,
+  current: string
 };
 
 type Props = {
@@ -68,7 +69,10 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
               <TableBody>
                 {periods.map(n => {
                   return (
-                    <TableRow key={n.period}>
+                    <TableRow
+                      key={n.period}
+                      className={n.current ? 'bell-schedule-current' : ''}
+                    >
                       <TableCell numeric>
                         {n.period}
                       </TableCell>

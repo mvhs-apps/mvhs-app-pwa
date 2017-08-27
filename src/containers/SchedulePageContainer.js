@@ -20,6 +20,18 @@ class SchedulePageContainer extends React.PureComponent<{}, State> {
     });
   };
 
+  componentDidMount() {
+    window.addEventListener('focus', () => {
+      //If the selected date is in the past, change to the current day
+      if (this.state.date.diff(moment().startOf('day')) < 0) {
+        this.setState({
+          date: moment()
+        });
+        console.log('Outdated, switching to today');
+      }
+    });
+  }
+
   render() {
     return (
       <SchedulePage

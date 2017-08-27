@@ -17,3 +17,7 @@
   padding-top: 24px;
   text-align: center;
 }
+
+.bell-schedule-current {
+  background-color: #ffc107;
+}

@@ -28,7 +28,8 @@ type State = {
   periods: Period[],
   loading: boolean,
   error: any,
-  scheduleName: string
+  scheduleName: string,
+  refreshed: Moment
 };
 
 const fbTimestampKey = 'fbTimestamp';
@@ -38,11 +39,20 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
     periods: [],
     loading: true,
     error: '',
-    scheduleName: ''
+    scheduleName: '',
+    refreshed: moment()
   };
 
   componentDidMount() {
     this.loadBellSchedule().then();
+
+    window.addEventListener('focus', () => {
+      //If last refresh was more than 5 minutes ago
+      if (this.state.refreshed.diff(moment(), 'minutes') < -5) {
+        this.loadBellSchedule().then();
+        console.log('Outdated, re-highlighting');
+      }
+    });
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -53,7 +63,8 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
 
   async loadBellSchedule() {
     this.setState({
-      loading: true
+      loading: true,
+      refreshed: moment()
     });
 
     try {
@@ -118,14 +129,25 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
         `/schedules/${schedule}`,
         forceFetch
       );
+
+      const now = this.state.refreshed;
+
       for (const periodTime: string in scheduleData) {
-        const startHour = to12Hour(periodTime.substr(0, 2));
+        const startHour = periodTime.substr(0, 2);
         const startMin = periodTime.substr(2, 2);
-        const endHour = to12Hour(periodTime.substr(5, 2));
+        const endHour = periodTime.substr(5, 2);
         const endMin = periodTime.substr(7, 2);
+
+        const start = this.props.date.clone().hour(startHour).minute(startMin);
+        const end = this.props.date.clone().hour(endHour).minute(endMin);
+        const current = now.diff(start) >= 0 && now.diff(end) < 0;
+
         periods.push({
           period: scheduleData[periodTime],
-          time: `${startHour}:${startMin} - ${endHour}:${endMin}`
+          time: `${to12Hour(startHour)}:${startMin} - ${to12Hour(
+            endHour
+          )}:${endMin}`,
+          current: current
         });
       }
     }
