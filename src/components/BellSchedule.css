@@ -9,15 +9,15 @@
   text-align: center;
 }
 
-.bell-schedule-empty {
-  padding: 24px;
-}
-
-.bell-schedule-loading {
+.card-padding {
   padding: 24px;
 }
 
 .bell-schedule-name {
   padding-top: 24px;
   text-align: center;
+}
+
+.bell-schedule-current {
+  background-color: #ffc107;
 }

@@ -3,7 +3,6 @@
 import React from 'react';
 
 import moment from 'moment';
-import isInclusivelyAfterDay from 'react-dates/lib/utils/isInclusivelyAfterDay';
 import DatePicker from '../components/DatePicker';
 
 type Props = {
@@ -15,10 +14,12 @@ type State = {
   focused: boolean
 };
 
-class DatePickerContainer extends React.PureComponent<void, Props, State> {
+class DatePickerContainer extends React.PureComponent<Props, State> {
   state = {
     focused: false
   };
+
+  twoWeeksLater = moment().add(2, 'weeks');
 
   handleFocusChange = ({ focused }: { focused: boolean }) => {
     this.setState({
@@ -32,13 +33,6 @@ class DatePickerContainer extends React.PureComponent<void, Props, State> {
     });
   };
 
-  isOutsideRange = (day: moment$Moment) => {
-    return (
-      !isInclusivelyAfterDay(day, moment()) ||
-      isInclusivelyAfterDay(day, moment().add(2, 'weeks'))
-    );
-  };
-
   render() {
     const { date, onDateChange } = this.props;
     return (
@@ -48,7 +42,7 @@ class DatePickerContainer extends React.PureComponent<void, Props, State> {
         focused={this.state.focused}
         onFocusChange={this.handleFocusChange}
         onCaretClick={this.handleCaretClick}
-        isOutsideRange={this.isOutsideRange}
+        lastDate={this.twoWeeksLater}
       />
     );
   }

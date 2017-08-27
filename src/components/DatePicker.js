@@ -3,10 +3,12 @@
 import React from 'react';
 
 import SingleDatePicker from 'react-dates/lib/components/SingleDatePicker';
+import isInclusivelyAfterDay from 'react-dates/lib/utils/isInclusivelyAfterDay';
 import 'react-dates/lib/css/_datepicker.css';
 import CaretDownIcon from 'material-ui-icons/KeyboardArrowDown';
 
 import './DatePicker.css';
+import moment from 'moment';
 
 type Props = {
   date: moment$Moment,
@@ -14,7 +16,14 @@ type Props = {
   focused: boolean,
   onFocusChange: ({ focused: boolean }) => void,
   onCaretClick: () => void,
-  isOutsideRange: (day: moment$Moment) => boolean
+  lastDate: moment$Moment
+};
+
+const isOutsideRange = (lastDate: moment$Moment) => (day: moment$Moment) => {
+  return (
+    !isInclusivelyAfterDay(day, moment()) ||
+    isInclusivelyAfterDay(day, lastDate)
+  );
 };
 
 const DatePicker = ({
@@ -23,7 +32,7 @@ const DatePicker = ({
   focused,
   onFocusChange,
   onCaretClick,
-  isOutsideRange
+  lastDate
 }: Props) => {
   return (
     <div className="date-picker">
@@ -32,8 +41,11 @@ const DatePicker = ({
         onDateChange={onDateChange}
         focused={focused}
         onFocusChange={onFocusChange}
-        isOutsideRange={isOutsideRange}
+        isOutsideRange={isOutsideRange(lastDate)}
         numberOfMonths={1}
+        withPortal={true}
+        hideKeyboardShortcutsPanel={true}
+        readOnly={true}
       />
       <CaretDownIcon className="date-picker-caret" onClick={onCaretClick} />
     </div>

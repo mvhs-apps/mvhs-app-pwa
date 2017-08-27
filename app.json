@@ -1,4 +1,17 @@
 {
-  "name": "mvhsapp",
-  "displayName": "mvhsapp"
+  "expo": {
+    "name": "MVHS App",
+    "slug": "mvhs-app",
+    "sdkVersion": "20.0.0",
+    "icon": "./native/assets/android.png",
+    "android": {
+      "icon": "./native/assets/android.png"
+    },
+    "ios": {
+      "icon": "./native/assets/ios.png"
+    },
+    "loading": {
+      "icon": "./native/assets/android.png"
+    }
+  }
 }

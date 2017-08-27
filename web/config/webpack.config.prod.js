@@ -7,11 +7,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const OfflinePlugin = require('offline-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+
+const OfflinePlugin = require('offline-plugin');
 const ShakePlugin = require('webpack-common-shake').Plugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const WebpackChunkHash = require('webpack-chunk-hash');
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
@@ -57,7 +62,13 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: 'source-map',
   // In production, we only want to load the polyfills and the app code.
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: {
+    main: [require.resolve('./polyfills'), paths.appIndexJs],
+    vendor: [
+      'react',
+      'react-dom'
+    ]
+  },
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -119,7 +130,8 @@ module.exports = {
         use: [
           {
             options: {
-              formatter: eslintFormatter
+              formatter: eslintFormatter,
+              eslintPath: require.resolve('eslint')
             },
             loader: require.resolve('eslint-loader')
           }
@@ -268,6 +280,10 @@ module.exports = {
         minifyURLs: true
       }
     }),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      include: ['vendor', 'main']
+    }),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.
@@ -290,13 +306,48 @@ module.exports = {
     }),
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     new ExtractTextPlugin({
-      filename: cssFilename
+      filename: cssFilename,
+      allChunks: true
     }),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.
     new ManifestPlugin({
       fileName: 'asset-manifest.json'
+    }),
+    // Generate a service worker script that will precache, and keep up to date,
+    // the HTML & assets that are part of the Webpack build.
+    new SWPrecacheWebpackPlugin({
+      // By default, a cache-busting query parameter is appended to requests
+      // used to populate the caches, to ensure the responses are fresh.
+      // If a URL is already hashed by Webpack, then there is no concern
+      // about it being stale, and the cache-busting can be skipped.
+      dontCacheBustUrlsMatching: /\.\w{8}\./,
+      filename: 'service-worker.js',
+      logger(message) {
+        if (message.indexOf('Total precache size is') === 0) {
+          // This message occurs for every build and is a bit too noisy.
+          return;
+        }
+        if (message.indexOf('Skipping static resource') === 0) {
+          // This message obscures real errors so we ignore it.
+          // https://github.com/facebookincubator/create-react-app/issues/2612
+          return;
+        }
+        console.log(message);
+      },
+      minify: true,
+      // For unknown URLs, fallback to the index page
+      navigateFallback: publicUrl + '/index.html',
+      // Ignores URLs starting from /__ (useful for Firebase):
+      // https://github.com/facebookincubator/create-react-app/issues/2237#issuecomment-302693219
+      navigateFallbackWhitelist: [/^(?!\/__).*/],
+      // Don't precache sourcemaps (they're large) and build asset manifest:
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/, /appcache/],
+      runtimeCaching: [{
+        urlPattern: /^https:\/\/www.googleapis.com\/calendar\/v3\/calendars/,
+        handler: 'fastest'
+      }],
     }),
     // Moment.js is an extremely popular library that bundles large locale files
     // by default due to how Webpack interprets its code. This is a practical
@@ -306,43 +357,36 @@ module.exports = {
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
     //CUSTOM------------------------------------------------------------------------------
-
     // Generate a service worker script that will precache, and keep up to date,
     // the HTML & assets that are part of the Webpack build.
     new OfflinePlugin({
       excludes: ['**/.*', '**/*.map', 'asset-manifest.json'],
       externals: [
         '/manifest.json',
-        '/icons/android-chrome-192x192.png',
-        '/icons/android-chrome-512x512.png',
-        '/icons/apple-touch-icon.png',
-        '/icons/safari-pinned-tab.svg'
+        '/icons/apple-touch-icon.png'
       ],
       AppCache: {
         FALLBACK: {'/': '/'}
       },
-      ServiceWorker: {
-        output: 'service-worker.js',
-        navigateFallbackURL: '/',
-        events: true
-      }
+      ServiceWorker: false
     }),
     //Code split with vendor chunk
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: function (module) {
-        // this assumes your vendor imports exist in the node_modules directory
-        return module.context && module.context.indexOf('node_modules') !== -1;
-      }
+      minChunks: Infinity
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest'
+      async: false,
+      children: true,
+      minChunks: 3
     }),
-    new webpack.NamedChunksPlugin(),
-    new webpack.NamedModulesPlugin(),
+    new webpack.HashedModuleIdsPlugin(),
+    new WebpackChunkHash(),
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer'
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ShakePlugin(),
-    //Web interface for analyzing bundles
     new BundleAnalyzerPlugin()
   ],
   // Some libraries import Node modules but don't use them in the browser.

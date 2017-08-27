@@ -8,44 +8,50 @@ import { CircularProgress } from 'material-ui/Progress';
 import List, { ListItem, ListItemText, ListItemAvatar } from 'material-ui/List';
 import MapIcon from 'material-ui-icons/Map';
 
-import Loadable from './Loadable';
+import Loadable from './LCEComponent';
 
-const Calendar = ({ loading, events }) => {
+const Empty = <div className="card-padding center">No school events</div>;
+const Loading = (
+  <div className="card-padding center">
+    <CircularProgress />
+  </div>
+);
+const Error = (error: string) =>
+  <div className="card-padding center">
+    {error}
+  </div>;
+
+const Calendar = ({ loading, events, error }) => {
   return (
     <div className="calendar">
       <Paper>
         <Loadable
           loading={loading}
           data={events}
-          LoadingComponent={
-            <div className="calendar-loading center">
-              <CircularProgress />
-            </div>
-          }
-          EmptyComponent={
-            <div className="calendar-empty center">No school events</div>
-          }
+          error={error}
+          LoadingComponent={Loading}
+          EmptyComponent={Empty}
+          ErrorComponent={Error(error)}
         >
           <div>
             <List>
-              {events.map(event => {
+              {events.map((event, index) => {
                 return (
-                  <ListItem id={event.id}>
-                    <ListItemAvatar>
-                      <a
-                        href={event.mapURL}
-                        target="_blank"
-                        title="Open in Maps"
-                      >
+                  <ListItem
+                    key={event.id}
+                    dense={false}
+                    divider={index !== events.length - 1}
+                  >
+                    <a href={event.mapURL} target="_blank" title="Open in Maps">
+                      <ListItemAvatar>
                         <Avatar>
                           <MapIcon />
                         </Avatar>
-                      </a>
-                    </ListItemAvatar>
+                      </ListItemAvatar>
+                    </a>
                     <ListItemText
-                      primary={
-                        event.summary + ' | ' + event.start + ' - ' + event.end
-                      }
+                      className="calendar-desc"
+                      primary={`${event.summary} • ${event.start} - ${event.end}`}
                       secondary={event.description}
                     />
                   </ListItem>

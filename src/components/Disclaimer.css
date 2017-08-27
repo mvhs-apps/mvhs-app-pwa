@@ -1,0 +1,8 @@
+.disclaimer {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 500px;
+  padding: 24px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.54);
+}

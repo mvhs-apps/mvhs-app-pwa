@@ -3,18 +3,14 @@
   margin: 0 auto;
   min-width: 300px;
   width: fit-content;
-  max-width: 400px;
+  max-width: 600px;
 }
 
 .center {
   text-align: center;
 }
 
-.calendar-empty {
-  padding: 24px;
-}
-
-.calendar-loading {
+.card-padding {
   padding: 24px;
 }
 
@@ -22,4 +18,8 @@
   padding-top: 24px;
   padding-bottom: 24px;
   text-align: center;
+}
+
+.calendar-desc {
+  white-space: pre-wrap;
 }

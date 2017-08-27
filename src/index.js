@@ -5,17 +5,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import './utils/addtohomescreen.js';
+import './utils/addtohomescreen.css';
 
-OfflinePluginRuntime.install({
-  onUpdateReady: () => {
-    console.log('SW Event:', 'onUpdateReady');
-    OfflinePluginRuntime.applyUpdate();
-  },
-  onUpdated: () => {
-    console.log('SW Event:', 'onUpdated');
-    // TODO: Use snackbar for proper updating
-    window.location.reload();
-  }
+ReactDOM.render(<App showUpdate={false} />, document.getElementById('root'));
+
+registerServiceWorker();
+if (!('serviceWorker' in navigator)) OfflinePluginRuntime.install();
+
+window.addToHomescreen({
+  lifespan: 0,
+  skipFirstVisit: true,
+  maxDisplayCount: 1,
+  validLocation: [/^\/$/]
 });

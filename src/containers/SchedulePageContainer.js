@@ -9,7 +9,7 @@ type State = {
   date: moment$Moment
 };
 
-class SchedulePageContainer extends React.PureComponent<void, {}, State> {
+class SchedulePageContainer extends React.PureComponent<{}, State> {
   state = {
     date: moment()
   };
@@ -19,6 +19,18 @@ class SchedulePageContainer extends React.PureComponent<void, {}, State> {
       date: date
     });
   };
+
+  componentDidMount() {
+    window.addEventListener('focus', () => {
+      //If the selected date is in the past, change to the current day
+      if (this.state.date.diff(moment().startOf('day')) < 0) {
+        this.setState({
+          date: moment()
+        });
+        console.log('Outdated, switching to today');
+      }
+    });
+  }
 
   render() {
     return (
