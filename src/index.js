@@ -10,7 +10,7 @@ import registerServiceWorker from './registerServiceWorker';
 import './utils/addtohomescreen.js';
 import './utils/addtohomescreen.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App showUpdate={false} />, document.getElementById('root'));
 
 registerServiceWorker();
 if (!('serviceWorker' in navigator)) OfflinePluginRuntime.install();

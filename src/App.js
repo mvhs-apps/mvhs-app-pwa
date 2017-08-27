@@ -27,7 +27,9 @@ import {
 import type { RouterHistory } from 'react-router-dom';
 
 import logo from './assets/outlinelogo.svg';
+
 import asyncComponent from './components/asyncComponent';
+import SimpleSnackbar from './components/SimpleSnackbar';
 
 const LinkTab = withRouter(
   ({ to, history, ...props }: { to: string, history: RouterHistory }) =>
@@ -73,7 +75,11 @@ const AsyncAbout = asyncComponent(() =>
   import(/* webpackChunkName: "page-about" */ './components/AboutPage')
 );
 
-const App = () => {
+const refresh = () => {
+  window.location.reload();
+};
+
+const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
   return (
     <MuiThemeProvider theme={theme}>
       <Router>
@@ -100,6 +106,13 @@ const App = () => {
             {/*<Route path={routes[2]} component={Search} />*/}
             <Route path={routes[2]} component={AsyncAbout} />
           </Switch>
+
+          <SimpleSnackbar
+            open={showUpdate}
+            message="A new version of this app is available."
+            buttonMessage="REFRESH"
+            onButtonClick={refresh}
+          />
         </div>
       </Router>
     </MuiThemeProvider>

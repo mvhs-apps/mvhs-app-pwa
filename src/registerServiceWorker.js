@@ -8,6 +8,10 @@
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -57,7 +61,10 @@ function registerValidSW(swUrl) {
               // It's the perfect time to display a "New content is
               // available; please refresh." message in your web app.
               console.log('New content is available; please refresh.');
-              window.location.reload();
+              ReactDOM.render(
+                <App showUpdate={true} />,
+                document.getElementById('root')
+              );
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a
