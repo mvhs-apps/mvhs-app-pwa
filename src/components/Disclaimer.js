@@ -13,9 +13,9 @@ const Disclaimer = () => (
       target="_blank"
       rel="noopener noreferrer"
     >
-      school website
+      official school website
     </a>{' '}
-    for official school-related information.
+    for school-related information.
   </div>
 );
 
