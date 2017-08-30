@@ -4,6 +4,7 @@ import React from 'react';
 
 import moment from 'moment';
 import SchedulePage from '../components/SchedulePage';
+import * as appstate from '../utils/appstate';
 
 type State = {
   date: moment$Moment
@@ -21,7 +22,7 @@ class SchedulePageContainer extends React.PureComponent<{}, State> {
   };
 
   componentDidMount() {
-    window.addEventListener('focus', () => {
+    appstate.addOnResumeListener(() => {
       //If the selected date is in the past, change to the current day
       if (this.state.date.diff(moment().startOf('day')) < 0) {
         this.setState({

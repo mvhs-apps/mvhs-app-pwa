@@ -8,6 +8,7 @@ import moment from 'moment';
 import type Moment from 'moment';
 import { getFirebaseVal } from '../utils/firebase';
 import * as storage from '../utils/storage';
+import * as appstate from '../utils/appstate';
 
 const pad = (num, size) => {
   let s = num + '';
@@ -46,7 +47,7 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
   componentDidMount() {
     this.loadBellSchedule().then();
 
-    window.addEventListener('focus', () => {
+    appstate.addOnResumeListener(() => {
       //If last refresh was more than 5 minutes ago
       if (this.state.refreshed.diff(moment(), 'minutes') < -5) {
         this.loadBellSchedule().then();
@@ -138,8 +139,14 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
         const endHour = periodTime.substr(5, 2);
         const endMin = periodTime.substr(7, 2);
 
-        const start = this.props.date.clone().hour(startHour).minute(startMin);
-        const end = this.props.date.clone().hour(endHour).minute(endMin);
+        const start = this.props.date
+          .clone()
+          .hour(startHour)
+          .minute(startMin);
+        const end = this.props.date
+          .clone()
+          .hour(endHour)
+          .minute(endMin);
         const current = now.diff(start) >= 0 && now.diff(end) < 0;
 
         periods.push({
