@@ -13,8 +13,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import { MuiThemeProvider } from 'material-ui/styles';
-import createMuiTheme from 'material-ui/styles/theme';
-import createPalette from 'material-ui/styles/palette';
+import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import amber from 'material-ui/colors/amber';
 import blue from 'material-ui/colors/blue';
 
@@ -60,10 +59,10 @@ const RouterTabs = withRouter(
 const routes = ['/', '/map', /*'/search', */ '/about'];
 
 const theme = createMuiTheme({
-  palette: createPalette({
+  palette: {
     primary: amber,
-    accent: blue
-  })
+    secondary: blue
+  }
 });
 
 const AsyncSchedulePage = asyncComponent(() =>
