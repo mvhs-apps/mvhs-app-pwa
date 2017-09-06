@@ -42,7 +42,7 @@
       ios:
         'To add this web app to the home screen: tap %icon and then <strong>Add to Home Screen</strong>.',
       android:
-        'To add this web app to the home screen, tap the top right menu icon %icon and then <strong>Add to Home screen</strong>'
+        'To add this web app to the home screen, tap the top right menu %icon and then <strong>Add to Home screen</strong>'
     }
   };
 
@@ -120,7 +120,7 @@
     (ath.isMobileChrome && _ua.indexOf('Mobile') < 0);
 
   ath.isCompatible =
-    ath.isMobileSafari && ath.OSVersion >= 6 && !ath.isMobileChrome; // TODO: add winphone
+    (ath.isMobileSafari && ath.OSVersion >= 6) || ath.isMobileChrome; // TODO: add winphone
 
   var _defaultSession = {
     lastDisplayTime: 0, // last time we displayed the message
