@@ -17,7 +17,7 @@ if (!('serviceWorker' in navigator)) OfflinePluginRuntime.install();
 
 window.addToHomescreen({
   lifespan: 0,
-  skipFirstVisit: true,
+  skipFirstVisit: false,
   maxDisplayCount: 1,
   validLocation: [/^\/$/]
 });
