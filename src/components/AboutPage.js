@@ -14,7 +14,7 @@ const AboutPage = () => {
         <Typography type="title" align="center" className="about-club-title">
           MVHS Computer Science Club
         </Typography>
-        <Typography type="body1" className="about-club-desc balance-text">
+        <Typography type="body1" align="center" className="about-club-desc">
           Join us to help develop this app and others for the MVHS community! No
           programming experience needed, meetings Tuesday at lunch in Room 522.
         </Typography>
