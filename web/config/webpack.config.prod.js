@@ -64,8 +64,9 @@ module.exports = {
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the polyfills and the app code.
   entry: {
-    main: [require.resolve('./polyfills'), paths.appIndexJs],
+    main: paths.appIndexJs,
     vendor: [
+      require.resolve('./polyfills'),
       'react',
       'react-dom'
     ]
@@ -348,7 +349,7 @@ module.exports = {
     // the HTML & assets that are part of the Webpack build.
     new PreloadWebpackPlugin({
       rel: 'preload',
-      include: ['vendor', 'main']
+      include: ['runtime', 'vendor', 'main']
     }),
     new OfflinePlugin({
       excludes: ['**/.*', '**/*.map', 'asset-manifest.json'],
