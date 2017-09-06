@@ -1,8 +1,17 @@
 .about-club-title {
-  padding-bottom: 12px;
+  padding-bottom: 14px;
 }
 
 .about-club {
-  padding-top: 32px;
-  padding-bottom: 12px;
+  padding: 32px 16px 12px;
+}
+
+.about-club-desc {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-bottom: 8px;
+}
+
+.center {
+  text-align: center;
 }
