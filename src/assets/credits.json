@@ -6,6 +6,7 @@
     "image": "avatar-daniel.jpg",
     "links": {
       "Website": "http://pluscubed.com",
+      "GitHub": "http://github.com/pluscubed",
       "Email": "mailto:pluscubed@gmail.com",
       "LinkedIn": "https://www.linkedin.com/in/dciao/"
     }
@@ -16,10 +17,38 @@
     "desc": "Project Lead",
     "image": "avatar-marc.jpg",
     "links": {
-      "Github": "http://github.com/mbacvanski",
+      "GitHub": "http://github.com/mbacvanski",
       "Email": "mailto:marc.bacvanski@gmail.com",
       "LinkedIn": "https://www.linkedin.com/in/mbacvanski/"
     }
+  },
+  {
+    "name": "Patrick Brown",
+    "role": "Class of 2019",
+    "desc": "",
+    "image": "",
+    "links": {}
+  },
+  {
+    "name": "Ron Arel",
+    "role": "Class of 2021",
+    "desc": "",
+    "image": "",
+    "links": {}
+  },
+  {
+    "name": "John Park",
+    "role": "Class of 2021",
+    "desc": "",
+    "image": "",
+    "links": {}
+  },
+  {
+    "name": "Andrew Runke",
+    "role": "Class of 2021",
+    "desc": "",
+    "image": "",
+    "links": {}
   },
   {
     "name": "Ly Nguyen",

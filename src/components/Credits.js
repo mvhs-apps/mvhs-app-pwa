@@ -20,45 +20,51 @@ export type Profile = {
 const Credits = ({ profiles }: { profiles: Profile[] }) => {
   return (
     <div className="about">
-      {profiles.map((profile: Profile) => (
-        <Card className="about-card" key={profile.name}>
-          <CardHeader
-            className={profile.desc ? '' : 'about-header-no-body'}
-            avatar={
-              <Avatar
-                className="about-avatar"
-                src={profile.image && require('../assets/' + profile.image)}
-              >
-                {!profile.image && profile.name.replace(/[^A-Z]/g, '')}
-              </Avatar>
-            }
-            title={profile.name}
-            subheader={profile.role}
-          />
-          <CardContent
-            className={
-              'about-content ' + (profile.desc ? '' : 'about-content-no-body')
-            }
-          >
-            {profile.desc && <Typography>{profile.desc}</Typography>}
-          </CardContent>
-          <CardActions>
-            {Object.keys(profile.links).map((name: string) => {
-              return (
-                <Button
-                  key={name}
-                  dense={true}
-                  href={profile.links[name]}
-                  target="_blank"
-                  rel="noopener noreferrer"
+      {profiles.map((profile: Profile) => {
+        const haveLinks = Object.keys(profile.links).length > 0;
+        return (
+          <Card className="about-card" key={profile.name}>
+            <CardHeader
+              className={profile.desc ? '' : 'about-header-no-body'}
+              avatar={
+                <Avatar
+                  className="about-avatar"
+                  src={profile.image && require('../assets/' + profile.image)}
                 >
-                  {name}
-                </Button>
-              );
-            })}
-          </CardActions>
-        </Card>
-      ))}
+                  {!profile.image && profile.name.replace(/[^A-Z]/g, '')}
+                </Avatar>
+              }
+              title={profile.name}
+              subheader={profile.role}
+            />
+            <CardContent
+              className={
+                'about-content ' +
+                (profile.desc || !haveLinks ? '' : 'about-content-no-body')
+              }
+            >
+              {profile.desc && <Typography>{profile.desc}</Typography>}
+            </CardContent>
+            {haveLinks && (
+              <CardActions>
+                {Object.keys(profile.links).map((name: string) => {
+                  return (
+                    <Button
+                      key={name}
+                      dense={true}
+                      href={profile.links[name]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {name}
+                    </Button>
+                  );
+                })}
+              </CardActions>
+            )}
+          </Card>
+        );
+      })}
     </div>
   );
 };
