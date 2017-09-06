@@ -15,6 +15,7 @@
     "react-addons-shallow-compare": "^15.6.0",
     "react-dates": "^12.5.1",
     "react-dom": "16.0.0-alpha.12",
+    "react-ga": "^2.2.0",
     "react-inline-css": "^2.3.1",
     "react-loadable": "^4.0.5",
     "react-native": "^0.47.2",
