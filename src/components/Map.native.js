@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 import SVGImage from './SVGImage.native';
-import map from './schoolMap.native';
+import map from '../assets/schoolMap.native';
 import { View } from 'react-native';
 
 const Map = () => (

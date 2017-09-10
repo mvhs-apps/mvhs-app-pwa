@@ -4,6 +4,16 @@ import React from 'react';
 
 import moment from 'moment';
 import DatePicker from '../components/DatePicker';
+import isInclusivelyAfterDay from 'react-dates/lib/utils/isInclusivelyAfterDay';
+
+export const isOutsideRange = (lastDate: moment$Moment) => (
+  day: moment$Moment
+) => {
+  return (
+    !isInclusivelyAfterDay(day, moment()) ||
+    isInclusivelyAfterDay(day, lastDate)
+  );
+};
 
 type Props = {
   date: moment$Moment,
@@ -27,10 +37,18 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
     });
   };
 
-  handleCaretClick = () => {
-    this.setState({
-      focused: true
-    });
+  handleLeftCaretClick = () => {
+    const newDate = this.props.date.clone().subtract(1, 'day');
+    if (!isOutsideRange(this.twoWeeksLater)(newDate)) {
+      this.props.onDateChange(newDate);
+    }
+  };
+
+  handleRightCaretClick = () => {
+    const newDate = this.props.date.clone().add(1, 'day');
+    if (!isOutsideRange(this.twoWeeksLater)(newDate)) {
+      this.props.onDateChange(newDate);
+    }
   };
 
   render() {
@@ -41,7 +59,8 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
         onDateChange={onDateChange}
         focused={this.state.focused}
         onFocusChange={this.handleFocusChange}
-        onCaretClick={this.handleCaretClick}
+        onLeftCaretClick={this.handleLeftCaretClick}
+        onRightCaretClick={this.handleRightCaretClick}
         lastDate={this.twoWeeksLater}
       />
     );

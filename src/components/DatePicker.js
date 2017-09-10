@@ -3,27 +3,24 @@
 import React from 'react';
 
 import SingleDatePicker from 'react-dates/lib/components/SingleDatePicker';
-import isInclusivelyAfterDay from 'react-dates/lib/utils/isInclusivelyAfterDay';
 import 'react-dates/lib/css/_datepicker.css';
-import CaretDownIcon from 'material-ui-icons/KeyboardArrowDown';
+import CaretLeftIcon from 'material-ui-icons/KeyboardArrowLeft';
+import CaretRightIcon from 'material-ui-icons/KeyboardArrowRight';
+import IconButton from 'material-ui/IconButton';
 
 import './DatePicker.css';
 import moment from 'moment';
+
+import { isOutsideRange } from '../containers/DatePickerContainer';
 
 type Props = {
   date: moment$Moment,
   onDateChange: (date: moment$Moment) => void,
   focused: boolean,
   onFocusChange: ({ focused: boolean }) => void,
-  onCaretClick: () => void,
+  onLeftCaretClick: () => void,
+  onRightCaretClick: () => void,
   lastDate: moment$Moment
-};
-
-const isOutsideRange = (lastDate: moment$Moment) => (day: moment$Moment) => {
-  return (
-    !isInclusivelyAfterDay(day, moment()) ||
-    isInclusivelyAfterDay(day, lastDate)
-  );
 };
 
 const DatePicker = ({
@@ -31,14 +28,23 @@ const DatePicker = ({
   onDateChange,
   focused,
   onFocusChange,
-  onCaretClick,
+  onLeftCaretClick,
+  onRightCaretClick,
   lastDate
 }: Props) => {
   return (
     <div className="date-picker">
+      <IconButton
+        color="accent"
+        className="date-picker-iconbtn"
+        onClick={onLeftCaretClick}
+      >
+        <CaretLeftIcon />
+      </IconButton>
       <SingleDatePicker
         date={date}
         onDateChange={onDateChange}
+        displayFormat="dddd, MMM D"
         focused={focused}
         onFocusChange={onFocusChange}
         isOutsideRange={isOutsideRange(lastDate)}
@@ -47,7 +53,13 @@ const DatePicker = ({
         hideKeyboardShortcutsPanel={true}
         readOnly={true}
       />
-      <CaretDownIcon className="date-picker-caret" onClick={onCaretClick} />
+      <IconButton
+        color="accent"
+        className="date-picker-iconbtn"
+        onClick={onRightCaretClick}
+      >
+        <CaretRightIcon />
+      </IconButton>
     </div>
   );
 };

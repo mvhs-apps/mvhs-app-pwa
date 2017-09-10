@@ -4,7 +4,7 @@
   width: fit-content;
 }
 
-.date-picker-caret {
+.date-picker-iconbtn {
   vertical-align: middle;
 }
 
@@ -12,10 +12,19 @@
   font-weight: 500;
   font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif !important;
+  background: none;
+  width: 200px;
 }
 
 .SingleDatePickerInput {
   border: none;
+}
+
+.DateInput__display-text {
+  color: #448aff;
+  text-align: center;
+  border: 2px solid rgba(68, 138, 255, 0.5);
+  border-radius: 2px;
 }
 
 .DateInput--with-caret::before,
