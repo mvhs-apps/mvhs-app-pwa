@@ -78,8 +78,13 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
       });
     } catch (err) {
       console.error(err);
+
+      let errorMessage = err;
+      if (!navigator.onLine) {
+        errorMessage = 'No Internet connection';
+      }
       this.setState({
-        error: err,
+        error: errorMessage,
         loading: false
       });
     }

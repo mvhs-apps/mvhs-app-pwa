@@ -103,9 +103,9 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
         events: eventList
       });
     } catch (err) {
-      let errorMessage = err;
-      console.error('Error getting calendar entries: ' + err);
+      console.error(err);
 
+      let errorMessage = err;
       if (!navigator.onLine) {
         errorMessage = 'No Internet connection';
       }

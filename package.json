@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-plugin-transform-remove-console": "^6.8.5",
     "enzyme": "^2.9.1",
     "expo": "^21.0.0",
     "firebase": "^4.3.1",
