@@ -7,9 +7,11 @@ import './SchedulePage.css';
 
 import Disclaimer from './Disclaimer';
 
+import type Moment from 'moment';
+
 type Props = {
-  date: moment$Moment,
-  onDateChange: (date: moment$Moment) => void
+  date: Moment,
+  onDateChange: (date: Moment) => void
 };
 
 const AsyncBellSchedule = Loadable({

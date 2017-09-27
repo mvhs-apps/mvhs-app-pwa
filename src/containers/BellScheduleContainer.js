@@ -128,7 +128,7 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
       //Get the schedule's periods
       const scheduleData = await getFirebaseVal(
         `/schedules/${schedule}`,
-        forceFetch
+        false
       );
 
       const now = this.state.refreshed;

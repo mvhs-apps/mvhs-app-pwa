@@ -13,7 +13,9 @@ const Credits = ({ profiles }: { profiles: Profile[] }) => {
         <Card key={profile.name}>
           <View>
             <Avatar
-              image={profile.image && require('../assets/' + profile.image)}
+              image={
+                profile.image && require('../assets/avatars/' + profile.image)
+              }
               text={!profile.image && profile.name.replace(/[^A-Z]/g, '')}
             />
             <Text>{profile.name}</Text>

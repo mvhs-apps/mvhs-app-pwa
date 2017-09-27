@@ -9,18 +9,19 @@ import CaretRightIcon from 'material-ui-icons/KeyboardArrowRight';
 import IconButton from 'material-ui/IconButton';
 
 import './DatePicker.css';
-import moment from 'moment';
 
 import { isOutsideRange } from '../containers/DatePickerContainer';
 
+import type Moment from 'moment';
+
 type Props = {
-  date: moment$Moment,
-  onDateChange: (date: moment$Moment) => void,
+  date: Moment,
+  onDateChange: (date: Moment) => void,
   focused: boolean,
   onFocusChange: ({ focused: boolean }) => void,
   onLeftCaretClick: () => void,
   onRightCaretClick: () => void,
-  lastDate: moment$Moment
+  lastDate: Moment
 };
 
 const DatePicker = ({

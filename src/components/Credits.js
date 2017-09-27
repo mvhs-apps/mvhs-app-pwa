@@ -29,7 +29,10 @@ const Credits = ({ profiles }: { profiles: Profile[] }) => {
               avatar={
                 <Avatar
                   className="about-avatar"
-                  src={profile.image && require('../assets/' + profile.image)}
+                  src={
+                    profile.image &&
+                    require('../assets/avatars/' + profile.image)
+                  }
                 >
                   {!profile.image && profile.name.replace(/[^A-Z]/g, '')}
                 </Avatar>

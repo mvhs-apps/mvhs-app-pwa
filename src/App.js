@@ -7,8 +7,9 @@ import './App.css';
 import NotificationIcon from 'material-ui-icons/Notifications';
 import MapIcon from 'material-ui-icons/Map';
 //import SearchIcon from 'material-ui-icons/Search';
-import AppBar from 'material-ui/AppBar';
 import InfoIcon from 'material-ui-icons/Info';
+
+import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Tabs, { Tab } from 'material-ui/Tabs';
@@ -28,13 +29,7 @@ import type { RouterHistory } from 'react-router-dom';
 import logo from './assets/outlinelogo.svg';
 
 import asyncComponent from './components/asyncComponent';
-import SimpleSnackbar from './components/SimpleSnackbar';
-
-import * as ReactGA from 'react-ga';
-
-if (process.env.NODE_ENV === 'production') {
-  ReactGA.initialize('UA-105974911-1');
-}
+import Loadable from 'react-loadable';
 
 const LinkTab = withRouter(
   ({ to, history, ...props }: { to: string, history: RouterHistory }) => (
@@ -80,42 +75,20 @@ const AsyncMap = asyncComponent(() =>
 const AsyncAbout = asyncComponent(() =>
   import(/* webpackChunkName: "page-about" */ './components/AboutPage')
 );
+const AsyncSnackbar = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "snackbar" */ './components/SimpleSnackbar'),
+  loading: () => null
+});
+const AsyncAnalytics = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "analytics" */ './components/Analytics'),
+  loading: () => null
+});
 
 const refresh = () => {
   window.location.reload();
 };
-
-class Analytics extends React.PureComponent<any> {
-  constructor(props) {
-    super(props);
-
-    // Initial page load - only fired once
-    this.sendPageChange(props.location.pathname, props.location.search);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // When props change, check if the URL has changed or not
-    if (
-      this.props.location.pathname !== nextProps.location.pathname ||
-      this.props.location.search !== nextProps.location.search
-    ) {
-      this.sendPageChange(
-        nextProps.location.pathname,
-        nextProps.location.search
-      );
-    }
-  }
-
-  sendPageChange(pathname, search = '') {
-    const page = pathname + search;
-    ReactGA.set({ page });
-    ReactGA.pageview(page);
-  }
-
-  render() {
-    return null;
-  }
-}
 
 const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
   return (
@@ -139,7 +112,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
           </AppBar>
 
           {process.env.NODE_ENV === 'production' && (
-            <Route path="/" component={Analytics} />
+            <Route path="/" component={AsyncAnalytics} />
           )}
 
           <Switch>
@@ -149,7 +122,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
             <Route path={routes[2]} component={AsyncAbout} />
           </Switch>
 
-          <SimpleSnackbar
+          <AsyncSnackbar
             open={showUpdate}
             message="A new version of this app is available."
             buttonMessage="REFRESH"

@@ -6,6 +6,7 @@ import type Moment from 'moment';
 import Calendar from '../components/Calendar';
 
 import calendarURL from '../utils/schoolCalendar';
+import moment from 'moment';
 
 type SchoolEvent = {
   summary: string,
@@ -71,6 +72,16 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
       const eventList: SchoolEvent[] = [];
       json.items
         .map(event => {
+          let startDate;
+          let endDate;
+          if (event.start.date) {
+            startDate = moment(event.start.date).format('M/D');
+            endDate = moment(event.end.date).format('M/D');
+          } else {
+            startDate = moment(event.start.dateTime).format('LT');
+            endDate = moment(event.end.dateTime).format('LT');
+          }
+
           return {
             id: event.id,
             summary: event.summary,
@@ -78,14 +89,8 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
             location: event.location,
             mapURL:
               'https://www.google.com/maps/search/' + encodeURI(event.location),
-            start: new Date(event.start.dateTime).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit'
-            }),
-            end: new Date(event.end.dateTime).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit'
-            })
+            start: startDate,
+            end: endDate
           };
         })
         .forEach(event => {
