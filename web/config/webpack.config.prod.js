@@ -16,6 +16,7 @@ const ShakePlugin = require('webpack-common-shake').Plugin;
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
+const noop = require('noop-webpack-plugin');
 
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
@@ -257,8 +258,8 @@ module.exports = {
     new InterpolateHtmlPlugin(env.raw),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
-      inject: true,
-      template: paths.appHtml,
+      inject: process.env.PRERENDER === 'true',
+      template: process.env.PRERENDER === 'true' ? paths.appHtml : paths.appBuild + '/index.html',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -350,10 +351,14 @@ module.exports = {
     //CUSTOM------------------------------------------------------------------------------
     // Generate a service worker script that will precache, and keep up to date,
     // the HTML & assets that are part of the Webpack build.
-    new PreloadWebpackPlugin({
+
+    //Ignore ReactDOMServer if not prerendering
+    process.env.PRERENDER !== 'true' ? new webpack.IgnorePlugin(/react-dom-server/) : noop(),
+
+    process.env.PRERENDER === 'true' ? new PreloadWebpackPlugin({
       rel: 'preload',
       include: ['runtime', 'vendor', 'main']
-    }),
+    }): noop(),
     new OfflinePlugin({
       excludes: ['**/.*', '**/*.map', 'asset-manifest.json'],
       externals: [
@@ -373,18 +378,21 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       async: false,
       children: true,
-      minChunks: 3
+      minChunks: 2
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'runtime'
     }),
     new webpack.HashedModuleIdsPlugin(),
-    new ScriptExtHtmlWebpackPlugin({
+    process.env.PRERENDER === 'true' ? new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'defer'
-    }),
+    }): noop(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ShakePlugin(),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin({
+      openAnalyzer: process.env.PRERENDER !== 'true',
+      analyzerMode: 'static'
+    })
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
