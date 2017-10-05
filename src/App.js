@@ -12,24 +12,25 @@ import InfoIcon from 'material-ui-icons/Info';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import { MuiThemeProvider } from 'material-ui/styles';
+import Tabs from 'material-ui/Tabs/Tabs';
+import Tab from 'material-ui/Tabs/Tab';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import amber from 'material-ui/colors/amber';
 import blue from 'material-ui/colors/blue';
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  withRouter
-} from 'react-router-dom/es';
+import Router from 'react-router-dom/es/BrowserRouter';
+import Route from 'react-router-dom/es/Route';
+import Switch from 'react-router-dom/es/Switch';
+import withRouter from 'react-router-dom/es/withRouter';
 import type { RouterHistory } from 'react-router-dom';
 
 import logo from './assets/outlinelogo.svg';
 
 import asyncComponent from './components/asyncComponent';
+
 import Loadable from 'react-loadable';
+import Analytics from './components/Analytics';
 
 const LinkTab = withRouter(
   ({ to, history, ...props }: { to: string, history: RouterHistory }) => (
@@ -80,11 +81,6 @@ const AsyncSnackbar = Loadable({
     import(/* webpackChunkName: "snackbar" */ './components/SimpleSnackbar'),
   loading: () => null
 });
-const AsyncAnalytics = Loadable({
-  loader: () =>
-    import(/* webpackChunkName: "analytics" */ './components/Analytics'),
-  loading: () => null
-});
 
 const refresh = () => {
   window.location.reload();
@@ -112,7 +108,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
           </AppBar>
 
           {process.env.NODE_ENV === 'production' && (
-            <Route path="/" component={AsyncAnalytics} />
+            <Route path="/" component={Analytics} />
           )}
 
           <Switch>
@@ -122,12 +118,14 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
             <Route path={routes[2]} component={AsyncAbout} />
           </Switch>
 
-          <AsyncSnackbar
-            open={showUpdate}
-            message="A new version of this app is available."
-            buttonMessage="REFRESH"
-            onButtonClick={refresh}
-          />
+          {showUpdate && (
+            <AsyncSnackbar
+              open={showUpdate}
+              message="A new version of this app is available."
+              buttonMessage="REFRESH"
+              onButtonClick={refresh}
+            />
+          )}
         </div>
       </Router>
     </MuiThemeProvider>

@@ -4,7 +4,10 @@ import React from 'react';
 
 import './Credits.css';
 
-import Card, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
+import Card from 'material-ui/Card/Card';
+import CardActions from 'material-ui/Card/CardActions';
+import CardContent from 'material-ui/Card/CardContent';
+import CardHeader from 'material-ui/Card/CardHeader';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import Avatar from 'material-ui/Avatar';

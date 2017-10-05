@@ -352,7 +352,7 @@ module.exports = {
     // the HTML & assets that are part of the Webpack build.
     new PreloadWebpackPlugin({
       rel: 'preload',
-      include: ['runtime', 'vendor', 'main']
+      include: ['runtime', 'vendor', 'main', 'page-schedule']
     }),
     new OfflinePlugin({
       excludes: ['**/.*', '**/*.map', 'asset-manifest.json'],
@@ -373,7 +373,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       async: false,
       children: true,
-      minChunks: 3
+      minChunks: 2
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'runtime'
