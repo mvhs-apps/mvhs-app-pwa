@@ -11,3 +11,46 @@
 .map-container {
   height: calc(100% - 148px);
 }
+
+.overlay4admin {
+  border: 5px red solid;
+  z-index: 20;
+  position: relative;
+  width: 157px;
+  height: 110px;
+  top: 690px;
+  margin-left: 31.57%;
+}
+
+.overlay4finance {
+  border: 5px red solid;
+  z-index: 20;
+  position: relative;
+  width: 157px;
+  height: 110px;
+  top: 690px;
+  margin-left: 31.57%;
+}
+.overlay4attendance {
+  border: 5px red solid;
+  z-index: 20;
+  position: relative;
+  width: 157px;
+  height: 70px;
+  top: 776px;
+  margin-left: 31.57%;
+}
+
+.overlay4library {
+  border: 5px red solid;
+  z-index: 20;
+  position: relative;
+  width: 179px;
+  height: 120px;
+  top: 776px;
+  margin-left: 58%;
+}
+
+.boverlay {
+  visibility: hidden;
+}
