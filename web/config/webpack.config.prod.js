@@ -378,7 +378,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       async: false,
       children: true,
-      minChunks: 2
+      minChunks: 3
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'runtime'

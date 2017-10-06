@@ -4,8 +4,11 @@ import './Calendar.css';
 
 import Paper from 'material-ui/Paper';
 import Avatar from 'material-ui/Avatar';
-import { CircularProgress } from 'material-ui/Progress';
-import List, { ListItem, ListItemText, ListItemAvatar } from 'material-ui/List';
+import CircularProgress from 'material-ui/Progress/CircularProgress';
+import List from 'material-ui/List/List';
+import ListItem from 'material-ui/List/ListItem';
+import ListItemText from 'material-ui/List/ListItemText';
+import ListItemAvatar from 'material-ui/List/ListItemAvatar';
 import MapIcon from 'material-ui-icons/Map';
 
 import Loadable from './LCEComponent';
