@@ -7,6 +7,12 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.state = { value: '' };
+    this.state = { name: 'boverlay' };
+    this.state = { fname: 'boverlay' };
+    this.state = { aname: 'boverlay' };
+    this.state = { lname: 'boverlay' };
+    this.state = { cname: 'boverlay' };
+    this.state = { rname: 'boverlay' };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,7 +21,6 @@ class Map extends Component {
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
-
   handleSubmit(event) {
     var adminbuilding = [
       'activities',
@@ -28,6 +33,7 @@ class Map extends Component {
       'found',
       'principal',
       'principals',
+      'drug',
       'grissom',
       'teacher',
       'teachers',
@@ -53,9 +59,10 @@ class Map extends Component {
       'parking',
       'permit',
       'reduced',
-      'lunch'
+      'lunch',
+      'finance'
     ];
-    var attendanceoffice = ['attendance'];
+    var attendanceoffice = ['tardy', 'late'];
     var library = ['print schedule', 'book', 'print'];
     var counselingoffices = [
       'counseling',
@@ -75,6 +82,7 @@ class Map extends Component {
         alert('adminbuilding');
         i = adminbuilding.length - 1;
         somethingfound = true;
+        this.setState({ name: 'overlay4admin' });
       }
     }
     //check Finance
@@ -83,6 +91,7 @@ class Map extends Component {
         alert('finance');
         i = financebuilding.length - 1;
         somethingfound = true;
+        this.setState({ name: 'overlay4finance' });
       }
     }
     //check attendance
@@ -91,6 +100,7 @@ class Map extends Component {
         alert('attendanceoffice');
         i = attendanceoffice.length - 1;
         somethingfound = true;
+        this.setState({ fname: 'overlay4attendance' });
       }
     }
     //check Library
@@ -99,6 +109,7 @@ class Map extends Component {
         alert('library');
         i = library.length - 1;
         somethingfound = true;
+        this.setState({ lname: 'overlay4library' });
       }
     }
     //counseling offices
@@ -138,7 +149,10 @@ class Map extends Component {
           <input type="submit" value="Submit" />
         </form>
 
-        <div className="overlay4admin" />
+        <div className={this.state.name} />
+        <div className={this.state.fname} />
+        <div className={this.state.lname} />
+        <div className={this.state.aname} />
         <div className="map-container">
           <img alt="map" className="map" src={map} />
         </div>
