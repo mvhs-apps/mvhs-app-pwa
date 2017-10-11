@@ -118,6 +118,7 @@ class Map extends Component {
         alert('counselingoffices');
         i = counselingoffices.length - 1;
         somethingfound = true;
+        this.setState({ cname: 'overlay4conseling' });
       }
     }
     //registar
