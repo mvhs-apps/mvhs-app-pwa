@@ -27,11 +27,7 @@ import type { RouterHistory } from 'react-router-dom';
 
 import logo from './assets/outlinelogo.svg';
 
-import asyncComponent from './components/asyncComponent';
-
 import Loadable from 'react-loadable';
-import Analytics from './components/Analytics';
-
 import Analytics from './components/Analytics';
 
 const LinkTab = withRouter(
@@ -69,15 +65,20 @@ const theme = createMuiTheme({
   }
 });
 
-const AsyncSchedulePage = asyncComponent(() =>
-  import(/* webpackChunkName: "page-schedule" */ './containers/SchedulePageContainer')
-);
-const AsyncMap = asyncComponent(() =>
-  import(/* webpackChunkName: "page-map" */ './components/Map')
-);
-const AsyncAbout = asyncComponent(() =>
-  import(/* webpackChunkName: "page-about" */ './components/AboutPage')
-);
+const AsyncSchedulePage = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "page-schedule" */ './containers/SchedulePageContainer'),
+  loading: () => null
+});
+const AsyncMap = Loadable({
+  loader: () => import(/* webpackChunkName: "page-map" */ './components/Map'),
+  loading: () => null
+});
+const AsyncAbout = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "page-about" */ './components/AboutPage'),
+  loading: () => null
+});
 const AsyncSnackbar = Loadable({
   loader: () =>
     import(/* webpackChunkName: "snackbar" */ './components/SimpleSnackbar'),
@@ -88,9 +89,9 @@ const refresh = () => {
   window.location.reload();
 };
 
-const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
+const App = ({ showUpdate = false }: { showUpdate?: boolean }) => {
   return (
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
       <Router>
         <div className="App">
           <AppBar position="static">

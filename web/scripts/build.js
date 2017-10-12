@@ -50,7 +50,10 @@ measureFileSizesBeforeBuild(paths.appBuild)
       fs.emptyDirSync(paths.appBuild);
       // Merge with the public folder
       copyPublicFolder();
+    }else{
+      fs.emptyDirSync(paths.appBuild + '/static/');
     }
+
     // Start the webpack build
     return build(previousFileSizes);
   })

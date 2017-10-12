@@ -58,6 +58,7 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
 module.exports = {
+  profile: true,
   // Don't attempt to continue if there are any errors.
   bail: true,
   // We generate sourcemaps in production. This is slow but gives good results.
@@ -169,7 +170,7 @@ module.exports = {
                 "react-app"
               ],
               "plugins": [
-                ["transform-remove-console"]
+                ...(process.env.PRERENDER !== 'true' ? ["transform-remove-console"] : [])
               ],
               compact: true
             },
@@ -258,7 +259,7 @@ module.exports = {
     new InterpolateHtmlPlugin(env.raw),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
-      inject: process.env.PRERENDER === 'true',
+      inject: true,
       template: process.env.PRERENDER === 'true' ? paths.appHtml : paths.appBuild + '/index.html',
       minify: {
         removeComments: true,
@@ -352,10 +353,7 @@ module.exports = {
     // Generate a service worker script that will precache, and keep up to date,
     // the HTML & assets that are part of the Webpack build.
 
-    //Ignore ReactDOMServer if not prerendering
-    process.env.PRERENDER !== 'true' ? new webpack.IgnorePlugin(/react-dom-server/) : noop(),
-
-    process.env.PRERENDER === 'true' ? new PreloadWebpackPlugin({
+    process.env.PRERENDER !== 'true' ? new PreloadWebpackPlugin({
       rel: 'preload',
       include: ['runtime', 'vendor', 'main']
     }): noop(),
@@ -384,9 +382,9 @@ module.exports = {
       name: 'runtime'
     }),
     new webpack.HashedModuleIdsPlugin(),
-    process.env.PRERENDER === 'true' ? new ScriptExtHtmlWebpackPlugin({
+    new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'defer'
-    }): noop(),
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ShakePlugin(),
     new BundleAnalyzerPlugin({
