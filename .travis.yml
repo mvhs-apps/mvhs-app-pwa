@@ -5,8 +5,8 @@ node_js:
   - "8"
 install:
   - yarn install
+  - yarn global add firebase-tools
 script:
   - yarn run build:web
-deploy:
-  provider: firebase
-  token: $FIREBASE_TOKEN
+after_success:
+  - firebase deploy --token $FIREBASE_TOKEN
