@@ -9,5 +9,4 @@ script:
   - yarn run build:web
 deploy:
   provider: firebase
-  token:
-    secure: $FIREBASE_TOKEN
+  token: $FIREBASE_TOKEN
