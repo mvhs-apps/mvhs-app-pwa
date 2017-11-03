@@ -1,0 +1,10 @@
+language: node_js
+cache: yarn
+node_js:
+  - "8"
+install:
+  - npm install -g firebase-tools
+script:
+  - npm run build:web
+after_success:
+  - firebase deploy --token "$FIREBASE_TOKEN"
