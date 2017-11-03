@@ -119,7 +119,7 @@ function build(previousFileSizes) {
         }
         return reject(new Error(messages.errors.join('\n\n')));
       }
-      if (
+      /*if (
         process.env.CI &&
         (typeof process.env.CI !== 'string' ||
           process.env.CI.toLowerCase() !== 'false') &&
@@ -132,7 +132,7 @@ function build(previousFileSizes) {
           )
         );
         return reject(new Error(messages.warnings.join('\n\n')));
-      }
+      }*/
       return resolve({
         stats,
         previousFileSizes,
