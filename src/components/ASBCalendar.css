@@ -1,0 +1,25 @@
+.calendar {
+  padding: 8px;
+  margin: 0 auto;
+  min-width: 300px;
+  width: fit-content;
+  max-width: 600px;
+}
+
+.center {
+  text-align: center;
+}
+
+.card-padding {
+  padding: 24px;
+}
+
+.calendar-name {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  text-align: center;
+}
+
+.calendar-desc {
+  white-space: pre-wrap;
+}

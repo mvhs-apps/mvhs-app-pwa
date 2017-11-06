@@ -6,6 +6,7 @@ import './App.css';
 
 import NotificationIcon from 'material-ui-icons/Notifications';
 import MapIcon from 'material-ui-icons/Map';
+import AnnouncementIcon from 'material-ui-icons/Announcement';
 //import SearchIcon from 'material-ui-icons/Search';
 import InfoIcon from 'material-ui-icons/Info';
 
@@ -56,7 +57,7 @@ const RouterTabs = withRouter(
   }
 );
 
-const routes = ['/', '/map', /*'/search', */ '/about'];
+const routes = ['/', '/asb', '/map', /*'/search', */ '/about'];
 
 const theme = createMuiTheme({
   palette: {
@@ -68,6 +69,11 @@ const theme = createMuiTheme({
 const AsyncSchedulePage = Loadable({
   loader: () =>
     import(/* webpackChunkName: "page-schedule" */ './containers/SchedulePageContainer'),
+  loading: () => null
+});
+const AsyncASB = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "snackbar" */ './containers/ASBPage'),
   loading: () => null
 });
 const AsyncMap = Loadable({
@@ -104,9 +110,10 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
 
             <RouterTabs routes={routes} fullWidth={true} centered={true}>
               <LinkTab icon={<NotificationIcon />} to={routes[0]} />
-              <LinkTab icon={<MapIcon />} to={routes[1]} />
+              <LinkTab icon={<AnnouncementIcon />} to={routes[1]} />
+              <LinkTab icon={<MapIcon />} to={routes[2]} />
               {/*<LinkTab icon={<SearchIcon />} to={routes[2]} />*/}
-              <LinkTab icon={<InfoIcon />} to={routes[2]} />
+              <LinkTab icon={<InfoIcon />} to={routes[3]} />
             </RouterTabs>
           </AppBar>
 
@@ -116,9 +123,10 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
 
           <Switch>
             <Route exact path={routes[0]} component={AsyncSchedulePage} />
-            <Route path={routes[1]} component={AsyncMap} />
+            <Route path={routes[1]} component={AsyncASB} />
             {/*<Route path={routes[2]} component={Search} />*/}
-            <Route path={routes[2]} component={AsyncAbout} />
+            <Route path={routes[2]} component={AsyncMap} />
+            <Route path={routes[3]} component={AsyncAbout} />
           </Switch>
 
           {showUpdate && (
