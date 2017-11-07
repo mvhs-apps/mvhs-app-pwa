@@ -9,4 +9,4 @@ install:
 script:
   - yarn run build:web
 after_success:
-  - if [[ "$TRAVIS_BRANCH" = "master" ]]; then firebase deploy --token $FIREBASE_TOKEN; fi
+  - test $TRAVIS_BRANCH = "master" && firebase deploy --token $FIREBASE_TOKEN; fi
