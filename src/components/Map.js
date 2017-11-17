@@ -2,7 +2,6 @@ import React from 'react';
 import { Component } from 'react';
 import map from '../assets/schoolmap.svg';
 import './Map.css';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import TextField from 'material-ui/TextField';
 
 //console.log(data);
