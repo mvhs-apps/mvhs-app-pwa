@@ -64,9 +64,7 @@ class Map extends Component {
               console.log('IN SPECIAL J');
               finalarray.push(
                 <ListItem button>
-                  <ListItemIcon>
-                    <ListItemText primary={data[i].Location} />
-                  </ListItemIcon>
+                  <ListItemText primary={data[i].Location} />
                 </ListItem>
               );
               console.log(data[i].Location);
