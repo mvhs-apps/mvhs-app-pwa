@@ -11,3 +11,39 @@
 .map-container {
   height: calc(100% - 148px);
 }
+
+.dropdown {
+  display: inline-block;
+}
+
+.dropdown__content {
+  display: none;
+  position: absolute;
+}
+
+.dropdown--active .dropdown__content {
+  display: block;
+}
+
+.none {
+  display: none;
+}
+
+.normal {
+  display: inline;
+}
+
+.sList {
+  list-style-type: none;
+}
+
+.papers {
+  padding: 8px;
+  margin: 0 auto;
+  min-width: 300px;
+  width: fit-content;
+  max-width: 600px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
