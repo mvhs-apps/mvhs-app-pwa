@@ -3,6 +3,7 @@ import { Component } from 'react';
 import map from '../assets/schoolmap.svg';
 import './Map.css';
 import TextField from 'material-ui/TextField';
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 
 //console.log(data);
 
@@ -61,7 +62,13 @@ class Map extends Component {
           if (data[i].KeyWords[j].toLowerCase().includes(event.target.value)) {
             if (first) {
               console.log('IN SPECIAL J');
-              finalarray.push(<li>{data[i].Location}</li>);
+              finalarray.push(
+                <ListItem button>
+                  <ListItemIcon>
+                    <ListItemText primary={data[i].Location} />
+                  </ListItemIcon>
+                </ListItem>
+              );
               console.log(data[i].Location);
             }
             //console.log('something found!!');
@@ -84,12 +91,22 @@ class Map extends Component {
             console.log(founds);
             if (founds) {
               console.log('IN FOUNDS');
-              finalarray.push(<li>{data[i].Location}</li>);
+              finalarray.push(
+                <ListItem button>
+                  <ListItemIcon>
+                    <ListItemText primary={data[i].Location} />
+                  </ListItemIcon>
+                </ListItem>
+              );
             }
             finalarray.push(
-              <ul>
-                <li>{data[i].KeyWords[j]}</li>
-              </ul>
+              <List>
+                <ListItem button>
+                  <ListItemIcon>
+                    <ListItemText primary={data[i].KeyWords[j]} />
+                  </ListItemIcon>
+                </ListItem>
+              </List>
             );
             console.log(finalarray);
             first = false;
@@ -133,7 +150,7 @@ class Map extends Component {
             />
           </form>
         </center>
-        <ul>{finalarray}</ul>
+        <List>{finalarray}</List>
       </div>
     );
   }
