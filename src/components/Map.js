@@ -41,18 +41,29 @@ class Map extends Component {
     this.setState({ value: event.target.value });
     this.setState({ view: 'none' });
 
-    if (event.target.value.length > 2) {
-      this.setState({ view: 'papers' });
+    if (event.target.value.length > 0) {
+      this.setState({ view: 'search_results' });
 
       searchResults = [];
       let query = event.target.value.toLowerCase();
       data.forEach(event => {
         let found = false;
         let match = event['KeyWords'][0];
+        const queryIncludesLocation = query.includes(
+          (event['Location'] + '').toLowerCase()
+        );
+        const locationIncludesQuery = (event['Location'] + '')
+          .toLowerCase()
+          .includes(query);
         event['KeyWords'].forEach(keyword => {
           const queryIncludesKeyword = query.includes(keyword.toLowerCase());
           const keywordContainsQuery = keyword.toLowerCase().includes(query);
-          if (queryIncludesKeyword || keywordContainsQuery) {
+          if (
+            queryIncludesKeyword ||
+            keywordContainsQuery ||
+            queryIncludesLocation ||
+            locationIncludesQuery
+          ) {
             found = true;
             match = keyword;
           }
