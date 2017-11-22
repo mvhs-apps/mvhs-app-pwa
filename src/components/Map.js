@@ -33,6 +33,8 @@ class Map extends Component {
     //json variable
     var url = 'https://mvhs-app-d04d2.firebaseio.com/locations.json';
 
+    this.setState({ view: 'none' });
+
     //Use fetch to get the spreadsheet data
     fetch(url)
       .then(response => response.json())
@@ -53,71 +55,30 @@ class Map extends Component {
 
     finalarray = [];
     checkarray = [];
-    var first = true;
+    //var first = true;
     this.setState({ value: event.target.value });
     this.setState({ view: 'none' });
     if (event.target.value.length > 2) {
       this.setState({ view: 'papers' });
       for (var i = 0; i < data.length; i++) {
         for (var j = 0; j < data[i].KeyWords.length; j++) {
-          //console.log(
-          //data[i].KeyWords[j] + ' ' + event.target.value
-          //);
-          //console.log("event.target.value: " + event.target.value);
-          //console.log("data[i].KeyWords[j].toLowerCase(): " + data[i].KeyWords[j].toLowerCase());
           if (data[i].KeyWords[j].toLowerCase().includes(event.target.value)) {
-            if (first) {
-              console.log('IN SPECIAL J');
-              finalarray.push(
-                <Typography type="headline">
-                  <ListItem button>
-                    <h3>{data[i].Location}</h3>
-                  </ListItem>
-                </Typography>
-              );
-              console.log(data[i].Location);
-            }
-            //console.log('something found!!');
-            //console.log("Location: " + data[i].Location);
-
-            //console.log('FOUND!!!!!' + data[i].Location);
-            var founds = false;
-            console.log(checkarray);
-            checkarray.push(data[i].Location);
-            console.log('HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
-            for (var k = 0; k < checkarray.length; k++) {
-              //console.log("IN FOOOR");
-              if (checkarray[k] === data[i].Location) {
-                console.log('IN IF');
-              } else {
-                founds = true;
-                console.log('IN ELSE');
-              }
-            }
-            console.log(founds);
-            if (founds) {
-              console.log('IN FOUNDS');
-              finalarray.push(
-                <Typography type="headline" component="h3">
-                  <ListItem button>
-                    <h3>{data[i].Location} </h3>
-                  </ListItem>
-                </Typography>
-              );
-            }
             finalarray.push(
               <Typography type="body1" component="p">
                 <List>
                   <ListItem button>
                     <ListItemIcon>
-                      <ListItemText primary={data[i].KeyWords[j]} />
+                      <ListItemText
+                        primary={data[i].KeyWords[j]}
+                        secondary={data[i].Location}
+                      />
                     </ListItemIcon>
                   </ListItem>
                 </List>
               </Typography>
             );
             console.log(finalarray);
-            first = false;
+            //first = false;
           }
         }
       }
