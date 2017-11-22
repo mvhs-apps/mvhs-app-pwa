@@ -56,7 +56,7 @@ const RouterTabs = withRouter(
   }
 );
 
-const routes = ['/', '/map', /*'/search', */ '/about'];
+const routes = ['/', '/map', '/about'];
 
 const theme = createMuiTheme({
   palette: {
