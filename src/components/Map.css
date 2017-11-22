@@ -36,3 +36,15 @@
 .sList {
   list-style-type: none;
 }
+
+.papers {
+  padding: 8px;
+  margin: 0 auto;
+  min-width: 300px;
+  width: fit-content;
+  max-width: 600px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}

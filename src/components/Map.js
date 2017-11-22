@@ -4,6 +4,8 @@ import map from '../assets/schoolmap.svg';
 import './Map.css';
 import TextField from 'material-ui/TextField';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
 
 //console.log(data);
 
@@ -18,6 +20,8 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.state = { value: '' }; //for searchbar
+
+    this.state = { view: 'none' };
 
     this.state = { loading: true };
 
@@ -51,7 +55,9 @@ class Map extends Component {
     checkarray = [];
     var first = true;
     this.setState({ value: event.target.value });
+    this.setState({ view: 'none' });
     if (event.target.value.length > 2) {
+      this.setState({ view: 'papers' });
       for (var i = 0; i < data.length; i++) {
         for (var j = 0; j < data[i].KeyWords.length; j++) {
           //console.log(
@@ -63,9 +69,11 @@ class Map extends Component {
             if (first) {
               console.log('IN SPECIAL J');
               finalarray.push(
-                <ListItem button>
-                  <ListItemText primary={data[i].Location} />
-                </ListItem>
+                <Typography type="headline" component="h3">
+                  <ListItem button>
+                    <h3>{data[i].Location} </h3>
+                  </ListItem>
+                </Typography>
               );
               console.log(data[i].Location);
             }
@@ -90,21 +98,23 @@ class Map extends Component {
             if (founds) {
               console.log('IN FOUNDS');
               finalarray.push(
-                <ListItem button>
-                  <ListItemIcon>
-                    <ListItemText primary={data[i].Location} />
-                  </ListItemIcon>
-                </ListItem>
+                <Typography type="headline" component="h3">
+                  <ListItem button>
+                    <h3>{data[i].Location} </h3>
+                  </ListItem>
+                </Typography>
               );
             }
             finalarray.push(
-              <List>
-                <ListItem button>
-                  <ListItemIcon>
-                    <ListItemText primary={data[i].KeyWords[j]} />
-                  </ListItemIcon>
-                </ListItem>
-              </List>
+              <Typography type="body1" component="p">
+                <List>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <ListItemText primary={data[i].KeyWords[j]} />
+                    </ListItemIcon>
+                  </ListItem>
+                </List>
+              </Typography>
             );
             console.log(finalarray);
             first = false;
@@ -132,7 +142,6 @@ class Map extends Component {
     if (this.state.loading) {
       return <div>Loading...</div>;
     }
-
     return (
       <div>
         <div className="map-container">
@@ -148,7 +157,14 @@ class Map extends Component {
             />
           </form>
         </center>
-        <List>{finalarray}</List>
+
+        <br />
+        <br />
+        <Paper elevation={4} className={this.state.view}>
+          <List>{finalarray}</List>
+        </Paper>
+        <br className={this.state.view} />
+        <br className={this.state.view} />
       </div>
     );
   }
