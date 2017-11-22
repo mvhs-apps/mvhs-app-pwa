@@ -62,7 +62,11 @@ class Map extends Component {
       this.setState({ view: 'papers' });
       for (var i = 0; i < data.length; i++) {
         for (var j = 0; j < data[i].KeyWords.length; j++) {
-          if (data[i].KeyWords[j].toLowerCase().includes(event.target.value)) {
+          if (
+            data[i].KeyWords[j]
+              .toLowerCase()
+              .includes(event.target.value.toLowerCase())
+          ) {
             finalarray.push(
               <Typography type="body1" component="p">
                 <List>
@@ -79,6 +83,7 @@ class Map extends Component {
             );
             console.log(finalarray);
             //first = false;
+            window.scrollTo(0, document.body.scrollHeight);
           }
         }
       }
