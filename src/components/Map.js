@@ -86,27 +86,25 @@ class Map extends Component {
     }
     return (
       <div>
-        <div className="map-container">
-          <img alt="map" className="map" src={map} />
-        </div>
-
-        <center>
-          <form onSubmit={Map.handleSubmit}>
+        <div>
+          <form onSubmit={Map.handleSubmit} className="search_field">
             <TextField
               label="Search"
               value={this.state.value}
               onChange={this.handleChange}
             />
           </form>
-        </center>
 
-        <br />
-        <br />
-        <Paper elevation={4} className={this.state.view}>
-          <List>{searchResults}</List>
-        </Paper>
-        <br className={this.state.view} />
-        <br className={this.state.view} />
+          <div className="search_results">
+            <Paper elevation={4} className={this.state.view}>
+              <List>{searchResults}</List>
+            </Paper>
+          </div>
+        </div>
+
+        <div className="map-container">
+          <img alt="map" className="map" src={map} />
+        </div>
       </div>
     );
   }

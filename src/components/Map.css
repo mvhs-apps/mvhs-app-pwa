@@ -34,7 +34,7 @@
 }
 
 .search_results {
-  list-style-type: none;
+  padding: 8px;
 }
 
 .papers {
@@ -46,4 +46,10 @@
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
+}
+
+.search_field {
+  margin: 0 auto;
+  width: fit-content;
+  padding: 16px;
 }
