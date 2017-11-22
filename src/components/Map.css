@@ -33,11 +33,11 @@
   display: inline;
 }
 
-.sList {
-  list-style-type: none;
+.search_results {
+  padding: 8px;
 }
 
-.papers {
+.search_results {
   padding: 8px;
   margin: 0 auto;
   min-width: 300px;
@@ -46,4 +46,10 @@
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
+}
+
+.search_field {
+  margin: 0 auto;
+  width: fit-content;
+  padding: 16px;
 }

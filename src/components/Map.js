@@ -1,38 +1,28 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import map from '../assets/schoolmap.svg';
 import './Map.css';
 import TextField from 'material-ui/TextField';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
 
-//console.log(data);
-
-var finalarray = [];
-var checkarray = [];
-
-var data;
-
-//alert(data.length);
+let data;
+let searchResults = [];
 
 class Map extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: '' }; //for searchbar
-
-    this.state = { view: 'none' };
-
-    this.state = { loading: true };
+    this.state = {
+      value: '',
+      view: 'none',
+      loading: true
+    };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    Map.handleSubmit = Map.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    //json variable
-    var url = 'https://mvhs-app-d04d2.firebaseio.com/locations.json';
-
+    const url = 'https://mvhs-app-d04d2.firebaseio.com/locations.json';
     this.setState({ view: 'none' });
 
     //Use fetch to get the spreadsheet data
@@ -40,62 +30,64 @@ class Map extends Component {
       .then(response => response.json())
       .then(jsonData => {
         //add the jsonData to a state variable
-        if (jsonData != null) {
+        if (jsonData !== null) {
           data = jsonData;
           this.setState({ loading: false });
-          console.log(this.state.loading);
-          console.log(data);
         }
       });
   }
 
   handleChange(event) {
-    //alert("IN CHANGE");
-    console.log(event.target.value);
-
-    finalarray = [];
-    checkarray = [];
-    //var first = true;
     this.setState({ value: event.target.value });
     this.setState({ view: 'none' });
-    if (event.target.value.length > 2) {
-      this.setState({ view: 'papers' });
-      for (var i = 0; i < data.length; i++) {
-        for (var j = 0; j < data[i].KeyWords.length; j++) {
-          if (data[i].KeyWords[j].toLowerCase().includes(event.target.value)) {
-            finalarray.push(
-              <Typography type="body1" component="p">
-                <List>
-                  <ListItem button>
-                    <ListItemIcon>
-                      <ListItemText
-                        primary={data[i].KeyWords[j]}
-                        secondary={data[i].Location}
-                      />
-                    </ListItemIcon>
-                  </ListItem>
-                </List>
-              </Typography>
-            );
-            console.log(finalarray);
-            //first = false;
+
+    if (event.target.value.length > 0) {
+      this.setState({ view: 'search_results' });
+
+      searchResults = [];
+      let query = event.target.value.toLowerCase();
+      data.forEach(event => {
+        let found = false;
+        let match = event['KeyWords'][0];
+        const queryIncludesLocation = query.includes(
+          (event['Location'] + '').toLowerCase()
+        );
+        const locationIncludesQuery = (event['Location'] + '')
+          .toLowerCase()
+          .includes(query);
+        event['KeyWords'].forEach(keyword => {
+          const queryIncludesKeyword = query.includes(keyword.toLowerCase());
+          const keywordContainsQuery = keyword.toLowerCase().includes(query);
+          if (
+            queryIncludesKeyword ||
+            keywordContainsQuery ||
+            queryIncludesLocation ||
+            locationIncludesQuery
+          ) {
+            found = true;
+            match = keyword;
           }
+        });
+
+        if (found) {
+          searchResults.push(
+            <ListItem key={match}>
+              <ListItemText primary={match} secondary={event.Location} />
+            </ListItem>
+          );
         }
-      }
-      if (finalarray.length === 0) {
-        finalarray.push(
-          <ul className="sList">
-            {' '}
-            <li>
-              <h1>Nothing Found</h1>
-            </li>
-          </ul>
+      });
+      if (searchResults.length === 0) {
+        searchResults.push(
+          <ListItem key="none">
+            <ListItemText primary="Not found on campus" />
+          </ListItem>
         );
       }
     }
   }
 
-  handleSubmit(event) {
+  static handleSubmit(event) {
     event.preventDefault();
   }
 
@@ -105,27 +97,25 @@ class Map extends Component {
     }
     return (
       <div>
-        <div className="map-container">
-          <img alt="map" className="map" src={map} />
-        </div>
-
-        <center>
-          <form onSubmit={this.handleSubmit}>
+        <div>
+          <form onSubmit={Map.handleSubmit} className="search_field">
             <TextField
               label="Search"
               value={this.state.value}
               onChange={this.handleChange}
             />
           </form>
-        </center>
 
-        <br />
-        <br />
-        <Paper elevation={4} className={this.state.view}>
-          <List>{finalarray}</List>
-        </Paper>
-        <br className={this.state.view} />
-        <br className={this.state.view} />
+          <div className="search_results">
+            <Paper elevation={4} className={this.state.view}>
+              <List>{searchResults}</List>
+            </Paper>
+          </div>
+        </div>
+
+        <div className="map-container">
+          <img alt="map" className="map" src={map} />
+        </div>
       </div>
     );
   }
