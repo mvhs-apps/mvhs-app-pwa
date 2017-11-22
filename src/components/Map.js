@@ -69,9 +69,9 @@ class Map extends Component {
             if (first) {
               console.log('IN SPECIAL J');
               finalarray.push(
-                <Typography type="headline" component="h3">
+                <Typography type="headline">
                   <ListItem button>
-                    <h3>{data[i].Location} </h3>
+                    <h3>{data[i].Location}</h3>
                   </ListItem>
                 </Typography>
               );
