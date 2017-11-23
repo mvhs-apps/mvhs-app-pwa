@@ -4,9 +4,22 @@ import './Map.css';
 import TextField from 'material-ui/TextField';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
+import CircularProgress from 'material-ui/Progress/CircularProgress';
+
+import Loadable from './LCEComponent';
 
 let data;
 let searchResults = [];
+
+const Empty = <div className="card-padding center" />;
+const Loading = (
+  <div className="card-padding center">
+    <CircularProgress />
+  </div>
+);
+const Error = (error: string) => (
+  <div className="card-padding center">{error}</div>
+);
 
 class Map extends Component {
   constructor(props) {
@@ -93,7 +106,16 @@ class Map extends Component {
 
   render() {
     if (this.state.loading) {
-      return <div>Loading...</div>;
+      return (
+        <Loadable
+          loading={this.state.loading}
+          data={null}
+          error={null}
+          LoadingComponent={Loading}
+          EmptyComponent={Empty}
+          ErrorComponent={Error('')}
+        />
+      );
     }
     return (
       <div>
