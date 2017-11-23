@@ -9,10 +9,10 @@
   */
 
   // Check for addEventListener browser support (prevent errors in IE<9)
-  var _eventListener = 'addEventListener' in window;
+  let _eventListener = 'addEventListener' in window;
 
   // Check if document is loaded, needed by autostart
-  var _DOMReady = false;
+  let _DOMReady = false;
   if (document.readyState === 'complete') {
     _DOMReady = true;
   } else if (_eventListener) {
@@ -25,11 +25,12 @@
   }
 
   // regex used to detect if app has been added to the homescreen
-  var _reSmartURL = /\/ath(\/)?$/;
-  var _reQueryString = /([\?&]ath=[^&]*$|&ath=[^&]*(&))/;
+  let _reSmartURL = /\/ath(\/)?$/;
+  let _reQueryString = /([?&]ath=[^&]*$|&ath=[^&]*(&))/;
 
   // singleton
-  var _instance;
+  let _instance;
+
   function ath(options) {
     _instance = _instance || new ath.Class(options);
 
@@ -47,7 +48,7 @@
   };
 
   // Add 2 characters language support (Android mostly)
-  for (var lang in ath.intl) {
+  for (let lang in ath.intl) {
     ath.intl[lang.substr(0, 2)] = ath.intl[lang];
   }
 
@@ -78,9 +79,9 @@
   };
 
   // browser info and capability
-  var _ua = window.navigator.userAgent;
+  let _ua = window.navigator.userAgent;
 
-  var _nav = window.navigator;
+  let _nav = window.navigator;
   _extend(ath, {
     hasToken:
       document.location.hash === '#ath' ||
@@ -109,7 +110,7 @@
       ? 'android'
       : ath.isMobileIE ? 'windows' : 'unsupported';
 
-  ath.OSVersion = _ua.match(/(OS|Android) (\d+[_\.]\d+)/);
+  ath.OSVersion = _ua.match(/(OS|Android) (\d+[_.]\d+)/);
   ath.OSVersion =
     ath.OSVersion && ath.OSVersion[2] ? +ath.OSVersion[2].replace('_', '.') : 0;
 
@@ -122,7 +123,7 @@
   ath.isCompatible =
     (ath.isMobileSafari && ath.OSVersion >= 6) || ath.isMobileChrome; // TODO: add winphone
 
-  var _defaultSession = {
+  let _defaultSession = {
     lastDisplayTime: 0, // last time we displayed the message
     returningVisitor: false, // is this the first time you visit
     displayCount: 0, // number of times the message has been shown
@@ -234,8 +235,8 @@
     }
 
     // check if this is a valid location
-    var isValidLocation = !this.options.validLocation.length;
-    for (var i = this.options.validLocation.length; i--; ) {
+    let isValidLocation = !this.options.validLocation.length;
+    for (let i = this.options.validLocation.length; i--; ) {
       if (this.options.validLocation[i].test(document.location.pathname)) {
         isValidLocation = true;
         break;
@@ -311,19 +312,19 @@
 
       // URL doesn't have the token, so add it
       if (this.options.detectHomescreen === 'hash') {
-        history.replaceState(
+        window.history.replaceState(
           '',
           window.document.title,
           document.location.href + '#ath'
         );
       } else if (this.options.detectHomescreen === 'smartURL') {
-        history.replaceState(
+        window.history.replaceState(
           '',
           window.document.title,
           document.location.href.replace(/(\/)?$/, '/ath$1')
         );
       } else {
-        history.replaceState(
+        window.history.replaceState(
           '',
           window.document.title,
           document.location.href +
@@ -384,7 +385,7 @@
     },
 
     handleEvent: function(e) {
-      var type = this.events[e.type];
+      let type = this.events[e.type];
       if (type) {
         this[type](e);
       }
@@ -407,8 +408,8 @@
         return;
       }
 
-      var now = Date.now();
-      var lastDisplayTime = this.session.lastDisplayTime;
+      let now = Date.now();
+      let lastDisplayTime = this.session.lastDisplayTime;
 
       if (force !== true) {
         // this is needed if autostart is disabled and you programmatically call the show() method
@@ -459,7 +460,7 @@
         }
       }
 
-      var message = '';
+      let message = '';
 
       if (
         typeof this.options.message === 'object' &&
@@ -514,7 +515,7 @@
         ath.OS +
         ' ath-' +
         ath.OS +
-        (parseInt(ath.OSVersion) || '') +
+        (parseInt(ath.OSVersion, 10) || '') +
         ' ath-' +
         (ath.isTablet ? 'tablet' : 'phone');
       this.element.style.cssText =
@@ -560,7 +561,7 @@
     },
 
     _show: function() {
-      var that = this;
+      let that = this;
 
       // update the viewport size and orientation
       this.updateViewport();
@@ -655,19 +656,21 @@
       this.viewport.style.left = window.scrollX + 'px';
       this.viewport.style.top = window.scrollY + 'px';
 
-      var clientWidth = document.documentElement.clientWidth;
+      let clientWidth = document.documentElement.clientWidth;
 
       this.orientation =
         clientWidth > document.documentElement.clientHeight
           ? 'landscape'
           : 'portrait';
 
-      var screenWidth =
+      let screenWidth =
         ath.OS === 'ios'
-          ? this.orientation === 'portrait' ? screen.width : screen.height
-          : screen.width;
+          ? this.orientation === 'portrait'
+            ? window.screen.width
+            : window.screen.height
+          : window.screen.width;
       this.scale =
-        screen.width > clientWidth ? 1 : screenWidth / window.innerWidth;
+        window.screen.width > clientWidth ? 1 : screenWidth / window.innerWidth;
 
       this.element.style.fontSize = this.options.fontSize / this.scale + 'px';
     },
@@ -728,7 +731,7 @@
 
   // utility
   function _extend(target, obj) {
-    for (var i in obj) {
+    for (let i in obj) {
       target[i] = obj[i];
     }
 
@@ -737,7 +740,7 @@
 
   function _removeToken() {
     if (document.location.hash === '#ath') {
-      history.replaceState(
+      window.history.replaceState(
         '',
         window.document.title,
         document.location.href.split('#')[0]
@@ -745,7 +748,7 @@
     }
 
     if (_reSmartURL.test(document.location.href)) {
-      history.replaceState(
+      window.history.replaceState(
         '',
         window.document.title,
         document.location.href.replace(_reSmartURL, '$1')
@@ -753,7 +756,7 @@
     }
 
     if (_reQueryString.test(document.location.search)) {
-      history.replaceState(
+      window.history.replaceState(
         '',
         window.document.title,
         document.location.href.replace(_reQueryString, '$2')
