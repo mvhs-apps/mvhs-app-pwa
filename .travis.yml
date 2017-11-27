@@ -1,0 +1,12 @@
+language: node_js
+cache: yarn
+dist: precise
+node_js:
+  - "8"
+install:
+  - yarn install
+  - yarn global add firebase-tools
+script:
+  - yarn run build:web
+after_success:
+  - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false" && firebase deploy --token $FIREBASE_TOKEN

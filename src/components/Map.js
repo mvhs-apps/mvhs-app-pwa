@@ -1,158 +1,140 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import map from '../assets/schoolmap.svg';
 import './Map.css';
+import TextField from 'material-ui/TextField';
+import List, { ListItem, ListItemText } from 'material-ui/List';
+import Paper from 'material-ui/Paper';
+import CircularProgress from 'material-ui/Progress/CircularProgress';
+
+import Loadable from './LCEComponent';
+
+let data;
+let searchResults = [];
+
+const Empty = <div className="card-padding center" />;
+const Loading = (
+  <div className="card-padding center">
+    <CircularProgress />
+  </div>
+);
+const Error = (error: string) => (
+  <div className="card-padding center">{error}</div>
+);
 
 class Map extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: '' };
-    this.state = { name: 'boverlay' };
-    this.state = { fname: 'boverlay' };
-    this.state = { aname: 'boverlay' };
-    this.state = { lname: 'boverlay' };
-    this.state = { cname: 'boverlay' };
-    this.state = { rname: 'boverlay' };
+    this.state = {
+      value: '',
+      view: 'none',
+      loading: true
+    };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    Map.handleSubmit = Map.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const url = 'https://mvhs-app-d04d2.firebaseio.com/locations.json';
+    this.setState({ view: 'none' });
+
+    //Use fetch to get the spreadsheet data
+    fetch(url)
+      .then(response => response.json())
+      .then(jsonData => {
+        //add the jsonData to a state variable
+        if (jsonData !== null) {
+          data = jsonData;
+          this.setState({ loading: false });
+        }
+      });
   }
 
   handleChange(event) {
     this.setState({ value: event.target.value });
-  }
-  handleSubmit(event) {
-    var adminbuilding = [
-      'activities',
-      'office',
-      'chac',
-      'clubs',
-      'confiscated',
-      'phones',
-      'lost',
-      'found',
-      'principal',
-      'principals',
-      'drug',
-      'grissom',
-      'teacher',
-      'teachers',
-      'mail',
-      'theft',
-      'report',
-      'vice',
-      'work',
-      'permits'
-    ];
-    var financebuilding = [
-      'money',
-      'check',
-      'bus',
-      'pass',
-      'buy',
-      'tickets',
-      'clothes',
-      'dance',
-      'replacement',
-      'card',
-      'locker',
-      'parking',
-      'permit',
-      'reduced',
-      'lunch',
-      'finance'
-    ];
-    var attendanceoffice = ['tardy', 'late'];
-    var library = ['print schedule', 'book', 'print'];
-    var counselingoffices = [
-      'counseling',
-      'counselor',
-      'appointment',
-      'mental',
-      'schedule'
-    ];
-    var registar = ['grade', 'transcript'];
-    alert('A query was submitted: ' + this.state.value);
-    event.preventDefault();
-    var phrase = /*toLowerCase(*/ this.state.value; //);
-    //check adminbuilding
-    var somethingfound = false;
-    for (var i = 0; i < adminbuilding.length - 1; i++) {
-      if (phrase.includes(adminbuilding[i])) {
-        alert('adminbuilding');
-        i = adminbuilding.length - 1;
-        somethingfound = true;
-        this.setState({ name: 'overlay4admin' });
-      }
-    }
-    //check Finance
-    for (var i = 0; i < financebuilding.length - 1; i++) {
-      if (phrase.includes(financebuilding[i])) {
-        alert('finance');
-        i = financebuilding.length - 1;
-        somethingfound = true;
-        this.setState({ name: 'overlay4finance' });
-      }
-    }
-    //check attendance
-    for (var i = 0; i < attendanceoffice.length - 1; i++) {
-      if (phrase.includes(attendanceoffice[i])) {
-        alert('attendanceoffice');
-        i = attendanceoffice.length - 1;
-        somethingfound = true;
-        this.setState({ fname: 'overlay4attendance' });
-      }
-    }
-    //check Library
-    for (var i = 0; i < library.length - 1; i++) {
-      if (phrase.includes(library[i])) {
-        alert('library');
-        i = library.length - 1;
-        somethingfound = true;
-        this.setState({ lname: 'overlay4library' });
-      }
-    }
-    //counseling offices
-    for (var i = 0; i < counselingoffices.length - 1; i++) {
-      if (phrase.includes(counselingoffices[i])) {
-        alert('counselingoffices');
-        i = counselingoffices.length - 1;
-        somethingfound = true;
-      }
-    }
-    //registar
-    for (var i = 0; i < registar.length - 1; i++) {
-      if (phrase.includes(registar[i])) {
-        alert('registar');
-        i = registar.length - 1;
-        somethingfound = true;
-      }
-    }
+    this.setState({ view: 'none' });
 
-    if (!somethingfound) {
-      alert('!somethingfound');
+    if (event.target.value.length > 0) {
+      this.setState({ view: 'search_results' });
+
+      searchResults = [];
+      let query = event.target.value.toLowerCase();
+      data.forEach(event => {
+        let found = false;
+        let match = event['KeyWords'][0];
+        const queryIncludesLocation = query.includes(
+          (event['Location'] + '').toLowerCase()
+        );
+        const locationIncludesQuery = (event['Location'] + '')
+          .toLowerCase()
+          .includes(query);
+        event['KeyWords'].forEach(keyword => {
+          const queryIncludesKeyword = query.includes(keyword.toLowerCase());
+          const keywordContainsQuery = keyword.toLowerCase().includes(query);
+          if (
+            queryIncludesKeyword ||
+            keywordContainsQuery ||
+            queryIncludesLocation ||
+            locationIncludesQuery
+          ) {
+            found = true;
+            match = keyword;
+          }
+        });
+
+        if (found) {
+          searchResults.push(
+            <ListItem key={match}>
+              <ListItemText primary={match} secondary={event.Location} />
+            </ListItem>
+          );
+        }
+      });
+      if (searchResults.length === 0) {
+        searchResults.push(
+          <ListItem key="none">
+            <ListItemText primary="Not found on campus" />
+          </ListItem>
+        );
+      }
     }
+  }
+
+  static handleSubmit(event) {
+    event.preventDefault();
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <Loadable
+          loading={this.state.loading}
+          data={null}
+          error={null}
+          LoadingComponent={Loading}
+          EmptyComponent={Empty}
+          ErrorComponent={Error('')}
+        />
+      );
+    }
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Search:
-            <input
-              type="text"
+        <div>
+          <form onSubmit={Map.handleSubmit} className="search_field">
+            <TextField
+              label="Search"
               value={this.state.value}
               onChange={this.handleChange}
             />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+          </form>
 
-        <div className={this.state.name} />
-        <div className={this.state.fname} />
-        <div className={this.state.lname} />
-        <div className={this.state.aname} />
+          <div className="search_results">
+            <Paper elevation={4} className={this.state.view}>
+              <List>{searchResults}</List>
+            </Paper>
+          </div>
+        </div>
+
         <div className="map-container">
           <img alt="map" className="map" src={map} />
         </div>

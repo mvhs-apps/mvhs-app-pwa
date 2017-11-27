@@ -27,8 +27,6 @@ import type { RouterHistory } from 'react-router-dom';
 
 import logo from './assets/outlinelogo.svg';
 
-import asyncComponent from './components/asyncComponent';
-
 import Loadable from 'react-loadable';
 import Analytics from './components/Analytics';
 
@@ -58,7 +56,7 @@ const RouterTabs = withRouter(
   }
 );
 
-const routes = ['/', '/map', /*'/search', */ '/about'];
+const routes = ['/', '/map', '/about'];
 
 const theme = createMuiTheme({
   palette: {
@@ -67,15 +65,20 @@ const theme = createMuiTheme({
   }
 });
 
-const AsyncSchedulePage = asyncComponent(() =>
-  import(/* webpackChunkName: "page-schedule" */ './containers/SchedulePageContainer')
-);
-const AsyncMap = asyncComponent(() =>
-  import(/* webpackChunkName: "page-map" */ './components/Map')
-);
-const AsyncAbout = asyncComponent(() =>
-  import(/* webpackChunkName: "page-about" */ './components/AboutPage')
-);
+const AsyncSchedulePage = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "page-schedule" */ './containers/SchedulePageContainer'),
+  loading: () => null
+});
+const AsyncMap = Loadable({
+  loader: () => import(/* webpackChunkName: "page-map" */ './components/Map'),
+  loading: () => null
+});
+const AsyncAbout = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "page-about" */ './components/AboutPage'),
+  loading: () => null
+});
 const AsyncSnackbar = Loadable({
   loader: () =>
     import(/* webpackChunkName: "snackbar" */ './components/SimpleSnackbar'),

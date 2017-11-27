@@ -384,7 +384,9 @@ module.exports = {
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ShakePlugin(),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin({
+      analyzerMode: process.env.CI ? 'disabled': 'static'
+    })
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
