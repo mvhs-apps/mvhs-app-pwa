@@ -53,7 +53,8 @@ const Calendar = ({ loading, events, error }) => {
                     </a>
                     <ListItemText
                       className="calendar-desc"
-                      primary={`${event.summary} • ${event.start} - ${event.end}`}
+                      primary={`${event.summary} •
+                       ${event.start} - ${event.end}`}
                       secondary={event.description}
                     />
                   </ListItem>
