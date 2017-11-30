@@ -71,7 +71,8 @@ const AsyncSchedulePage = Loadable({
   loading: () => null
 });
 const AsyncMap = Loadable({
-  loader: () => import(/* webpackChunkName: "page-map" */ './components/Map'),
+  loader: () =>
+    import(/* webpackChunkName: "page-map" */ './containers/MapContainer'),
   loading: () => null
 });
 const AsyncAbout = Loadable({
