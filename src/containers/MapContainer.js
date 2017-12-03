@@ -30,7 +30,9 @@ class MapContainer extends React.PureComponent<Props, State> {
     this.setState({ loading: true });
 
     try {
-      const locations = await getFirebaseVal('/locations');
+      //temporary fix to get new locations
+      const locations = await getFirebaseVal('/locations', true);
+      //const locations = await getFirebaseVal('/locations');
 
       this.setState({ loading: false, locations: locations });
 
@@ -59,7 +61,8 @@ class MapContainer extends React.PureComponent<Props, State> {
         const queryIncludesLocation = query.includes(
           location.Location.toString().toLowerCase()
         );
-        const locationIncludesQuery = location.Location.toString()
+        const locationIncludesQuery = location.Location
+          .toString()
           .toLowerCase()
           .includes(query);
 
