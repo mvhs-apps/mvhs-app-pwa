@@ -18,7 +18,7 @@ type Props = {
 
 const Empty = (
   <ListItem key="none">
-    <ListItemText primary="Not found on campus" />
+    <ListItemText primary="No Search Result" />
   </ListItem>
 );
 
