@@ -3,12 +3,7 @@
 import * as storage from './storage';
 
 const config = {
-  apiKey: 'AIzaSyCfRrWtuQjgV2ekSGkmDn_BROYje60T61c',
-  authDomain: 'mvhs-app-d04d2.firebaseapp.com',
-  databaseURL: 'https://mvhs-app-d04d2.firebaseio.com',
-  projectId: 'mvhs-app',
-  storageBucket: 'mvhs-app.appspot.com',
-  messagingSenderId: '408854922610'
+  databaseURL: 'https://mvhs-app-d04d2.firebaseio.com'
 };
 
 function deep(obj, path, value) {

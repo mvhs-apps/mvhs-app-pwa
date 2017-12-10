@@ -27,3 +27,11 @@
 .calendar-desc {
   white-space: pre-wrap;
 }
+
+.calendar-form {
+  width: 100%;
+}
+
+.calendar-select {
+  margin: 12px auto 0;
+}

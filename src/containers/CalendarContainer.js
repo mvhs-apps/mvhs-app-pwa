@@ -5,7 +5,7 @@ import React from 'react';
 import type Moment from 'moment';
 import Calendar from '../components/Calendar';
 
-import calendarURL from '../utils/schoolCalendar';
+import calendarUrls from '../utils/calendarUrls';
 import moment from 'moment';
 
 type SchoolEvent = {
@@ -24,22 +24,28 @@ type Props = {
 type State = {
   loading: boolean,
   error: any,
-  events: SchoolEvent[]
+  events: SchoolEvent[],
+  selectedCalendar: string
 };
 
 class DatePickerContainer extends React.PureComponent<Props, State> {
   state = {
     loading: true,
     error: '',
-    events: []
+    events: [],
+    selectedCalendar: Object.keys(calendarUrls)[0]
   };
 
   componentDidMount() {
     this.loadCalendar().then();
   }
 
-  componentDidUpdate(prevProps: Props) {
-    if (this.props.date && !this.props.date.isSame(prevProps.date)) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    console.log(this.state);
+    if (
+      (this.props.date && !this.props.date.isSame(prevProps.date)) ||
+      this.state.selectedCalendar !== prevState.selectedCalendar
+    ) {
       this.loadCalendar().then();
     }
   }
@@ -58,7 +64,7 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
     const tomorrow = today.clone().add(1, 'days');
 
     const url =
-      calendarURL +
+      calendarUrls[this.state.selectedCalendar] +
       'timeMin=' +
       today.toISOString() +
       '&' +
@@ -117,12 +123,19 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
     }
   }
 
+  handleChange = e => {
+    this.setState({ selectedCalendar: e.target.value });
+  };
+
   render() {
     return (
       <Calendar
         loading={this.state.loading}
         events={this.state.events}
         error={this.state.error.toString()}
+        onHandleChange={this.handleChange}
+        selectedOption={this.state.selectedCalendar}
+        options={calendarUrls}
       />
     );
   }
