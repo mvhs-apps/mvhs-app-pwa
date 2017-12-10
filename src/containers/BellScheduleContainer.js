@@ -156,9 +156,9 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
 
         periods.push({
           period: scheduleData[periodTime],
-          time: `${to12Hour(startHour)}:${startMin} - ${to12Hour(endHour)}:${
-            endMin
-          }`,
+          time: `${to12Hour(startHour)}:${startMin} - ${to12Hour(
+            endHour
+          )}:${endMin}`,
           current: current
         });
       }

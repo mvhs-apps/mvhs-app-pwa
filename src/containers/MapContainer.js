@@ -61,8 +61,7 @@ class MapContainer extends React.PureComponent<Props, State> {
         const queryIncludesLocation = query.includes(
           location.Location.toString().toLowerCase()
         );
-        const locationIncludesQuery = location.Location
-          .toString()
+        const locationIncludesQuery = location.Location.toString()
           .toLowerCase()
           .includes(query);
 
