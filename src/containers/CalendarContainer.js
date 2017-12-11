@@ -77,6 +77,11 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
 
       const eventList: SchoolEvent[] = [];
       json.items
+        .sort((e1, e2) => {
+          const e1Date = moment(e1.start.date || e1.start.dateTime);
+          const e2Date = moment(e2.start.date || e2.start.dateTime);
+          return e1Date.valueOf() - e2Date.valueOf();
+        })
         .map(event => {
           let startDate;
           let endDate;
