@@ -38,7 +38,6 @@ const SchedulePage = ({ date, onDateChange }: Props) => {
       <AsyncDatePicker date={date} onDateChange={onDateChange} />
       <AsyncBellSchedule date={date} />
       <AsyncCalendar date={date} />
-      <div className="spacer" />
       <Disclaimer />
     </div>
   );

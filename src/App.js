@@ -6,7 +6,6 @@ import './App.css';
 
 import NotificationIcon from 'material-ui-icons/Notifications';
 import MapIcon from 'material-ui-icons/Map';
-//import SearchIcon from 'material-ui-icons/Search';
 import InfoIcon from 'material-ui-icons/Info';
 
 import AppBar from 'material-ui/AppBar';
@@ -118,7 +117,6 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
           <Switch>
             <Route exact path={routes[0]} component={AsyncSchedulePage} />
             <Route path={routes[1]} component={AsyncMap} />
-            {/*<Route path={routes[2]} component={Search} />*/}
             <Route path={routes[2]} component={AsyncAbout} />
           </Switch>
 

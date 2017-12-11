@@ -5,4 +5,5 @@
   padding: 24px;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.54);
+  grid-area: disclaimer;
 }
