@@ -64,12 +64,12 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
     const tomorrow = today.clone().add(1, 'days');
 
     const url =
-      calendarUrls[this.state.selectedCalendar] +
-      'timeMin=' +
-      today.toISOString() +
-      '&' +
-      'timeMax=' +
-      tomorrow.toISOString();
+      `https://www.googleapis.com/calendar/v3/calendars/` +
+      `${calendarUrls[this.state.selectedCalendar]}` +
+      `/events?` +
+      `key=AIzaSyCfRrWtuQjgV2ekSGkmDn_BROYje60T61c&` +
+      `timeMin=${today.toISOString()}&` +
+      `timeMax=${tomorrow.toISOString()}`;
 
     try {
       const response = await fetch(url);
@@ -93,8 +93,9 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
             summary: event.summary,
             description: event.description,
             location: event.location,
-            mapURL:
-              'https://www.google.com/maps/search/' + encodeURI(event.location),
+            mapURL: `https://www.google.com/maps/search/${encodeURI(
+              event.location
+            )}`,
             start: startDate,
             end: endDate
           };

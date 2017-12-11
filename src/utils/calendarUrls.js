@@ -1,8 +1,7 @@
-const mainCalendar = `https://www.googleapis.com/calendar/v3/calendars/mvla.net_3236303434383738363838%40resource.calendar.google.com/events?key=AIzaSyCfRrWtuQjgV2ekSGkmDn_BROYje60T61c&`;
+const mainCalendar =
+  'mvla.net_3236303434383738363838@resource.calendar.google.com';
 const asbCalendar =
-  'https://www.googleapis.com/calendar/v3/calendars/' +
-  'mvla.net_rkga5oan4veneeukqb79urf0fo%40group.calendar.google.com/' +
-  'events?key=AIzaSyCfRrWtuQjgV2ekSGkmDn_BROYje60T61c&';
+  'mvla.net_rkga5oan4veneeukqb79urf0fo@group.calendar.google.com';
 
 const calendars = {
   'Main Calendar': mainCalendar,

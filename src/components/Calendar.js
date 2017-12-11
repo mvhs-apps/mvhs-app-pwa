@@ -10,6 +10,7 @@ import ListItem from 'material-ui/List/ListItem';
 import ListItemText from 'material-ui/List/ListItemText';
 import ListItemAvatar from 'material-ui/List/ListItemAvatar';
 import MapIcon from 'material-ui-icons/Map';
+import Button from 'material-ui/Button';
 
 import FormControl from 'material-ui/Form/FormControl';
 import Select from 'material-ui/Select';
@@ -71,34 +72,30 @@ const Calendar = ({
           EmptyComponent={Empty}
           ErrorComponent={Error(error)}
         >
-          <div>
-            <List>
-              {events.map((event, index) => {
-                return (
-                  <ListItem
-                    key={event.id}
-                    dense={false}
-                    divider={index !== events.length - 1}
-                  >
-                    <a href={event.mapURL} target="_blank" title="Open in Maps">
-                      <ListItemAvatar>
-                        <Avatar>
-                          <MapIcon />
-                        </Avatar>
-                      </ListItemAvatar>
-                    </a>
-                    <ListItemText
-                      className="calendar-desc"
-                      primary={`${event.summary} • ${event.start} - ${
-                        event.end
-                      }`}
-                      secondary={event.description}
-                    />
-                  </ListItem>
-                );
-              })}
-            </List>
-          </div>
+          <List>
+            {events.map((event, index) => {
+              return (
+                <ListItem
+                  key={event.id}
+                  dense={false}
+                  divider={index !== events.length - 1}
+                >
+                  <a href={event.mapURL} target="_blank" title="Open in Maps">
+                    <ListItemAvatar>
+                      <Avatar>
+                        <MapIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                  </a>
+                  <ListItemText
+                    className="calendar-desc"
+                    primary={`${event.summary} • ${event.start} - ${event.end}`}
+                    secondary={event.description}
+                  />
+                </ListItem>
+              );
+            })}
+          </List>
         </Loadable>
       </Paper>
     </div>
