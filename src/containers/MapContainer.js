@@ -55,7 +55,7 @@ class MapContainer extends React.PureComponent<Props, State> {
     const queryValue = event.target.value;
     this.setState({ query: queryValue });
 
-    if (queryValue.length > 0) {
+    if (queryValue.length > 1) {
       let query = queryValue.toLowerCase();
       const searchResults = this.state.locations.reduce((results, location) => {
         const queryIncludesLocation = query.includes(
@@ -66,13 +66,22 @@ class MapContainer extends React.PureComponent<Props, State> {
           .includes(query);
 
         let matchingKeywords = [];
-        if (location.KeyWords) {
-          matchingKeywords = location.KeyWords.filter(keyword => {
-            const queryIncludesKeyword = query.includes(keyword.toLowerCase());
-            const keywordContainsQuery = keyword.toLowerCase().includes(query);
-            return queryIncludesKeyword || keywordContainsQuery;
-          });
+        if (locationIncludesQuery) {
+          matchingKeywords = location.KeyWords;
+        } else {
+          if (location.KeyWords) {
+            matchingKeywords = location.KeyWords.filter(keyword => {
+              const queryIncludesKeyword = query.includes(
+                keyword.toLowerCase()
+              );
+              const keywordContainsQuery = keyword
+                .toLowerCase()
+                .includes(query);
+              return queryIncludesKeyword || keywordContainsQuery;
+            });
+          }
         }
+
         const keywordMatchesQuery = matchingKeywords.length > 0;
 
         if (
