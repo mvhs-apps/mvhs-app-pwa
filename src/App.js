@@ -8,6 +8,9 @@ import NotificationIcon from 'material-ui-icons/Notifications';
 import MapIcon from 'material-ui-icons/Map';
 import InfoIcon from 'material-ui-icons/Info';
 
+//Add new icon
+import SearchIcon from 'material-ui-icons/Search';
+
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -55,7 +58,8 @@ const RouterTabs = withRouter(
   }
 );
 
-const routes = ['/', '/map', '/about'];
+//when adding adding tab, add to routes array
+const routes = ['/', '/map', '/about', '/search'];
 
 const theme = createMuiTheme({
   palette: {
@@ -85,6 +89,13 @@ const AsyncSnackbar = Loadable({
   loading: () => null
 });
 
+//add search page here
+const AsyncSearch = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "page-about" */ './components/SearchPage'),
+  loading: () => null
+});
+
 const refresh = () => {
   window.location.reload();
 };
@@ -105,8 +116,9 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
             <RouterTabs routes={routes} fullWidth={true} centered={true}>
               <LinkTab icon={<NotificationIcon />} to={routes[0]} />
               <LinkTab icon={<MapIcon />} to={routes[1]} />
-              {/*<LinkTab icon={<SearchIcon />} to={routes[2]} />*/}
               <LinkTab icon={<InfoIcon />} to={routes[2]} />
+
+              <LinkTab icon={<SearchIcon />} to={routes[3]} />
             </RouterTabs>
           </AppBar>
 
@@ -118,6 +130,8 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
             <Route exact path={routes[0]} component={AsyncSchedulePage} />
             <Route path={routes[1]} component={AsyncMap} />
             <Route path={routes[2]} component={AsyncAbout} />
+
+            <Route path={routes[3]} component={AsyncSearch} />
           </Switch>
 
           {showUpdate && (
