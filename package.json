@@ -123,5 +123,16 @@
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     }
-  }
+  },
+  "description": "[![Build Status](https://travis-ci.org/mvhs-apps/mvhs-app-pwa.svg?branch=master)](https://travis-ci.org/mvhs-apps/mvhs-app-pwa) [![Code Climate](https://codeclimate.com/github/mvhs-apps/mvhs-app-pwa/badges/gpa.svg)](https://codeclimate.com/github/mvhs-apps/mvhs-app-pwa)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mvhs-apps/mvhs-app-pwa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mvhs-apps/mvhs-app-pwa/issues"
+  },
+  "homepage": "https://github.com/mvhs-apps/mvhs-app-pwa#readme"
 }

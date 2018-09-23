@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Home Page",
+    "role": "mvla.net/MVHS",
+    "desc": "",
+    "image": "",
+    "links": {
+      "Link": "http://www.mvla.net/MVHS/"
+    }
+  },
+  {
+    "name": "Elist Enrollment",
+    "role": "mvhs.elists.mvla.net",
+    "desc": "",
+    "image": "",
+    "links": {
+      "Link": "http://mvhs.elists.mvla.net/"
+    }
+  },
+  {
+    "name": "Teacher Sites",
+    "role": "mvla.net/MVHS/2055-MVHS-Teacher-Web-Sites.html",
+    "desc": "",
+    "image": "",
+    "links": {
+      "Link": "http://www.mvla.net/MVHS/2055-MVHS-Teacher-Web-Sites.html"
+    }
+  },
+  {
+    "name": "Aeries Portal",
+    "role": "mvla.asp.aeries.net/student/",
+    "desc": "",
+    "image": "",
+    "links": {
+      "Link": "https://mvla.asp.aeries.net/student/"
+    }
+  }
+]
