@@ -4,11 +4,11 @@ import React from 'react';
 
 import creditsData from '../assets/links.json';
 
-import Credits from '../components/Credits';
+import LinksCss from '../components/LinksCss';
 
 class LinkContainer extends React.PureComponent {
   render() {
-    return <Credits profiles={creditsData} />;
+    return <LinksCss profiles={creditsData} />;
   }
 }
 

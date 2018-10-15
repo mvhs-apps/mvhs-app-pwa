@@ -3,16 +3,25 @@
     "name": "Home Page",
     "role": "mvla.net/MVHS",
     "desc": "",
-    "image": "",
+    "image": "mvhs.png",
     "links": {
       "Link": "http://www.mvla.net/MVHS/"
+    }
+  },
+  {
+    "name": "District Page",
+    "role": "mvla.net",
+    "desc": "",
+    "image": "district.png",
+    "links": {
+      "Link": "http://www.mvla.net/"
     }
   },
   {
     "name": "Elist Enrollment",
     "role": "mvhs.elists.mvla.net",
     "desc": "",
-    "image": "",
+    "image": "mail.png",
     "links": {
       "Link": "http://mvhs.elists.mvla.net/"
     }
@@ -21,7 +30,7 @@
     "name": "Teacher Sites",
     "role": "mvla.net/MVHS/2055-MVHS-Teacher-Web-Sites.html",
     "desc": "",
-    "image": "",
+    "image": "teachers.png",
     "links": {
       "Link": "http://www.mvla.net/MVHS/2055-MVHS-Teacher-Web-Sites.html"
     }
@@ -30,7 +39,7 @@
     "name": "Aeries Portal",
     "role": "mvla.asp.aeries.net/student/",
     "desc": "",
-    "image": "",
+    "image": "aeries.png",
     "links": {
       "Link": "https://mvla.asp.aeries.net/student/"
     }
