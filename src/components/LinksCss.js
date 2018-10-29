@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import './Credits.css';
+import './LinksCss.css';
 import Card from 'material-ui/Card/Card';
 import CardActions from 'material-ui/Card/CardActions';
 import CardContent from 'material-ui/Card/CardContent';
@@ -50,27 +50,16 @@ const LinksCss = ({ profiles }: { profiles: Profile[] }) => {
                     profile.image &&
                     require('../assets/avatars/' + profile.image)
                   }
-                >
-                  {!profile.image && profile.name.replace(/[^A-Z]/g, '')}
-                </Avatar>
+                />
               }
               title={profile.name}
-              subheader={profile.role}
             />
-            <CardContent
-              className={
-                'about-content ' +
-                (profile.desc || !haveLinks ? '' : 'about-content-no-body')
-              }
-            >
-              {profile.desc && <Typography>{profile.desc}</Typography>}
-            </CardContent>
-            {haveLinks && (
-              <CardActions>
-                {Object.keys(profile.links).map((name: string) => {})}
-              </CardActions>
-            )}
           </Card>
+
+          //Default
+          //{!profile.image && profile.name.replace(/[^A-Z]/, '../assets/avatars/default.png')}
+          //Default
+
           //</Link>
           /**</ButtonBase>**/
         );
