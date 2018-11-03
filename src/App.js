@@ -5,6 +5,8 @@ import React from 'react';
 import './App.css';
 
 import NotificationIcon from 'material-ui-icons/Notifications';
+import LinkIcon from 'material-ui-icons/Link';
+
 import MapIcon from 'material-ui-icons/Map';
 import InfoIcon from 'material-ui-icons/Info';
 
@@ -55,7 +57,7 @@ const RouterTabs = withRouter(
   }
 );
 
-const routes = ['/', '/map', '/about'];
+const routes = ['/', '/map', '/about', '/links'];
 
 const theme = createMuiTheme({
   palette: {
@@ -77,6 +79,11 @@ const AsyncMap = Loadable({
 const AsyncAbout = Loadable({
   loader: () =>
     import(/* webpackChunkName: "page-about" */ './components/AboutPage'),
+  loading: () => null
+});
+const AsyncLinks = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "page-about" */ './components/Links'),
   loading: () => null
 });
 const AsyncSnackbar = Loadable({
@@ -106,7 +113,8 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
               <LinkTab icon={<NotificationIcon />} to={routes[0]} />
               <LinkTab icon={<MapIcon />} to={routes[1]} />
               {/*<LinkTab icon={<SearchIcon />} to={routes[2]} />*/}
-              <LinkTab icon={<InfoIcon />} to={routes[2]} />
+              <LinkTab icon={<LinkIcon />} to={routes[2]} />
+              <LinkTab icon={<InfoIcon />} to={routes[3]} />
             </RouterTabs>
           </AppBar>
 
@@ -117,7 +125,8 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
           <Switch>
             <Route exact path={routes[0]} component={AsyncSchedulePage} />
             <Route path={routes[1]} component={AsyncMap} />
-            <Route path={routes[2]} component={AsyncAbout} />
+            <Route path={routes[2]} component={AsyncLinks} />
+            <Route path={routes[3]} component={AsyncAbout} />
           </Switch>
 
           {showUpdate && (
