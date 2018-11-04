@@ -87,16 +87,6 @@ const AsyncAbout = Loadable({
   loading: () => null
 });
 
-//import LinkIcon from 'material-ui-icons/Link';
-////const routes = ['/', '/map', '/links', '/about'];
-//const AsyncLinks = Loadable({
-//loader: () =>
-//import(/* webpackChunkName: "page-link" */ './components/Links'),
-//loading: () => null
-//});
-////<Route path={routes[2]} component={AsyncLinks} />
-//<LinkTab icon={<InfoIcon />} to={routes[3]} />
-
 const AsyncSnackbar = Loadable({
   loader: () =>
     import(/* webpackChunkName: "snackbar" */ './components/SimpleSnackbar'),
