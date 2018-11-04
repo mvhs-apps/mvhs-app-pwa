@@ -57,7 +57,7 @@ const RouterTabs = withRouter(
   }
 );
 
-const routes = ['/', '/map', '/about', '/links'];
+const routes = ['/', '/map', '/links', '/about'];
 
 const theme = createMuiTheme({
   palette: {
@@ -83,7 +83,7 @@ const AsyncAbout = Loadable({
 });
 const AsyncLinks = Loadable({
   loader: () =>
-    import(/* webpackChunkName: "page-about" */ './components/Links'),
+    import(/* webpackChunkName: "page-link" */ './components/Links'),
   loading: () => null
 });
 const AsyncSnackbar = Loadable({
