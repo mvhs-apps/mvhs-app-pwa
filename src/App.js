@@ -5,7 +5,6 @@ import React from 'react';
 import './App.css';
 
 import NotificationIcon from 'material-ui-icons/Notifications';
-import LinkIcon from 'material-ui-icons/Link';
 
 import MapIcon from 'material-ui-icons/Map';
 import InfoIcon from 'material-ui-icons/Info';
@@ -57,7 +56,6 @@ const RouterTabs = withRouter(
   }
 );
 
-//const routes = ['/', '/map', '/links', '/about'];
 const routes = ['/', '/map', '/links', '/about'];
 
 const theme = createMuiTheme({
@@ -83,6 +81,8 @@ const AsyncAbout = Loadable({
   loading: () => null
 });
 
+//import LinkIcon from 'material-ui-icons/Link';
+////const routes = ['/', '/map', '/links', '/about'];
 //const AsyncLinks = Loadable({
 //loader: () =>
 //import(/* webpackChunkName: "page-link" */ './components/Links'),
