@@ -8,6 +8,7 @@ import NotificationIcon from 'material-ui-icons/Notifications';
 
 import MapIcon from 'material-ui-icons/Map';
 import InfoIcon from 'material-ui-icons/Info';
+import LinkIcon from 'material-ui-icons/Link';
 
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -75,6 +76,11 @@ const AsyncMap = Loadable({
     import(/* webpackChunkName: "page-map" */ './containers/MapContainer'),
   loading: () => null
 });
+const AsyncLinks = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "page-link" */ './components/Links'),
+  loading: () => null
+});
 const AsyncAbout = Loadable({
   loader: () =>
     import(/* webpackChunkName: "page-about" */ './components/AboutPage'),
@@ -117,7 +123,8 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
             <RouterTabs routes={routes} fullWidth={true} centered={true}>
               <LinkTab icon={<NotificationIcon />} to={routes[0]} />
               <LinkTab icon={<MapIcon />} to={routes[1]} />
-              <LinkTab icon={<InfoIcon />} to={routes[2]} />
+              <LinkTab icon={<LinkIcon />} to={routes[2]} />
+              <LinkTab icon={<InfoIcon />} to={routes[3]} />
             </RouterTabs>
           </AppBar>
 
@@ -128,7 +135,8 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
           <Switch>
             <Route exact path={routes[0]} component={AsyncSchedulePage} />
             <Route path={routes[1]} component={AsyncMap} />
-            <Route path={routes[2]} component={AsyncAbout} />
+            <Route path={routes[2]} component={AsyncLinks} />
+            <Route path={routes[3]} component={AsyncAbout} />
           </Switch>
 
           {showUpdate && (
