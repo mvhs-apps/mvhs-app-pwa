@@ -90,7 +90,7 @@ const Calendar = ({
                   <ListItemText
                     className="calendar-desc"
                     primary={`${event.summary} • ${event.start} - ${event.end}`}
-                    secondary={extractText(event.description)}
+                    secondary={event.description}
                   />
                 </ListItem>
               );
@@ -101,16 +101,5 @@ const Calendar = ({
     </div>
   );
 };
-
-function extractText(str) {
-  if (str != null) {
-    str = str.replace(/<br>/g, ' ');
-    var txt = document.createElement('text');
-    txt.innerHTML = str;
-    return txt.textContent;
-  } else {
-    return str;
-  }
-}
 
 export default Calendar;
