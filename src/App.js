@@ -57,6 +57,7 @@ const RouterTabs = withRouter(
   }
 );
 
+//const routes = ['/', '/map', '/links', '/about'];
 const routes = ['/', '/map', '/links', '/about'];
 
 const theme = createMuiTheme({
@@ -81,11 +82,15 @@ const AsyncAbout = Loadable({
     import(/* webpackChunkName: "page-about" */ './components/AboutPage'),
   loading: () => null
 });
-const AsyncLinks = Loadable({
-  loader: () =>
-    import(/* webpackChunkName: "page-link" */ './components/Links'),
-  loading: () => null
-});
+
+//const AsyncLinks = Loadable({
+//loader: () =>
+//import(/* webpackChunkName: "page-link" */ './components/Links'),
+//loading: () => null
+//});
+////<Route path={routes[2]} component={AsyncLinks} />
+//<LinkTab icon={<InfoIcon />} to={routes[3]} />
+
 const AsyncSnackbar = Loadable({
   loader: () =>
     import(/* webpackChunkName: "snackbar" */ './components/SimpleSnackbar'),
@@ -112,9 +117,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
             <RouterTabs routes={routes} fullWidth={true} centered={true}>
               <LinkTab icon={<NotificationIcon />} to={routes[0]} />
               <LinkTab icon={<MapIcon />} to={routes[1]} />
-              {/*<LinkTab icon={<SearchIcon />} to={routes[2]} />*/}
-              <LinkTab icon={<LinkIcon />} to={routes[2]} />
-              <LinkTab icon={<InfoIcon />} to={routes[3]} />
+              <LinkTab icon={<InfoIcon />} to={routes[2]} />
             </RouterTabs>
           </AppBar>
 
@@ -125,8 +128,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
           <Switch>
             <Route exact path={routes[0]} component={AsyncSchedulePage} />
             <Route path={routes[1]} component={AsyncMap} />
-            <Route path={routes[2]} component={AsyncLinks} />
-            <Route path={routes[3]} component={AsyncAbout} />
+            <Route path={routes[2]} component={AsyncAbout} />
           </Switch>
 
           {showUpdate && (
