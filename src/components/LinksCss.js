@@ -4,14 +4,9 @@ import React from 'react';
 
 import './LinksCss.css';
 import Card from 'material-ui/Card/Card';
-import CardActions from 'material-ui/Card/CardActions';
-import CardContent from 'material-ui/Card/CardContent';
 import CardHeader from 'material-ui/Card/CardHeader';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
 import Avatar from 'material-ui/Avatar';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import { Link, hashHistory } from 'react-router-dom';
+import { hashHistory, Link } from 'react-router-dom';
 
 export type Profile = {
   name: string,
@@ -28,12 +23,6 @@ const LinksCss = ({ profiles }: { profiles: Profile[] }) => {
         const haveLinks = Object.keys(profile.links).length > 0;
 
         return (
-          /**onClick={()=> window.open(profile.links[name], "_blank")}**/
-
-          /**<ButtonBase
-          href={profile.links[name]}
-          >**/
-
           //<Link to={profile.links[name]}>
           //<Link to={profile.links[name]} target="_blank">
           <Card
@@ -61,7 +50,6 @@ const LinksCss = ({ profiles }: { profiles: Profile[] }) => {
           //Default
 
           //</Link>
-          /**</ButtonBase>**/
         );
       })}
     </div>
