@@ -32,9 +32,11 @@
   {
     "name": "Ron Arel",
     "role": "Class of 2021",
-    "desc": "",
+    "desc": "Links Page",
     "image": "",
-    "links": {}
+    "links": {
+      "LinkedIn": "https://www.linkedin.com/in/ron-arel-58b684140/"
+    }
   },
   {
     "name": "John Park",
