@@ -26,7 +26,7 @@ const Credits = ({ profiles }: { profiles: Profile[] }) => {
       {profiles.map((profile: Profile) => {
         const haveLinks = Object.keys(profile.links).length > 0;
         return (
-          <Card className="about-card" key={profile.name}>
+          <Card className="profile-card" key={profile.name}>
             <CardHeader
               className={profile.desc ? '' : 'about-header-no-body'}
               avatar={
