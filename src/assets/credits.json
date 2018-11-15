@@ -32,9 +32,11 @@
   {
     "name": "Ron Arel",
     "role": "Class of 2021",
-    "desc": "Links Page",
-    "image": "",
+    "desc": "Links",
+    "image": "ronArel3.jpg",
     "links": {
+      "GitHub": "http://github.com/OverAny",
+      "Email": "mailto:ronarel123@gmail.com",
       "LinkedIn": "https://www.linkedin.com/in/ron-arel-58b684140/"
     }
   },
