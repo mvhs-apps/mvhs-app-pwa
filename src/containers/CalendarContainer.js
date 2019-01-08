@@ -75,38 +75,35 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
       const response = await fetch(url);
       const json = await response.json();
 
-      const eventList: SchoolEvent[] = [];
-      json.items
+      const eventList: SchoolEvent[] = json.items
+        .filter(e => e.start && e.status !== 'cancelled')
         .sort((e1, e2) => {
           const e1Date = moment(e1.start.date || e1.start.dateTime);
           const e2Date = moment(e2.start.date || e2.start.dateTime);
           return e1Date.valueOf() - e2Date.valueOf();
         })
-        .map(event => {
+        .map(e => {
           let startDate;
           let endDate;
-          if (event.start.date) {
-            startDate = moment(event.start.date).format('M/D');
-            endDate = moment(event.end.date).format('M/D');
+          if (e.start.date) {
+            startDate = moment(e.start.date).format('M/D');
+            endDate = moment(e.end.date).format('M/D');
           } else {
-            startDate = moment(event.start.dateTime).format('LT');
-            endDate = moment(event.end.dateTime).format('LT');
+            startDate = moment(e.start.dateTime).format('LT');
+            endDate = moment(e.end.dateTime).format('LT');
           }
 
           return {
-            id: event.id,
-            summary: event.summary,
-            description: event.description,
-            location: event.location,
+            id: e.id,
+            summary: e.summary,
+            description: e.description,
+            location: e.location,
             mapURL: `https://www.google.com/maps/search/${encodeURI(
-              event.location
+              e.location
             )}`,
             start: startDate,
             end: endDate
           };
-        })
-        .forEach(event => {
-          eventList.push(event);
         });
 
       this.setState({
@@ -130,7 +127,9 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
   }
 
   handleChange = e => {
-    this.setState({ selectedCalendar: e.target.value });
+    this.setState({
+      selectedCalendar: e.target.value
+    });
   };
 
   render() {
