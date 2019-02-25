@@ -5,7 +5,7 @@
     "desc": "",
     "image": "mvhs.png",
     "links": {
-      "Link": "http://www.mvla.net/MVHS/"
+      "Link": "http://www.mvla.net/mvhs"
     }
   },
   {
@@ -27,12 +27,12 @@
     }
   },
   {
-    "name": "Teacher Sites",
+    "name": "MVHS Staff",
     "role": "mvla.net/MVHS/2055-MVHS-Teacher-Web-Sites.html",
     "desc": "",
     "image": "teachers.png",
     "links": {
-      "Link": "http://www.mvla.net/MVHS/2055-MVHS-Teacher-Web-Sites.html"
+      "Link": "https://www.mvla.net/site/Default.aspx?PageID=2642"
     }
   },
   {
