@@ -14,7 +14,9 @@ type State = {
 
 class SchedulePageContainer extends React.PureComponent<{}, State> {
   state = {
-    date: moment()
+    date: moment(),
+    lastX: 0,
+    lastY: 0
   };
 
   handleDateChange = (date: moment$Moment) => {
@@ -36,18 +38,27 @@ class SchedulePageContainer extends React.PureComponent<{}, State> {
   }
 
   onSwipeMove = (position, event) => {
-    //console.log("move");
+    console.log('move ', event);
     console.log(`Moved ${position.x} pixels horizontally`, event);
     console.log(`Moved ${position.y} pixels vertically`, event);
+    this.state.lastX = position.x;
+    this.state.lastY = position.y;
+  };
 
-    if (Math.abs(position.y) < 4 && Math.abs(position.x) > 9) {
+  onSwipeEnd = event => {
+    console.log('end X', this.state.lastX);
+    console.log('end Y', this.state.lastY);
+    //console.log(`Moved ${position.x} pixels horizontally`, event);
+    //console.log(`Moved ${position.y} pixels vertically`, event);
+
+    if (Math.abs(this.state.lastY) < 17 && Math.abs(this.state.lastX) > 9) {
       //console.log("swipe");
       const twoWeeksLater = moment().add(2, 'weeks');
       const currentDate = this.state.date.clone();
       var newDate = currentDate;
-      if (position.x < 0) {
+      if (this.state.lastX < 0) {
         newDate = currentDate.add(1, 'day');
-      } else if (position.x > 0) {
+      } else if (this.state.lastX > 0) {
         newDate = currentDate.subtract(1, 'day');
       }
       if (
@@ -61,7 +72,7 @@ class SchedulePageContainer extends React.PureComponent<{}, State> {
 
   render() {
     return (
-      <Swipe onSwipeMove={this.onSwipeMove}>
+      <Swipe onSwipeEnd={this.onSwipeEnd} onSwipeMove={this.onSwipeMove}>
         <SchedulePage
           date={this.state.date}
           onDateChange={this.handleDateChange}
