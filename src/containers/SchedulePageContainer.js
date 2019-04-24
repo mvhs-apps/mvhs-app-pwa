@@ -35,39 +35,33 @@ class SchedulePageContainer extends React.PureComponent<{}, State> {
     });
   }
 
-  onSwipeRight = event => {
-    //console.log('swipe right');
-    const twoWeeksLater = moment().add(2, 'weeks');
-    const currentDate = this.state.date.clone();
-    const newDate = currentDate.subtract(1, 'day');
-    //console.log(newDate);
-    //console.log(isInclusivelyAfterDay(newDate, moment()) +' ' +!isInclusivelyAfterDay(newDate, twoWeeksLater));
-    if (
-      isInclusivelyAfterDay(newDate, moment()) &&
-      !isInclusivelyAfterDay(newDate, twoWeeksLater)
-    ) {
-      this.handleDateChange(newDate);
-    }
-  };
+  onSwipeMove = (position, event) => {
+    //console.log("move");
+    //console.log(`Moved ${position.x} pixels horizontally`, event);
+    //console.log(`Moved ${position.y} pixels vertically`, event);
 
-  onSwipeLeft = event => {
-    //console.log('swipe left');
-    const twoWeeksLater = moment().add(2, 'weeks');
-    const currentDate = this.state.date.clone();
-    const newDate = currentDate.add(1, 'day');
-    //console.log(newDate);
-    //console.log(isInclusivelyAfterDay(newDate, moment()) +' ' +!isInclusivelyAfterDay(newDate, twoWeeksLater));
-    if (
-      isInclusivelyAfterDay(newDate, moment()) &&
-      !isInclusivelyAfterDay(newDate, twoWeeksLater)
-    ) {
-      this.handleDateChange(newDate);
+    if (Math.abs(position.y) < 9 && Math.abs(position.x) > 2) {
+      //console.log("swipe");
+      const twoWeeksLater = moment().add(2, 'weeks');
+      const currentDate = this.state.date.clone();
+      var newDate = currentDate;
+      if (position.x < 0) {
+        newDate = currentDate.add(1, 'day');
+      } else if (position.x > 0) {
+        newDate = currentDate.subtract(1, 'day');
+      }
+      if (
+        isInclusivelyAfterDay(newDate, moment()) &&
+        !isInclusivelyAfterDay(newDate, twoWeeksLater)
+      ) {
+        this.handleDateChange(newDate);
+      }
     }
   };
 
   render() {
     return (
-      <Swipe onSwipeLeft={this.onSwipeLeft} onSwipeRight={this.onSwipeRight}>
+      <Swipe onSwipeMove={this.onSwipeMove}>
         <SchedulePage
           date={this.state.date}
           onDateChange={this.handleDateChange}
