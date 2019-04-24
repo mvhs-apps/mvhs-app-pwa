@@ -51,7 +51,7 @@ class SchedulePageContainer extends React.PureComponent<{}, State> {
     //console.log(`Moved ${position.x} pixels horizontally`, event);
     //console.log(`Moved ${position.y} pixels vertically`, event);
 
-    if (Math.abs(this.state.lastY) < 25 && Math.abs(this.state.lastX) > 22) {
+    if (Math.abs(this.state.lastY) < 35 && Math.abs(this.state.lastX) > 14) {
       //console.log("swipe");
       const twoWeeksLater = moment().add(2, 'weeks');
       const currentDate = this.state.date.clone();
@@ -68,6 +68,9 @@ class SchedulePageContainer extends React.PureComponent<{}, State> {
         this.handleDateChange(newDate);
       }
     }
+
+    this.state.lastX = 0;
+    this.state.lastY = 0;
   };
 
   render() {
