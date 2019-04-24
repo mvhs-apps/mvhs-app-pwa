@@ -37,10 +37,10 @@ class SchedulePageContainer extends React.PureComponent<{}, State> {
 
   onSwipeMove = (position, event) => {
     //console.log("move");
-    //console.log(`Moved ${position.x} pixels horizontally`, event);
-    //console.log(`Moved ${position.y} pixels vertically`, event);
+    console.log(`Moved ${position.x} pixels horizontally`, event);
+    console.log(`Moved ${position.y} pixels vertically`, event);
 
-    if (Math.abs(position.y) < 9 && Math.abs(position.x) > 2) {
+    if (Math.abs(position.y) < 4 && Math.abs(position.x) > 2) {
       //console.log("swipe");
       const twoWeeksLater = moment().add(2, 'weeks');
       const currentDate = this.state.date.clone();
