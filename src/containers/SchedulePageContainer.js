@@ -36,16 +36,12 @@ class SchedulePageContainer extends React.PureComponent<{}, State> {
   }
 
   onSwipeRight = event => {
-    console.log('swipe right');
+    //console.log('swipe right');
     const twoWeeksLater = moment().add(2, 'weeks');
     const currentDate = this.state.date.clone();
     const newDate = currentDate.subtract(1, 'day');
-    console.log(newDate);
-    console.log(
-      isInclusivelyAfterDay(newDate, moment()) +
-        ' ' +
-        !isInclusivelyAfterDay(newDate, twoWeeksLater)
-    );
+    //console.log(newDate);
+    //console.log(isInclusivelyAfterDay(newDate, moment()) +' ' +!isInclusivelyAfterDay(newDate, twoWeeksLater));
     if (
       isInclusivelyAfterDay(newDate, moment()) &&
       !isInclusivelyAfterDay(newDate, twoWeeksLater)
@@ -55,16 +51,12 @@ class SchedulePageContainer extends React.PureComponent<{}, State> {
   };
 
   onSwipeLeft = event => {
-    console.log('swipe left');
+    //console.log('swipe left');
     const twoWeeksLater = moment().add(2, 'weeks');
     const currentDate = this.state.date.clone();
     const newDate = currentDate.add(1, 'day');
-    console.log(newDate);
-    console.log(
-      isInclusivelyAfterDay(newDate, moment()) +
-        ' ' +
-        !isInclusivelyAfterDay(newDate, twoWeeksLater)
-    );
+    //console.log(newDate);
+    //console.log(isInclusivelyAfterDay(newDate, moment()) +' ' +!isInclusivelyAfterDay(newDate, twoWeeksLater));
     if (
       isInclusivelyAfterDay(newDate, moment()) &&
       !isInclusivelyAfterDay(newDate, twoWeeksLater)
