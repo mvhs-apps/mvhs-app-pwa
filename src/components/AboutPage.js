@@ -16,7 +16,8 @@ const AboutPage = () => {
         </Typography>
         <Typography type="body1" align="center" className="about-club-desc">
           Join us to help develop this app and others for the MVHS community! No
-          programming experience necessary, meetings Monday at lunch in Room P4.
+          programming experience necessary. Meetings are held Monday at lunch in
+          Room P4.
         </Typography>
         <Button
           className=""
