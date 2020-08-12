@@ -14,8 +14,7 @@
     "desc": "",
     "image": "bulletin.png",
     "links": {
-      "Link":
-        "https://www.mvla.net/site/default.aspx?PageType=14&DomainID=8&ModuleInstanceID=9421&PageID=9&ViewID=C83D46AC-74FE-4857-8C9A-5922A80225E2&IsMoreExpandedView=True&GroupByField=DisplayDate"
+      "Link": "https://mvhs.mvla.net/Our-School/Daily-Bulletin/index.html"
     }
   },
   {
@@ -42,7 +41,7 @@
     "desc": "",
     "image": "teachers.png",
     "links": {
-      "Link": "https://www.mvla.net/site/Default.aspx?PageID=2642"
+      "Link": "https://mvhs.mvla.net/Staff-Directory/index.html"
     }
   },
   {
