@@ -8162,6 +8162,12 @@ react-devtools-core@^2.5.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+react-easy-swipe@0.0.17:
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/react-easy-swipe/-/react-easy-swipe-0.0.17.tgz#029aae58c7f0ebe0056f19b8da3ee6e63c863055"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-error-overlay@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-2.0.2.tgz#967b091962b17f5aeb4a60b1311b1736e1b6533d"
@@ -10834,8 +10840,8 @@ xtend@~2.1.1:
     object-keys "~0.4.0"
 
 y18n@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/y18n/-/y18n-3.2.1.tgz#6d15fba884c08679c0d77e88e7759e811e07fa41"
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/y18n/-/y18n-3.2.2.tgz#85c901bd6470ce71fc4bb723ad209b70f7f28696"
 
 yallist@^2.0.0, yallist@^2.1.2:
   version "2.1.2"
