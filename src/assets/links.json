@@ -14,7 +14,8 @@
     "desc": "",
     "image": "bulletin.png",
     "links": {
-      "Link": "https://mvhs.mvla.net/Student-Activities/Daily-BulletinStudent-Announcements/index.html"
+      "Link":
+        "https://mvhs.mvla.net/Student-Activities/Daily-BulletinStudent-Announcements/index.html"
     }
   },
   {
@@ -27,12 +28,12 @@
     }
   },
   {
-    "name": "Elist Enrollment",
-    "role": "mvhs.elists.mvla.net",
+    "name": "Elist",
+    "role": "mvhs.myelists.net",
     "desc": "",
     "image": "mail.png",
     "links": {
-      "Link": "http://mvhs.elists.mvla.net/"
+      "Link": "https://mvhs.myelists.net/"
     }
   },
   {
