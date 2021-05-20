@@ -6,7 +6,7 @@
     "babel-plugin-transform-remove-console": "^6.8.5",
     "enzyme": "^2.9.1",
     "expo": "^23.0.0",
-    "html-pdf": "^2.1.0",
+    "html-pdf": "^3.0.1",
     "material-ui": "^1.0.0-beta.11",
     "material-ui-icons": "^1.0.0-beta.17",
     "moment": "^2.18.1",

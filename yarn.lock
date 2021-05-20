@@ -4604,11 +4604,11 @@ html-minifier@^3.2.3:
     relateurl "0.2.x"
     uglify-js "3.2.x"
 
-html-pdf@^2.1.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/html-pdf/-/html-pdf-2.2.0.tgz#4bcf91c24cb560e47aa3facfd033e0e1bf241b91"
+html-pdf@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/html-pdf/-/html-pdf-3.0.1.tgz#5a8f7b6bd49d624345938952f24b47e4a08f14db"
   optionalDependencies:
-    phantomjs-prebuilt "^2.1.4"
+    phantomjs-prebuilt "^2.1.16"
 
 html-webpack-plugin@^2.30.1:
   version "2.30.1"
@@ -7394,7 +7394,7 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
 
-phantomjs-prebuilt@^2.1.4:
+phantomjs-prebuilt@^2.1.16:
   version "2.1.16"
   resolved "https://registry.yarnpkg.com/phantomjs-prebuilt/-/phantomjs-prebuilt-2.1.16.tgz#efd212a4a3966d3647684ea8ba788549be2aefef"
   dependencies:
@@ -8161,6 +8161,12 @@ react-devtools-core@^2.5.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+
+react-easy-swipe@0.0.17:
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/react-easy-swipe/-/react-easy-swipe-0.0.17.tgz#029aae58c7f0ebe0056f19b8da3ee6e63c863055"
+  dependencies:
+    prop-types "^15.5.8"
 
 react-error-overlay@^2.0.2:
   version "2.0.2"
