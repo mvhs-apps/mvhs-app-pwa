@@ -30,17 +30,18 @@ const handleSubmit = event => {
 };
 
 const Map = (props: Props) => {
+  /* commenting out search
   return (
     <div>
       <div>
-        <form onSubmit={handleSubmit} className="search-field">
+	            <form onSubmit={handleSubmit} className="search-field">
           <TextField
             label="Search"
             value={props.query}
             onChange={props.handleChange}
           />
         </form>
-
+		
         {props.query.length > 0 && (
           <div className="search-results">
             <Paper elevation={4}>
@@ -67,8 +68,17 @@ const Map = (props: Props) => {
             </Paper>
           </div>
         )}
+		
       </div>
 
+      <div className="map-container">
+        <img alt="map" className="map" src={map} />
+      </div>
+    </div>
+	);
+	*/
+  return (
+    <div>
       <div className="map-container">
         <img alt="map" className="map" src={map} />
       </div>
