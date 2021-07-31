@@ -80,7 +80,9 @@ const Map = (props: Props) => {
   return (
     <div>
       <div className="map-container">
-        <img alt="map" className="map" src={map} />
+        <center>
+          <img alt="map" className="map" src={map} />
+        </center>
       </div>
     </div>
   );
