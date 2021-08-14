@@ -142,7 +142,7 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
       );
 
       const now = this.state.refreshed;
-      now;
+      // now
       // .hour(9)
       // .minute(30)
       for (const periodTime: string in scheduleData) {
