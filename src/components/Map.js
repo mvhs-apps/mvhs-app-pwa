@@ -41,7 +41,7 @@ const Map = (props: Props) => {
             onChange={props.handleChange}
           />
         </form>
-		
+
         {props.query.length > 0 && (
           <div className="search-results">
             <Paper elevation={4}>
@@ -68,7 +68,7 @@ const Map = (props: Props) => {
             </Paper>
           </div>
         )}
-		
+
       </div>
 
       <div className="map-container">
@@ -80,9 +80,7 @@ const Map = (props: Props) => {
   return (
     <div>
       <div className="map-container">
-        <center>
-          <img alt="map" className="map" src={map} />
-        </center>
+        <img alt="map" className="map" src={map} />
       </div>
     </div>
   );

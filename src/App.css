@@ -1,6 +1,6 @@
 .App {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -10,4 +10,9 @@
   width: 24px;
   height: 24px;
   padding-right: 16px;
+}
+
+#content {
+  width: 100vw;
+  overflow-x: scroll;
 }
