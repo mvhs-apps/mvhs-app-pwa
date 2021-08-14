@@ -17,7 +17,8 @@ import Loadable from './LCEComponent';
 export type Period = {
   period: string,
   time: string,
-  current: string
+  current: string,
+  percentThrough: Number
 };
 
 type Props = {
@@ -70,7 +71,15 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
                   return (
                     <TableRow
                       key={n.period}
-                      className={n.current ? 'bell-schedule-current' : ''}
+                      // style={{background: n.current ? 'linear-gradient(to right, #ffc107, #fefefe)' : ''}}
+                      style={{
+                        background:
+                          'linear-gradient(to right, #ffc107 ' +
+                          n.percentThrough * 100 +
+                          '%, #fefefe ' +
+                          n.percentThrough * 100 +
+                          '%)'
+                      }}
                     >
                       <TableCell numeric>{n.period}</TableCell>
                       <TableCell>{n.time}</TableCell>
