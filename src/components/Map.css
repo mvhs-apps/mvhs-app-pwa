@@ -1,7 +1,12 @@
 .map {
+  vertical-align: bottom;
+  height: auto;
 }
 
 .map-container {
+  overflow: auto;
+  width: 100%;
+  position: relative;
 }
 
 .dropdown {

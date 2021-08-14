@@ -6,6 +6,13 @@
   flex-direction: column;
 }
 
+.menu-bar {
+  background: #ffc107;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 0 10px #a8a9ad;
+  z-index: 1;
+}
+
 .school-logo {
   width: 24px;
   height: 24px;
@@ -13,6 +20,10 @@
 }
 
 #content {
-  width: 100vw;
+  width: 100%;
   overflow-x: scroll;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

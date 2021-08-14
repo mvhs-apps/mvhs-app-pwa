@@ -102,7 +102,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
     <MuiThemeProvider theme={theme}>
       <Router>
         <div className="App">
-          <AppBar position="static">
+          <div className="menu-bar">
             <Toolbar>
               <img src={logo} className="school-logo" alt="MVHS Logo" />
               <Typography type="title" color="inherit">
@@ -116,7 +116,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
               <LinkTab icon={<LinkIcon />} to={routes[2]} />
               <LinkTab icon={<InfoIcon />} to={routes[3]} />
             </RouterTabs>
-          </AppBar>
+          </div>
 
           {process.env.NODE_ENV === 'production' && (
             <Route path="/" component={Analytics} />

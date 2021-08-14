@@ -1,21 +1,8 @@
 .bell-schedule {
-  padding: 8px;
-  min-width: 300px;
-  width: fit-content;
+  /*padding: 8px;*/
+  /*min-width: 300px;*/
+  /*width: 100%;*/
   grid-area: schedule;
-  justify-self: end;
-}
-
-/*Class for consistency in cards like bell schedule, should use tailwind later on*/
-.card {
-  border-radius: 10px;
-  box-shadow: 0 0 10px #a8a9ad;
-}
-
-@media (max-width: 840px) {
-  .bell-schedule {
-    margin: 0 auto;
-  }
 }
 
 .center {

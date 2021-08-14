@@ -13,6 +13,7 @@ import Paper from 'material-ui/Paper';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
 import Typography from 'material-ui/Typography';
 import Loadable from './LCEComponent';
+import Card from './Card';
 
 export type Period = {
   period: string,
@@ -42,7 +43,7 @@ const Error = (error: string) => (
 const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
   return (
     <div className="bell-schedule">
-      <div className={'card'}>
+      <Card>
         <Loadable
           loading={loading}
           data={periods}
@@ -81,7 +82,7 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
             </Table>
           </div>
         </Loadable>
-      </div>
+      </Card>
     </div>
   );
 };
