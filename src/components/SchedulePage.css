@@ -12,10 +12,11 @@
   margin: 1%;
 }
 
+/* mobile */
 @media (max-width: 840px) {
   .schedule-page {
-    max-width: 96%;
-    margin: 2%;
+    max-width: 92%;
+    /*margin: 4%;*/
     grid-template-columns: 1fr;
     grid-template-rows: auto auto 1fr auto;
     grid-template-areas:
