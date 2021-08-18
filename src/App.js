@@ -30,6 +30,7 @@ import logo from './assets/outlinelogo.svg';
 
 import Loadable from 'react-loadable';
 import Analytics from './components/Analytics';
+import Paper from 'material-ui/Paper';
 
 const LinkTab = withRouter(
   ({ to, history, ...props }: { to: string, history: RouterHistory }) => (
@@ -102,7 +103,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
     <MuiThemeProvider theme={theme}>
       <Router>
         <div className="App">
-          <div className="menu-bar">
+          <AppBar>
             <Toolbar>
               <img src={logo} className="school-logo" alt="MVHS Logo" />
               <Typography type="title" color="inherit">
@@ -116,7 +117,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
               <LinkTab icon={<LinkIcon />} to={routes[2]} />
               <LinkTab icon={<InfoIcon />} to={routes[3]} />
             </RouterTabs>
-          </div>
+          </AppBar>
 
           {process.env.NODE_ENV === 'production' && (
             <Route path="/" component={Analytics} />

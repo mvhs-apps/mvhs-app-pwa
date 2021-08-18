@@ -43,7 +43,7 @@ const Error = (error: string) => (
 const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
   return (
     <div className="bell-schedule">
-      <Card>
+      <Paper>
         <Loadable
           loading={loading}
           data={periods}
@@ -82,7 +82,7 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
             </Table>
           </div>
         </Loadable>
-      </Card>
+      </Paper>
     </div>
   );
 };

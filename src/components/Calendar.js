@@ -48,7 +48,7 @@ const Calendar = ({
 }: Props) => {
   return (
     <div className="calendar">
-      <Card>
+      <Paper>
         <FormControl className="calendar-form">
           <Select
             className="calendar-select"
@@ -98,7 +98,7 @@ const Calendar = ({
             })}
           </List>
         </Loadable>
-      </Card>
+      </Paper>
     </div>
   );
 };
