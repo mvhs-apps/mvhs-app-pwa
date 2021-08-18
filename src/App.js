@@ -107,7 +107,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
             <Toolbar>
               <img src={logo} className="school-logo" alt="MVHS Logo" />
               <Typography type="title" color="inherit">
-                MVHS
+                MVHS App
               </Typography>
             </Toolbar>
 
