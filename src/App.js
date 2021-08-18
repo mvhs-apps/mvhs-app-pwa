@@ -123,14 +123,12 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
             <Route path="/" component={Analytics} />
           )}
 
-          <div id={'content'}>
-            <Switch>
-              <Route exact path={routes[0]} component={AsyncSchedulePage} />
-              <Route path={routes[1]} component={AsyncMap} />
-              <Route path={routes[2]} component={AsyncLinks} />
-              <Route path={routes[3]} component={AsyncAbout} />
-            </Switch>
-          </div>
+          <Switch>
+            <Route exact path={routes[0]} component={AsyncSchedulePage} />
+            <Route path={routes[1]} component={AsyncMap} />
+            <Route path={routes[2]} component={AsyncLinks} />
+            <Route path={routes[3]} component={AsyncAbout} />
+          </Switch>
 
           {showUpdate && (
             <AsyncSnackbar
