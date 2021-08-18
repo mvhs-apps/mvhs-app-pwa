@@ -38,20 +38,11 @@
   },
   {
     "name": "MVHS Staff",
-    "role": "mvhs.mvla.net/Staff-Directory/index.html",
+    "role": "mvla.net/MVHS/2055-MVHS-Teacher-Web-Sites.html",
     "desc": "",
     "image": "teachers.png",
     "links": {
       "Link": "https://mvhs.mvla.net/Staff-Directory/index.html"
-    }
-  },
-  {
-    "name": "Canvas",
-    "role": "mvla.instructure.com/login/canvas",
-    "desc": "",
-    "image": "canvas.png",
-    "links": {
-      "Link": "https://mvla.instructure.com/login/canvas"
     }
   },
   {
