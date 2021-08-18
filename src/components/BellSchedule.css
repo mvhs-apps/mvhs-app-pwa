@@ -3,6 +3,13 @@
   /*min-width: 300px;*/
   /*width: 100%;*/
   grid-area: schedule;
+  justify-self: end;
+}
+
+@media (max-width: 840px) {
+  .bell-schedule {
+    margin: 0 auto;
+  }
 }
 
 .center {

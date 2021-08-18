@@ -7,6 +7,8 @@
   overflow: auto;
   width: 100%;
   position: relative;
+
+  height: calc(100vh - 200px);
 }
 
 .dropdown {
