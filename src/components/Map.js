@@ -70,42 +70,7 @@ const Map = (props: Props) => {
           )}
 
         </div>
-	      <form onSubmit={handleSubmit} className="search-field">
-          <TextField
-            label="Search"
-            value={props.query}
-            onChange={props.handleChange}
-          />
-        </form>
-		
-        {props.query.length > 0 && (
-          <div className="search-results">
-            <Paper elevation={4}>
-              <List>
-                <LCEComponent
-                  loading={props.loading}
-                  data={props.queryResults}
-                  error={props.error}
-                  LoadingComponent={Loading}
-                  EmptyComponent={Empty}
-                  ErrorComponent={Error(props.error)}
-                >
-                  {props.queryResults.map(location => (
-                    <ListItem key={location.Location}>
-                      <ListItemText
-                        className="search-result-keywords"
-                        primary={location.Location}
-                        secondary={location.matchingKeywords.join('\n')}
-                      />
-                    </ListItem>
-                  ))}
-                </LCEComponent>
-              </List>
-            </Paper>
-          </div>
-        )}
-		
-      </div>
+
         <div className="map-container">
           <img alt="map" className="map" src={map} />
         </div>
@@ -113,12 +78,8 @@ const Map = (props: Props) => {
       );
       */
   return (
-    <div>
-      <div className="map-container">
-        <center>
-          <img alt="map" className="map" src={map} />
-        </center>
-      </div>
+    <div className="map-container">
+      <img alt="map" className="map" src={map} />
     </div>
   );
 };

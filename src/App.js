@@ -107,7 +107,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
             <Toolbar>
               <img src={logo} className="school-logo" alt="MVHS Logo" />
               <Typography type="title" color="inherit">
-                MVHS App
+                MVHS
               </Typography>
             </Toolbar>
 
@@ -123,12 +123,14 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
             <Route path="/" component={Analytics} />
           )}
 
-          <Switch>
-            <Route exact path={routes[0]} component={AsyncSchedulePage} />
-            <Route path={routes[1]} component={AsyncMap} />
-            <Route path={routes[2]} component={AsyncLinks} />
-            <Route path={routes[3]} component={AsyncAbout} />
-          </Switch>
+          <div id={'content'}>
+            <Switch>
+              <Route exact path={routes[0]} component={AsyncSchedulePage} />
+              <Route path={routes[1]} component={AsyncMap} />
+              <Route path={routes[2]} component={AsyncLinks} />
+              <Route path={routes[3]} component={AsyncAbout} />
+            </Switch>
+          </div>
 
           {showUpdate && (
             <AsyncSnackbar
