@@ -13,6 +13,7 @@ import Paper from 'material-ui/Paper';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
 import Typography from 'material-ui/Typography';
 import Loadable from './LCEComponent';
+import Card from './Card';
 
 export type Period = {
   period: string,

@@ -69,3 +69,4 @@ fastlane/screenshots
 package-lock.json
 package-lock.json
 package-lock.json
+yarn.lock

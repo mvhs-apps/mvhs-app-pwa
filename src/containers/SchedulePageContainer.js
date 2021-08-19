@@ -75,7 +75,11 @@ class SchedulePageContainer extends React.PureComponent<{}, State> {
 
   render() {
     return (
-      <Swipe onSwipeEnd={this.onSwipeEnd} onSwipeMove={this.onSwipeMove}>
+      <Swipe
+        onSwipeEnd={this.onSwipeEnd}
+        onSwipeMove={this.onSwipeMove}
+        style={{ display: 'flex', width: '100%', justifyContent: 'center' }}
+      >
         <SchedulePage
           date={this.state.date}
           onDateChange={this.handleDateChange}

@@ -17,6 +17,7 @@ import Select from 'material-ui/Select';
 import Input from 'material-ui/Input';
 
 import Loadable from './LCEComponent';
+import Card from './Card';
 
 const Empty = <div className="card-padding center">No events</div>;
 const Loading = (
