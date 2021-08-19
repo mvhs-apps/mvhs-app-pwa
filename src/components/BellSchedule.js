@@ -74,11 +74,10 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
                       // style={{background: n.current ? 'linear-gradient(to right, #ffc107, #fefefe)' : ''}}
                       style={{
                         background:
-                          'linear-gradient(to right, #ffc107 ' +
-                          n.percentThrough * 100 +
-                          '%, #fefefe ' +
-                          n.percentThrough * 100 +
-                          '%)'
+                          `linear-gradient(to right, #ffc107 ${
+                          n.percentThrough * 100}
+                          %, #fefefe ${n.percentThrough * 100%}
+                          %)`
                       }}
                     >
                       <TableCell numeric>{n.period}</TableCell>
