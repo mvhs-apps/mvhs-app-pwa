@@ -143,6 +143,7 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
 
       const now = this.state.refreshed;
       // you can debug with now.hour(11).minute(7)
+      now.hour(11).minute(5);
       for (const periodTime: string in scheduleData) {
         const startHour = periodTime.substr(0, 2);
         const startMin = periodTime.substr(2, 2);

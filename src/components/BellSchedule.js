@@ -41,8 +41,6 @@ const Error = (error: string) => (
 );
 
 const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
-  const parent = document.getElementById('bell-schedule');
-  const parentWidth = parent ? parent.offsetWidth : 300;
   return (
     <div className="bell-schedule">
       <Paper>
@@ -71,17 +69,34 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
               <TableBody>
                 {periods.map(n => {
                   return (
-                    <TableRow
-                      key={n.period}
-                      style={{
-                        boxShadow: `inset ${Math.max(
-                          Math.min(n.progress, 1),
-                          0
-                        ) * parentWidth}px 0 #ffc107`
-                      }}
-                    >
-                      <TableCell numeric>{n.period}</TableCell>
-                      <TableCell>{n.time}</TableCell>
+                    <TableRow key={n.period}>
+                      <TableCell
+                        numeric
+                        style={{
+                          background: `linear-gradient(to right, #ffc107 ${Math.max(
+                            Math.min(n.progress * 2, 1),
+                            0
+                          ) * 100}%, #00000000 ${Math.max(
+                            Math.min(n.progress, 1),
+                            0
+                          )}%)`
+                        }}
+                      >
+                        {n.period}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          background: `linear-gradient(to right, #ffc107 ${Math.max(
+                            Math.min((n.progress - 0.5) * 2, 1),
+                            0
+                          ) * 100}%, #00000000 ${Math.max(
+                            Math.min(n.progress, 1),
+                            0
+                          )}%)`
+                        }}
+                      >
+                        {n.time}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
