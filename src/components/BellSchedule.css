@@ -1,7 +1,7 @@
 .bell-schedule {
-  padding: 8px;
-  min-width: 300px;
-  width: fit-content;
+  /*padding: 8px;*/
+  /*min-width: 300px;*/
+  /*width: 100%;*/
   grid-area: schedule;
   justify-self: end;
 }
