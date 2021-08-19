@@ -142,9 +142,7 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
       );
 
       const now = this.state.refreshed;
-      // now
-      // .hour(9)
-      // .minute(30)
+      // you can debug with now.hour(11).minute(7)
       for (const periodTime: string in scheduleData) {
         const startHour = periodTime.substr(0, 2);
         const startMin = periodTime.substr(2, 2);
@@ -160,7 +158,7 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
           .hour(endHour)
           .minute(endMin);
         const current = now.diff(start) >= 0 && now.diff(end) < 0;
-        const percentThrough = now.diff(start) / end.diff(start);
+        const progress = now.diff(start) / end.diff(start);
 
         periods.push({
           period: scheduleData[periodTime],
@@ -168,7 +166,7 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
             endHour
           )}:${endMin}`,
           current: current,
-          percentThrough: percentThrough
+          progress: progress
         });
       }
     }

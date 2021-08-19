@@ -18,7 +18,7 @@ export type Period = {
   period: string,
   time: string,
   current: string,
-  percentThrough: Number
+  progress: Number
 };
 
 type Props = {
@@ -41,6 +41,8 @@ const Error = (error: string) => (
 );
 
 const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
+  const parent = document.getElementById('bell-schedule');
+  const parentWidth = parent ? parent.offsetWidth : 300;
   return (
     <div className="bell-schedule">
       <Paper>
@@ -59,7 +61,7 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
               </Typography>
             )}
 
-            <Table>
+            <Table id={'table'}>
               <TableHead>
                 <TableRow>
                   <TableCell numeric>Period</TableCell>
@@ -71,13 +73,11 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
                   return (
                     <TableRow
                       key={n.period}
-                      // style={{background: n.current ? 'linear-gradient(to right, #ffc107, #fefefe)' : ''}}
                       style={{
-                        background:
-                          `linear-gradient(to right, #ffc107 ${
-                          n.percentThrough * 100}
-                          %, #fefefe ${n.percentThrough * 100%}
-                          %)`
+                        boxShadow: `inset ${Math.max(
+                          Math.min(n.progress, 1),
+                          0
+                        ) * parentWidth}px 0 #ffc107`
                       }}
                     >
                       <TableCell numeric>{n.period}</TableCell>
