@@ -36,7 +36,7 @@
   margin-top: 100px;
   width: 100%;
   height: 100%;
-  overflow-x: scroll;
+  overflow-x: auto;
 
   display: flex;
   flex-direction: row;
