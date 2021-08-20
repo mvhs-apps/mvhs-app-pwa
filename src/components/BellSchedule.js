@@ -68,36 +68,34 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {periods.map(n => {
+                {periods.map((n, i) => {
+                  console.log(n.progress);
                   return (
-                    <TableRow key={n.period}>
-                      <TableCell
-                        numeric
-                        style={{
-                          background: `linear-gradient(to right, #ffc107 ${Math.max(
-                            Math.min(n.progress * 2, 1),
-                            0
-                          ) * 100}%, #00000000 ${Math.max(
-                            Math.min(n.progress, 1),
-                            0
-                          )}%)`
-                        }}
-                      >
-                        {n.period}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          background: `linear-gradient(to right, #ffc107 ${Math.max(
-                            Math.min((n.progress - 0.5) * 2, 1),
-                            0
-                          ) * 100}%, #00000000 ${Math.max(
-                            Math.min(n.progress, 1),
-                            0
-                          )}%)`
-                        }}
-                      >
-                        {n.time}
-                      </TableCell>
+                    <TableRow
+                      key={n.period}
+                      id={'period' + n.period}
+                      className={n.current ? 'bell-schedule-current' : ''}
+                    >
+                      {n.current && (
+                        <style>
+                          {`
+                        #period${n.period} {
+                          position: relative;
+                        }
+                        #period${n.period}::after {
+                          content: '';
+                          position: absolute;
+                          bottom: 0;
+                          left: 0;
+                          width: ${Math.min(Math.max(n.progress, 0), 1) * 100}%;
+                          height: 2px;
+                          background-color: #448aff;
+                        }
+                      `}
+                        </style>
+                      )}
+                      <TableCell numeric>{n.period}</TableCell>
+                      <TableCell>{n.time}</TableCell>
                     </TableRow>
                   );
                 })}
