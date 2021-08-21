@@ -86,8 +86,9 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
                           content: '';
                           position: absolute;
                           bottom: 0;
-                          left: 0;
-                          width: ${Math.min(Math.max(n.progress, 0), 1) * 100}%;
+                          right: 0;
+                          width: ${(1 - Math.min(Math.max(n.progress, 0), 1)) *
+                            100}%;
                           height: 2px;
                           background-color: #448aff;
                         }
