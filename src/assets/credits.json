@@ -55,11 +55,13 @@
     "links": {}
   },
   {
-    "name": "Atulya T. Weise",
+    "name": "Atulya Weise",
     "role": "Class of 2025",
     "desc": "School Map",
-    "image": "",
-    "links": {}
+    "image": "avatar-atulya.jpg",
+    "links": {
+      "GitHub": "https://github.com/atultw"
+    }
   },
   {
     "name": "Ly Nguyen",
