@@ -49,6 +49,7 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
 
     appstate.addOnResumeListener(() => {
       //If last refresh was more than 1 minute ago
+      console.log(this.state.refreshed.diff(moment(), 'minutes'));
       if (this.state.refreshed.diff(moment(), 'minutes') < -1) {
         this.loadBellSchedule().then();
         console.log('Outdated, re-highlighting');
@@ -142,7 +143,6 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
       );
 
       const now = this.state.refreshed;
-      // you can debug with now.hour(11).minute(7)
       for (const periodTime: string in scheduleData) {
         const startHour = periodTime.substr(0, 2);
         const startMin = periodTime.substr(2, 2);
