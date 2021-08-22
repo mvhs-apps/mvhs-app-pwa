@@ -69,7 +69,6 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
               </TableHead>
               <TableBody>
                 {periods.map((n, i) => {
-                  console.log(n.progress);
                   return (
                     <TableRow
                       key={n.period}
