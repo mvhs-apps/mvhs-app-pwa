@@ -49,7 +49,6 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
 
     this.timeRefreshInterval = window.setInterval(() => {
       //If last refresh was more than 1 minute ago
-      console.log(this.state.refreshed.diff(moment(), 'minutes'));
       if (this.state.refreshed.diff(moment(), 'minutes') < -1) {
         this.loadBellSchedule().then();
         console.log('Outdated, re-highlighting');
