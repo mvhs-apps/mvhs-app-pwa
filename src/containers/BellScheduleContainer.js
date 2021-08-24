@@ -47,14 +47,18 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
   componentDidMount() {
     this.loadBellSchedule().then();
 
-    appstate.addOnResumeListener(() => {
+    this.timeRefreshInterval = window.setInterval(() => {
       //If last refresh was more than 1 minute ago
       console.log(this.state.refreshed.diff(moment(), 'minutes'));
       if (this.state.refreshed.diff(moment(), 'minutes') < -1) {
         this.loadBellSchedule().then();
         console.log('Outdated, re-highlighting');
       }
-    });
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.timeRefreshInterval);
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -143,6 +147,7 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
       );
 
       const now = this.state.refreshed;
+      now.subtract(7, 'hours');
       for (const periodTime: string in scheduleData) {
         const startHour = periodTime.substr(0, 2);
         const startMin = periodTime.substr(2, 2);
