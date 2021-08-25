@@ -92,10 +92,9 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
             startDate = moment(e.start.dateTime).format('LT');
             endDate = moment(e.end.dateTime).format('LT');
           }
-
           return {
             id: e.id,
-            summary: e.summary,
+            summary: e.summary.replaceAll('C Day (odd', 'C Day (even').replaceAll('B Day (even', 'B Day (odd'),
             description: e.description,
             location: e.location,
             mapURL: `https://www.google.com/maps/search/${encodeURI(
