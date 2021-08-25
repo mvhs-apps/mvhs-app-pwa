@@ -93,12 +93,12 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
   async getBellSchedule() {
     const fbTimestampString = await storage.getItem(fbTimestampKey);
     //If last fetch was over 30 minutes ago, force fetch from Internet
-    //const forceFetch =
-    //!fbTimestampString || Date.now() - JSON.parse(fbTimestampString) > 1.8e6;
+    const forceFetch =
+      !fbTimestampString || Date.now() - JSON.parse(fbTimestampString) > 1.8e6;
 
     //temporary change of fetch time to 3 mins because of special scedule
-    const forceFetch =
-      !fbTimestampString || Date.now() - JSON.parse(fbTimestampString) > 1.8e5;
+    //const forceFetch =
+    //!fbTimestampString || Date.now() - JSON.parse(fbTimestampString) > 1.8e5;
 
     if (!fbTimestampString || forceFetch) {
       await storage.setItem(fbTimestampKey, JSON.stringify(Date.now()));
