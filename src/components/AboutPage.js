@@ -20,15 +20,6 @@ const AboutPage = () => {
           TBD for 2021-22.
         </Typography>
         <Button
-          className=""
-          href="http://club.mvhs.io"
-          target="_blank"
-          rel="noopener noreferrer"
-          color="accent"
-        >
-          club.mvhs.io
-        </Button>
-        <Button
           className="center"
           href="https://github.com/mvhs-apps/mvhs-app-pwa"
           target="_blank"
