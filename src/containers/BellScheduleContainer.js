@@ -47,13 +47,17 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
   componentDidMount() {
     this.loadBellSchedule().then();
 
-    appstate.addOnResumeListener(() => {
-      //If last refresh was more than 5 minutes ago
-      if (this.state.refreshed.diff(moment(), 'minutes') < -5) {
+    this.timeRefreshInterval = window.setInterval(() => {
+      //If last refresh was more than 1 minute ago
+      if (this.state.refreshed.diff(moment(), 'minutes') < -1) {
         this.loadBellSchedule().then();
         console.log('Outdated, re-highlighting');
       }
-    });
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    window.clearInterval(this.timeRefreshInterval);
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -142,7 +146,6 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
       );
 
       const now = this.state.refreshed;
-
       for (const periodTime: string in scheduleData) {
         const startHour = periodTime.substr(0, 2);
         const startMin = periodTime.substr(2, 2);
@@ -158,13 +161,15 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
           .hour(endHour)
           .minute(endMin);
         const current = now.diff(start) >= 0 && now.diff(end) < 0;
+        const progress = now.diff(start) / end.diff(start);
 
         periods.push({
           period: scheduleData[periodTime],
           time: `${to12Hour(startHour)}:${startMin} - ${to12Hour(
             endHour
           )}:${endMin}`,
-          current: current
+          current: current,
+          progress: progress
         });
       }
     }
