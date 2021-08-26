@@ -64,6 +64,16 @@
     }
   },
   {
+    "name": "Zephyr Jones",
+    "role": "Class of 2022",
+    "desc": "Periods Page Progress Bar",
+    "image": "",
+    "links": {
+      "Website": "http://zephyrj.com",
+      "GitHub": "https://github.com/zphyrj"
+    }
+  },
+  {
     "name": "Ly Nguyen",
     "role": "CS Club Advisor • Computer Science Teacher",
     "desc": "",

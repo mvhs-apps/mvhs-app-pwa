@@ -18,7 +18,8 @@ import Card from './Card';
 export type Period = {
   period: string,
   time: string,
-  current: string
+  current: string,
+  progress: Number
 };
 
 type Props = {
@@ -59,7 +60,7 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
               </Typography>
             )}
 
-            <Table>
+            <Table id={'table'}>
               <TableHead>
                 <TableRow>
                   <TableCell numeric>Period</TableCell>
@@ -67,12 +68,32 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {periods.map(n => {
+                {periods.map((n, i) => {
                   return (
                     <TableRow
                       key={n.period}
+                      id={'period' + n.period}
                       className={n.current ? 'bell-schedule-current' : ''}
                     >
+                      {n.current && (
+                        <style>
+                          {`
+                        #period${n.period} {
+                          position: relative;
+                        }
+                        #period${n.period}::after {
+                          content: '';
+                          position: absolute;
+                          bottom: 0;
+                          right: 0;
+                          width: ${(1 - Math.min(Math.max(n.progress, 0), 1)) *
+                            100}%;
+                          height: 2px;
+                          background-color: #448aff;
+                        }
+                      `}
+                        </style>
+                      )}
                       <TableCell numeric>{n.period}</TableCell>
                       <TableCell>{n.time}</TableCell>
                     </TableRow>
