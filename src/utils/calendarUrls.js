@@ -1,3 +1,4 @@
+/*
 const mainCalendar =
   'mvla.net_3236303434383738363838@resource.calendar.google.com';
 const asbCalendar =
@@ -6,6 +7,14 @@ const asbCalendar =
 const calendars = {
   'Main Calendar': mainCalendar,
   'ASB Calendar': asbCalendar
+};
+*/
+
+const mainCalendar =
+  'mvla.net_3236303434383738363838@resource.calendar.google.com';
+
+const calendars = {
+  'Main Calendar': mainCalendar
 };
 
 export default calendars;
