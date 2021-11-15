@@ -8,6 +8,16 @@ type Props = {
 
 type State = {};
 
+let cache: CacheStorage;
+// https://api.weather.gov/gridpoints/MTR/96,105/forecast/hourly
+const url = `https://api.weather.gov/gridpoints/MTR/96,105/forecast/hourly`;
+const request = new Request(url, {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json'
+  }
+});
+
 class WeatherContainer extends React.PureComponent<Props, State> {
   state = {
     loading: true,
@@ -16,7 +26,6 @@ class WeatherContainer extends React.PureComponent<Props, State> {
   };
 
   componentDidMount() {
-    console.log('WeatherContainer did mount');
     this.getWeather();
   }
 
@@ -29,20 +38,37 @@ class WeatherContainer extends React.PureComponent<Props, State> {
   }
 
   getWeather = async () => {
+    if (!cache) {
+      cache = await caches.open('weather');
+    }
     const { date } = this.props;
     this.setState({
       loading: true,
       error: ''
     });
-
-    // https://api.weather.gov/gridpoints/MTR/96,105/forecast/hourly
-    const url = `https://api.weather.gov/gridpoints/MTR/96,105/forecast/hourly`;
-    const response = await fetch(url);
-    const json = await response.json();
-    const periods = json.properties.periods;
+    let response = await cache.match(request);
+    let weatherPeriods;
+    // if response does not exist or if the expires date is before the current date
+    response &&
+      console.log(
+        new Date(new Date(response.headers.get('Expires')) - Date.now())
+          .toISOString({
+            timeZone: 'UTC'
+            // only show the time
+          })
+          .slice(14, 19)
+      );
+    if (!response || new Date(response.headers.get('expires')) < Date.now()) {
+      await cache.add(request);
+      response = await cache.match(request);
+    }
+    if (response) {
+      const weather = await response.json();
+      weatherPeriods = weather.properties.periods;
+    }
     // filter periods to only include the ones for the current day
     // from 8 am to 4 pm
-    const periodsForToday = periods.filter(period => {
+    const periodsForToday = weatherPeriods.filter(period => {
       const startDate = moment(period.startTime);
       const endDate = moment(period.endTime);
       return (
@@ -56,7 +82,6 @@ class WeatherContainer extends React.PureComponent<Props, State> {
       loading: false,
       weather: periodsForToday
     });
-    console.log('weather: ' + JSON.stringify(periodsForToday, null, 2));
   };
 
   render() {

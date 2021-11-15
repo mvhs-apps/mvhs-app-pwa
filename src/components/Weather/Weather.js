@@ -29,7 +29,6 @@ const Error = (error: string) => (
 );
 
 const Weather = ({ loading, weather, error }: Props) => {
-  console.log('weather: ' + JSON.stringify(weather));
   return (
     <div>
       <Paper>
