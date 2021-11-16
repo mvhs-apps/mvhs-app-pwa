@@ -7,6 +7,7 @@ import TableBody from 'material-ui/Table/TableBody';
 import TableCell from 'material-ui/Table/TableCell';
 import TableHead from 'material-ui/Table/TableHead';
 import TableRow from 'material-ui/Table/TableRow';
+import './Weather.css';
 
 type Props = {
   loading: boolean,
@@ -21,6 +22,7 @@ const Loading = (
 );
 
 const Empty = (
+  /* empty div */
   <div className="card-padding center">No weather data available.</div>
 );
 

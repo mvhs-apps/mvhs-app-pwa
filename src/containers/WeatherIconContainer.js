@@ -1,16 +1,16 @@
-import moment from 'moment';
 import React from 'react';
-import Weather from '../components/Weather/Weather.js';
+import WeatherIcon from '../components/Weather/WeatherIcon';
+import moment from 'moment';
 
 type Props = {
   date: moment.Moment
 };
 
+let cache;
+
 type State = {};
 
-let cache: CacheStorage;
-// https://api.weather.gov/gridpoints/MTR/96,105/forecast/hourly
-const url = `https://api.weather.gov/gridpoints/MTR/96,105/forecast/hourly`;
+const url = `https://api.weather.gov/gridpoints/MTR/96,105/forecast`;
 const request = new Request(url, {
   method: 'GET',
   headers: {
@@ -18,7 +18,7 @@ const request = new Request(url, {
   }
 });
 
-class WeatherContainer extends React.PureComponent<Props, State> {
+class WeatherIconContainer extends React.PureComponent<Props, State> {
   state = {
     loading: true,
     weather: [],
@@ -66,25 +66,24 @@ class WeatherContainer extends React.PureComponent<Props, State> {
       const weather = await response.json();
       weatherPeriods = weather.properties.periods;
     }
-    // filter periods to only include 8:00 am, 12:00 pm, and 3:00 pm
-    // on the current date
-    const periodsForToday = weatherPeriods.filter((period, index) => {
-      const time = period.startTime.slice(11, 13);
-      return (
-        (time === '08' || time === '12' || time === '15') &&
-        period.startTime.slice(0, 10) === date.format('YYYY-MM-DD')
-      );
-    });
+    // check to see if at night
+    const period = weatherPeriods.filter(period => {
+      const startDate = moment(period.startTime);
+      const endDate = moment(period.endTime);
+      return startDate.isSame(date, 'day') && period.isDaytime;
+    })[0];
+    console.log(period);
+    const weather = period ? period.shortForecast : null;
     this.setState({
       loading: false,
-      weather: periodsForToday
+      weather: weather
     });
   };
 
   render() {
     return (
-      <div class="weather">
-        <Weather
+      <div class="weather-icon">
+        <WeatherIcon
           loading={this.state.loading}
           weather={this.state.weather}
           error={this.state.error}
@@ -93,4 +92,4 @@ class WeatherContainer extends React.PureComponent<Props, State> {
     );
   }
 }
-export default WeatherContainer;
+export default WeatherIconContainer;

@@ -1,0 +1,6 @@
+.weather-icon {
+  grid-area: weathericon;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

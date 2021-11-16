@@ -37,11 +37,17 @@ const AsyncWeather = Loadable({
     import(/* webpackChunkName: "weather" */ '../containers/WeatherContainer'),
   loading: () => null
 });
+const AsyncWeatherIcon = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "weather-icon" */ '../containers/WeatherIconContainer'),
+  loading: () => null
+});
 
 const SchedulePage = ({ date, onDateChange }: Props) => {
   return (
     <div className="schedule-page">
       <AsyncDatePicker date={date} onDateChange={onDateChange} />
+      <AsyncWeatherIcon date={date} />
       <AsyncBellSchedule date={date} />
       <AsyncWeather date={date} />
       <AsyncCalendar date={date} />
