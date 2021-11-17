@@ -50,14 +50,12 @@ class WeatherContainer extends React.PureComponent<Props, State> {
     let weatherPeriods;
     // if response does not exist or if the expires date is before the current date
     response &&
-      console.log(
-        new Date(new Date(response.headers.get('Expires')) - Date.now())
-          .toISOString({
-            timeZone: 'UTC'
-            // only show the time
-          })
-          .slice(14, 19)
-      );
+      new Date(new Date(response.headers.get('Expires')) - Date.now())
+        .toISOString({
+          timeZone: 'UTC'
+          // only show the time
+        })
+        .slice(14, 19);
     if (!response || new Date(response.headers.get('expires')) < Date.now()) {
       await cache.add(request);
       response = await cache.match(request);

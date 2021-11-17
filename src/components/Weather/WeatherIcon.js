@@ -28,7 +28,6 @@ const weatherStringToIcon = (weather: string) => {
   if (!weather) {
     return Empty;
   }
-  console.log('Weather: ' + weather);
   if (weather.includes('Snow')) {
     return <AcUnit />;
   } else if (weather.includes('Rain')) {
