@@ -81,13 +81,6 @@ const Calendar = ({
                   dense={false}
                   divider={index !== events.length - 1}
                 >
-                  <a href={event.mapURL} target="_blank" title="Open in Maps">
-                    <ListItemAvatar>
-                      <Avatar>
-                        <MapIcon />
-                      </Avatar>
-                    </ListItemAvatar>
-                  </a>
                   <ListItemText
                     className="calendar-desc"
                     primary={`${event.summary} • ${event.start} - ${event.end}`}
