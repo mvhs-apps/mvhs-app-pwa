@@ -70,7 +70,6 @@ class WeatherIconContainer extends React.PureComponent<Props, State> {
       const endDate = moment(period.endTime);
       return startDate.isSame(date, 'day') && period.isDaytime;
     })[0];
-    console.log(period);
     const weather = period ? period.shortForecast : null;
     this.setState({
       loading: false,
@@ -80,7 +79,7 @@ class WeatherIconContainer extends React.PureComponent<Props, State> {
 
   render() {
     return (
-      <div class="weather-icon">
+      <div className="weather-icon">
         <WeatherIcon
           loading={this.state.loading}
           weather={this.state.weather}

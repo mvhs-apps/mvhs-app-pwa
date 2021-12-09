@@ -1,11 +1,9 @@
 import React from 'react';
-import {
-  BeachAccess as Rainy,
-  AcUnit,
-  WbSunny,
-  WbCloudy,
-  CloudOff
-} from 'material-ui-icons';
+import Rainy from './icons/cloud-rain.svg';
+import AcUnit from './icons/cloud-snow.svg';
+import WbSunny from './icons/day-sunny.svg';
+import WbCloudy from './icons/cloud.svg';
+import { CloudOff } from 'material-ui-icons';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
 import Loadable from '../LCEComponent';
 import './WeatherIcon.css';
@@ -29,13 +27,13 @@ const weatherStringToIcon = (weather: string) => {
     return Empty;
   }
   if (weather.includes('Snow')) {
-    return <AcUnit />;
+    return <img src={AcUnit} />;
   } else if (weather.includes('Rain')) {
-    return <Rainy />;
+    return <img src={Rainy} />;
   } else if (weather.includes('Sunny')) {
-    return <WbSunny />;
+    return <img src={WbSunny} />;
   } else if (weather.includes('Cloudy')) {
-    return <WbCloudy />;
+    return <img src={WbCloudy} />;
   } else return <CloudOff />;
 };
 

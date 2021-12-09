@@ -81,7 +81,7 @@ class WeatherContainer extends React.PureComponent<Props, State> {
 
   render() {
     return (
-      <div class="weather">
+      <div className="weather">
         <Weather
           loading={this.state.loading}
           weather={this.state.weather}

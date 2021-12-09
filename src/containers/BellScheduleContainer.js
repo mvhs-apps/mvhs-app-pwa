@@ -194,6 +194,7 @@ class BellScheduleContainer extends React.PureComponent<Props, State> {
         loading={this.state.loading}
         scheduleName={this.state.scheduleName}
         error={this.state.error.toString()}
+        date={this.props.date}
       />
     );
   }

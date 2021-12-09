@@ -5,8 +5,8 @@
   grid-gap: 15px;
   grid-template-columns: auto auto;
   grid-template-rows: auto;
-  grid-template-areas: 'picker picker ' 'weathericon weathericon'
-    'schedule weather ' 'schedule calendar' 'disclaimer disclaimer';
+  grid-template-areas: 'picker picker' 'schedule calendar' 'weather calendar'
+    'disclaimer disclaimer';
   margin: 1%;
 }
 
@@ -17,7 +17,10 @@
     /*margin: 4%;*/
     grid-template-columns: 1fr;
     grid-template-rows: auto auto 1fr auto;
-    grid-template-areas: 'picker' 'weathericon' 'schedule' 'weather' 'calendar'
-      'disclaimer';
+    grid-template-areas: 'picker' 'schedule' 'weather' 'calendar' 'disclaimer';
+  }
+
+  .schedule-page .weather {
+    justify-self: center;
   }
 }
