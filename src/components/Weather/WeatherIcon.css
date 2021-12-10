@@ -2,6 +2,8 @@
   grid-area: weathericon;
   width: 1.75em;
   padding: 0.25em;
+  aspect-ratio: 1;
+  overflow: hidden;
   display: flex;
   box-sizing: border-box;
   justify-content: center;
