@@ -57,7 +57,15 @@ class WeatherContainer extends React.PureComponent<Props, State> {
         })
         .slice(14, 19);
     if (!response || new Date(response.headers.get('expires')) < Date.now()) {
-      await cache.add(request);
+      try {
+        await cache.add(request);
+      } catch (err) {
+        console.log(err);
+        this.setState({
+          error: err.message
+        });
+        return [];
+      }
       response = await cache.match(request);
     }
     if (response) {

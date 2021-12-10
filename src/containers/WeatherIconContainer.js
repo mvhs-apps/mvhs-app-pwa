@@ -57,7 +57,14 @@ class WeatherIconContainer extends React.PureComponent<Props, State> {
         })
         .slice(14, 19);
     if (!response || new Date(response.headers.get('expires')) < Date.now()) {
-      await cache.add(request);
+      try {
+        await cache.add(request);
+      } catch (err) {
+        this.setState({
+          error: err
+        });
+        return [];
+      }
       response = await cache.match(request);
     }
     if (response) {
@@ -79,13 +86,11 @@ class WeatherIconContainer extends React.PureComponent<Props, State> {
 
   render() {
     return (
-      <div className="weather-icon">
-        <WeatherIcon
-          loading={this.state.loading}
-          weather={this.state.weather}
-          error={this.state.error}
-        />
-      </div>
+      <WeatherIcon
+        loading={this.state.loading}
+        weather={this.state.weather}
+        error={this.state.error}
+      />
     );
   }
 }
