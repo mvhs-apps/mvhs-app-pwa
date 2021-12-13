@@ -30,6 +30,10 @@ const weatherStringToIcon = (weather: string) => {
     return <img className="weather-icon" alt="snow" src={AcUnit} />;
   } else if (weather.includes('Rain')) {
     return <img className="weather-icon" alt="rain" src={Rainy} />;
+  } else if (weather.includes('Shower')) {
+    return <img className="weather-icon" alt="rain" src={Rainy} />;
+  } else if (weather.includes('Thunderstorm')) {
+    return <img className="weather-icon" alt="rain" src={Rainy} />;
   } else if (weather.includes('Sunny')) {
     return <img className="weather-icon" alt="sun" src={WbSunny} />;
   } else if (weather.includes('Cloudy')) {
