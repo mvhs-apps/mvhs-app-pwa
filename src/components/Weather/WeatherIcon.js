@@ -35,7 +35,7 @@ const weatherStringToIcon = (weather: string) => {
     return <img className="weather-icon" alt="thunder" src={Thunder} />;
   } else if (weather.includes('Rain')) {
     return <img className="weather-icon" alt="rain" src={Rainy} />;
-  } else if (weather.includes('Thunderstorm')) {
+  } else if (weather.includes('Shower')) {
     return <img className="weather-icon" alt="rain" src={Rainy} />;
   } else if (weather.includes('Sunny')) {
     return <img className="weather-icon" alt="sun" src={WbSunny} />;
