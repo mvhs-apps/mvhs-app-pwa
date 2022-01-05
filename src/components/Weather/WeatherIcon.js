@@ -37,11 +37,11 @@ const weatherStringToIcon = (weather: string) => {
     return <img className="weather-icon" alt="rain" src={Rainy} />;
   } else if (weather.includes('Shower')) {
     return <img className="weather-icon" alt="rain" src={Rainy} />;
-  } else if (weather.includes('Sunny')) {
+  } else if (weather.includes('Sun')) {
     return <img className="weather-icon" alt="sun" src={WbSunny} />;
-  } else if (weather.includes('Cloudy')) {
+  } else if (weather.includes('Cloud')) {
     return <img className="weather-icon" alt="cloudy" src={WbCloudy} />;
-  } else return <img className="weather-icon" alt="unknown" src={Question} />;
+  } else return Empty;
 };
 
 const WeatherIcon = ({ loading, weather, error }: Props) => {
