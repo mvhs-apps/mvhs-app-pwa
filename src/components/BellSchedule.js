@@ -1,9 +1,5 @@
-// @flow
-
 import React from 'react';
-
 import './BellSchedule.css';
-
 import Table from 'material-ui/Table/Table';
 import TableBody from 'material-ui/Table/TableBody';
 import TableCell from 'material-ui/Table/TableCell';
@@ -15,33 +11,27 @@ import Typography from 'material-ui/Typography';
 import Loadable from './LCEComponent';
 import Card from './Card';
 import WeatherIcon from '../containers/WeatherIconContainer';
-
 export type Period = {
   period: string,
   time: string,
   current: string,
   progress: Number
 };
-
 type Props = {
   loading: boolean,
   periods: Period[],
   error: any,
   scheduleName: string
 };
-
 const Loading = (
   <div className="card-padding center">
     <CircularProgress />
   </div>
 );
-
 const Empty = <div className="card-padding center">No school!</div>;
-
 const Error = (error: string) => (
   <div className="card-padding center">{error}</div>
 );
-
 const BellSchedule = ({
   periods,
   loading,
@@ -49,6 +39,18 @@ const BellSchedule = ({
   scheduleName,
   date
 }: Props) => {
+  const backgroundColorBellSchedule =
+    scheduleName.split(' ')[1] === 'A'
+      ? '#8DE3FF'
+      : scheduleName.split(' ')[1] === 'B' ? '#E0DBFF' : '#ffddf4';
+  // ADDED CODE BELOW TO CHANGE TEXT COLOR
+  // const textColorBellSchedule = scheduleName.split(' ')[1] === 'A' ? 'black' : scheduleName.split(' ')[1] === 'B' ? 'black' : '#FFBF00';
+  const bellBackground = {
+    backgroundColor: backgroundColorBellSchedule
+    // backgroundColorBellSchedule,
+    // ADDED CODE BELOW
+    // color: textColorBellSchedule
+  };
   return (
     <div className="bell-schedule">
       <Paper>
@@ -62,7 +64,11 @@ const BellSchedule = ({
         >
           <div>
             {scheduleName !== 'none' && (
-              <Typography type="title" className="bell-schedule-name">
+              <Typography
+                type="title"
+                className="bell-schedule-name"
+                style={bellBackground}
+              >
                 <div
                   style={{
                     display: 'flex',
@@ -73,13 +79,16 @@ const BellSchedule = ({
                   {scheduleName}
                   <WeatherIcon
                     date={date}
-                    style={{ width: '20px', aspectRatio: '1', padding: '1em' }}
+                    style={{
+                      width: '20px',
+                      aspectRatio: '1',
+                      padding: '0.75em'
+                    }}
                     class="weather"
                   />
                 </div>
               </Typography>
             )}
-
             <Table id={'table'}>
               <TableHead>
                 <TableRow>
@@ -109,7 +118,7 @@ const BellSchedule = ({
                           width: ${(1 - Math.min(Math.max(n.progress, 0), 1)) *
                             100}%;
                           height: 2px;
-                          background-color: #448aff;
+                          background-color: #448AFF;
                         }
                       `}
                         </style>
@@ -127,5 +136,4 @@ const BellSchedule = ({
     </div>
   );
 };
-
 export default BellSchedule;
