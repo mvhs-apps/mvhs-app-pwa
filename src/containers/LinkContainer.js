@@ -26,6 +26,29 @@ const getNameAndId = () => {
 // entry.1853050928 - I am testing weekly and am making sure that I do not have COVID symptoms BEFORE I come to school
 
 class LinkContainer extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    // get name and id from localStorage
+    const { name, id } = getNameAndId();
+    this.state = {
+      name,
+      id
+    };
+    // add event listener to localStorage
+    window.addEventListener('storage', this.onStorageChange);
+  }
+  onStorageChange = event => {
+    if (event.key === 'settings') {
+      const { name, id } = JSON.parse(event.newValue);
+      this.setState({
+        name,
+        id
+      });
+    }
+  };
+  componentWillUnmount() {
+    window.removeEventListener('storage', this.onStorageChange);
+  }
   render() {
     const { name, id } = getNameAndId();
     let link =

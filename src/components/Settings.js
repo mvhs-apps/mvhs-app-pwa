@@ -43,14 +43,9 @@ class Settings extends React.PureComponent {
     });
     const currentSettings = JSON.parse(localStorage.getItem('settings'));
     currentSettings[event.target.id] = event.target.value;
-    console.log(currentSettings, event.target.value);
     localStorage.setItem('settings', JSON.stringify(currentSettings));
   };
   render() {
-    console.log({
-      name: this.state.name,
-      id: this.state.id
-    });
     return (
       <div className="settings-container">
         <Typography type="headline" component="h2">
@@ -65,7 +60,6 @@ class Settings extends React.PureComponent {
           id="name"
           label="Last Name, First Name"
           onChange={this.handleChange}
-          defaultValue={this.state.name}
           value={this.state.name}
           margin="normal"
         />
@@ -74,7 +68,6 @@ class Settings extends React.PureComponent {
           id="id"
           label="ID (#1000 _ _ _ _ _)"
           onChange={this.handleChange}
-          defaultValue={this.state.id}
           value={this.state.id}
           margin="normal"
         />
