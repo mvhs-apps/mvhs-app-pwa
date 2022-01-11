@@ -1,0 +1,10 @@
+.covid-links {
+  /* add as grid item */
+  grid-area: covidlinks;
+  align-self: center;
+}
+
+.covid-links-paper {
+  max-width: 500px;
+  margin: auto;
+}
