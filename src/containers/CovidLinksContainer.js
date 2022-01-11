@@ -22,16 +22,10 @@ class CovidLinksContainer extends React.PureComponent {
     return (
       <div className="covid-links">
         <Paper className="covid-links-paper">
-          <Typography type="title" className="bell-schedule-name">
-            COVID-19 Daily Symptom Trackers
+          <Typography className="bell-schedule-name">
+            COVID-19 Daily Tracker
           </Typography>
           <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Teachers</TableCell>
-                <TableCell>Students</TableCell>
-              </TableRow>
-            </TableHead>
             <TableBody>
               <TableRow>
                 <TableCell>
@@ -40,7 +34,7 @@ class CovidLinksContainer extends React.PureComponent {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Student Form
+                    Student
                   </a>
                 </TableCell>
                 <TableCell>
@@ -49,7 +43,7 @@ class CovidLinksContainer extends React.PureComponent {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Staff Form
+                    Staff
                   </a>
                 </TableCell>
               </TableRow>
