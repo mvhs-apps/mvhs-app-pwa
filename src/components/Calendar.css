@@ -15,6 +15,7 @@
 @media (max-width: 840px) {
   .calendar {
     justify-self: center;
+    width: 100%;
   }
 }
 
