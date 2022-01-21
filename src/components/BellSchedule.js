@@ -43,13 +43,8 @@ const BellSchedule = ({
     scheduleName.split(' ')[1] === 'A'
       ? '#8DE3FF'
       : scheduleName.split(' ')[1] === 'B' ? '#E0DBFF' : '#ffddf4';
-  // ADDED CODE BELOW TO CHANGE TEXT COLOR
-  // const textColorBellSchedule = scheduleName.split(' ')[1] === 'A' ? 'black' : scheduleName.split(' ')[1] === 'B' ? 'black' : '#FFBF00';
   const bellBackground = {
     backgroundColor: backgroundColorBellSchedule
-    // backgroundColorBellSchedule,
-    // ADDED CODE BELOW
-    // color: textColorBellSchedule
   };
   return (
     <div className="bell-schedule">
