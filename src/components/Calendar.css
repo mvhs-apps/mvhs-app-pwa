@@ -1,12 +1,22 @@
 .calendar {
   /*width: 100%;*/
   /*padding: 8px;*/
+  max-width: 500px;
+  width: 500px;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
   hyphens: auto;
   grid-area: calendar;
   height: 100%;
+  justify-self: start;
+}
+
+@media (max-width: 840px) {
+  .calendar {
+    justify-self: center;
+    width: 100%;
+  }
 }
 
 .center {
