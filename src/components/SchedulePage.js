@@ -38,9 +38,16 @@ const AsyncWeather = Loadable({
   loading: () => null
 });
 
+const AsyncCovidLinks = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "covid-links" */ '../containers/CovidLinksContainer'),
+  loading: () => null
+});
+
 const SchedulePage = ({ date, onDateChange }: Props) => {
   return (
     <div className="schedule-page">
+      <AsyncCovidLinks />
       <AsyncDatePicker date={date} onDateChange={onDateChange} />
       <AsyncBellSchedule date={date} />
       <AsyncWeather date={date} />

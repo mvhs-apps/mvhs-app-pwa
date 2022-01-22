@@ -9,6 +9,16 @@
     }
   },
   {
+    "name": "Covid-19 Student Tracker",
+    "role": "",
+    "desc": "",
+    "image": "covid.png",
+    "links": {
+      "Link":
+        "https://docs.google.com/forms/d/e/1FAIpQLSfjtuFWUak0QJaiUOvaEo055pr6Tz9OW2dkeT0D6-zZfeCuCQ/viewform"
+    }
+  },
+  {
     "name": "Daily Bulletin",
     "role": "mvla.net/MVHS",
     "desc": "",
