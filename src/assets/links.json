@@ -72,5 +72,15 @@
     "links": {
       "Link": "https://mvla.asp.aeries.net/student/"
     }
+  },
+  {
+    "name": "MVLA Crisis Services",
+    "role": "",
+    "desc": "",
+    "image": "district.png",
+    "links": {
+      "Link":
+        "https://www.mvla.net/Departments/Educational-Services/Student-Wellness/Crisis-Services/index.html"
+    }
   }
 ]
