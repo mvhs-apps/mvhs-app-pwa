@@ -66,8 +66,9 @@ class Settings extends React.PureComponent {
         </Typography>
         <Typography type="body1" component="p" align="center" className="">
           Fill out your information below to autofill the Covid-19 form fields.
-          The form automatically saves locally on your device. You can to
-          re-enter your information into each browser you use.
+          The form automatically saves locally on your device. You can re-enter
+          your information into each browser you want the Covid-19 form to
+          autofill in.
         </Typography>
         <FormControl>
           <RadioGroup
