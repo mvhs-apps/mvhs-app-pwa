@@ -64,12 +64,7 @@ class Settings extends React.PureComponent {
         <Typography type="headline" component="h2">
           Settings
         </Typography>
-        <Typography type="body1" component="p" align="center" className="">
-          Fill out your information below to autofill the Covid-19 form fields.
-          The form automatically saves locally on your device. You can re-enter
-          your information into each browser you want the Covid-19 form to
-          autofill in.
-        </Typography>
+
         <FormControl>
           <RadioGroup
             row
@@ -109,6 +104,13 @@ class Settings extends React.PureComponent {
             margin="normal"
           />
         )}
+        <br />
+        <br />
+        <Typography type="body1" component="p" align="center" className="">
+          Fill out your information above to enable customization and features
+          such as form autofill. No data is saved online. It is cached locally
+          on your device.
+        </Typography>
       </div>
     );
   }
