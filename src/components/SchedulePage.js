@@ -47,7 +47,6 @@ const AsyncCovidLinks = Loadable({
 const SchedulePage = ({ date, onDateChange }: Props) => {
   return (
     <div className="schedule-page">
-      <AsyncCovidLinks />
       <AsyncDatePicker date={date} onDateChange={onDateChange} />
       <AsyncBellSchedule date={date} />
       <AsyncWeather date={date} />
