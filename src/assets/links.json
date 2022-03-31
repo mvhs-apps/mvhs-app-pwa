@@ -9,16 +9,6 @@
     }
   },
   {
-    "name": "Covid-19 Student Tracker",
-    "role": "",
-    "desc": "",
-    "image": "covid.png",
-    "links": {
-      "Link":
-        "https://docs.google.com/forms/d/e/1FAIpQLSfjtuFWUak0QJaiUOvaEo055pr6Tz9OW2dkeT0D6-zZfeCuCQ/viewform"
-    }
-  },
-  {
     "name": "Daily Bulletin",
     "role": "mvla.net/MVHS",
     "desc": "",
@@ -71,6 +61,16 @@
     "image": "aeries.png",
     "links": {
       "Link": "https://mvla.asp.aeries.net/student/"
+    }
+  },
+  {
+    "name": "MVLA Crisis Services",
+    "role": "",
+    "desc": "",
+    "image": "district.png",
+    "links": {
+      "Link":
+        "https://www.mvla.net/Departments/Educational-Services/Student-Wellness/Crisis-Services/index.html"
     }
   }
 ]

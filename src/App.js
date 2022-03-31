@@ -88,7 +88,11 @@ const AsyncAbout = Loadable({
     import(/* webpackChunkName: "page-about" */ './components/AboutPage'),
   loading: () => null
 });
-
+const AsyncSettings = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "page-settings" */ './components/Settings'),
+  loading: () => null
+});
 const AsyncSnackbar = Loadable({
   loader: () =>
     import(/* webpackChunkName: "snackbar" */ './components/SimpleSnackbar'),
@@ -117,6 +121,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
               <LinkTab icon={<MapIcon />} to={routes[1]} />
               <LinkTab icon={<LinkIcon />} to={routes[2]} />
               <LinkTab icon={<InfoIcon />} to={routes[3]} />
+              <LinkTab icon={<SettingsIcon />} to={routes[4]} />
             </RouterTabs>
           </AppBar>
 
@@ -130,6 +135,7 @@ const App = ({ showUpdate = false }: { showUpdate: boolean }) => {
               <Route path={routes[1]} component={AsyncMap} />
               <Route path={routes[2]} component={AsyncLinks} />
               <Route path={routes[3]} component={AsyncAbout} />
+              <Route path={routes[4]} component={AsyncSettings} />
             </Switch>
           </div>
 
