@@ -14,20 +14,12 @@ const AboutPage = () => {
         <Typography type="title" align="center" className="about-club-title">
           MVHS Computer Science Club
         </Typography>
+
         <Typography type="body1" align="center" className="about-club-desc">
           Join us to help develop this app and others for the MVHS community! No
-          programming experience necessary. Meetings location, day, and time are
-          TBD for 2021-22.
+          programming experience necessary.
         </Typography>
-        <Button
-          className=""
-          href="http://club.mvhs.io"
-          target="_blank"
-          rel="noopener noreferrer"
-          color="accent"
-        >
-          club.mvhs.io
-        </Button>
+
         <Button
           className="center"
           href="https://github.com/mvhs-apps/mvhs-app-pwa"

@@ -49,22 +49,6 @@ const Calendar = ({
   return (
     <div className="calendar">
       <Paper>
-        <FormControl className="calendar-form">
-          <Select
-            className="calendar-select"
-            native={true}
-            value={selectedOption}
-            onChange={onHandleChange}
-            input={<Input />}
-          >
-            {Object.keys(options).map((calendarName, index) => (
-              <option key={calendarName} value={calendarName}>
-                {calendarName}
-              </option>
-            ))}
-          </Select>
-        </FormControl>
-
         <Loadable
           loading={loading}
           data={events}

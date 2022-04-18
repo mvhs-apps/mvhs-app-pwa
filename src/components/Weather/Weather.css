@@ -1,0 +1,5 @@
+.weather {
+  grid-area: weather;
+  width: 245px;
+  justify-self: end;
+}

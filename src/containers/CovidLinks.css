@@ -1,0 +1,17 @@
+.covid-links {
+  /* add as grid item */
+  grid-area: covidlinks;
+  width: 500px;
+  justify-self: start;
+}
+
+@media (max-width: 840px) {
+  .covid-links {
+    width: 245px;
+    justify-self: center;
+  }
+}
+
+.covid-links-paper {
+  margin: auto;
+}

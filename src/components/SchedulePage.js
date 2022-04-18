@@ -32,11 +32,24 @@ const AsyncCalendar = Loadable({
   loading: () => null
 });
 
+const AsyncWeather = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "weather" */ '../containers/WeatherContainer'),
+  loading: () => null
+});
+
+const AsyncCovidLinks = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "covid-links" */ '../containers/CovidLinksContainer'),
+  loading: () => null
+});
+
 const SchedulePage = ({ date, onDateChange }: Props) => {
   return (
     <div className="schedule-page">
       <AsyncDatePicker date={date} onDateChange={onDateChange} />
       <AsyncBellSchedule date={date} />
+      <AsyncWeather date={date} />
       <AsyncCalendar date={date} />
       <Disclaimer />
     </div>

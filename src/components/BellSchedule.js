@@ -14,6 +14,7 @@ import CircularProgress from 'material-ui/Progress/CircularProgress';
 import Typography from 'material-ui/Typography';
 import Loadable from './LCEComponent';
 import Card from './Card';
+import WeatherIcon from '../containers/WeatherIconContainer';
 
 export type Period = {
   period: string,
@@ -41,7 +42,13 @@ const Error = (error: string) => (
   <div className="card-padding center">{error}</div>
 );
 
-const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
+const BellSchedule = ({
+  periods,
+  loading,
+  error,
+  scheduleName,
+  date
+}: Props) => {
   return (
     <div className="bell-schedule">
       <Paper>
@@ -56,7 +63,20 @@ const BellSchedule = ({ periods, loading, error, scheduleName }: Props) => {
           <div>
             {scheduleName !== 'none' && (
               <Typography type="title" className="bell-schedule-name">
-                {scheduleName}
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  {scheduleName}
+                  <WeatherIcon
+                    date={date}
+                    style={{ width: '20px', aspectRatio: '1', padding: '1em' }}
+                    class="weather"
+                  />
+                </div>
               </Typography>
             )}
 
