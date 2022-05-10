@@ -7,9 +7,12 @@ import TextField from 'material-ui/TextField';
 import { FormControlLabel, FormLabel } from 'material-ui';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import './Settings.css';
 import { FormControl } from 'material-ui';
+import Barcode from 'react-hooks-barcode';
+
 const defaultValues = {
   name: '',
   id: '',
@@ -87,6 +90,10 @@ class Settings extends React.PureComponent {
             />
           </RadioGroup>
         </FormControl>
+        {this.state.staffOrStudent == 'student' && (
+          <Barcode value={'1000' + this.state.id} />
+        )}
+        <br />
         <TextField
           id="name"
           label="Last Name, First Name"
