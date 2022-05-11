@@ -15,7 +15,7 @@ import Barcode from 'react-hooks-barcode';
 
 const defaultValues = {
   name: '',
-  id: '',
+  id: '1000',
   staffOrStudent: 'student'
 };
 class Settings extends React.PureComponent {
@@ -90,9 +90,8 @@ class Settings extends React.PureComponent {
             />
           </RadioGroup>
         </FormControl>
-        {this.state.staffOrStudent == 'student' && (
-          <Barcode value={'1000' + this.state.id} />
-        )}
+        {this.state.staffOrStudent == 'student' &&
+          this.state.id != '' && <Barcode value={this.state.id} />}
         <br />
         <TextField
           id="name"
@@ -105,7 +104,7 @@ class Settings extends React.PureComponent {
         {this.state.staffOrStudent == 'student' && (
           <TextField
             id="id"
-            label="ID (#1000 _ _ _ _ _)"
+            label="ID #"
             onChange={this.handleChange}
             value={this.state.id}
             margin="normal"
