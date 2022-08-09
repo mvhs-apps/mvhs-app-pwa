@@ -1,5 +1,5 @@
 import * as React from 'react';
-import map from '../assets/schoolmap.svg';
+import map from '../assets/SchoolMap.png';
 import './Map.css';
 import TextField from 'material-ui/TextField';
 import List, { ListItem, ListItemText } from 'material-ui/List';
