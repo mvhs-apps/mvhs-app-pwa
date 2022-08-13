@@ -91,7 +91,7 @@ class Settings extends React.PureComponent {
           </RadioGroup>
         </FormControl>
         {this.state.staffOrStudent == 'student' &&
-          this.state.id != '' && <Barcode value={this.state.id} format: "CODE39"/>}
+          this.state.id != '' && <Barcode value={this.state.id} format="CODE39"/>}
         <br />
         <TextField
           id="name"
