@@ -44,12 +44,6 @@ const locationToPixels = (latitude, longitude) => {
   return [Math.abs(Math.round(x)), Math.abs(Math.round(y))];
 };
 
-const debug = (...data) => {
-  if (window.location.hostname !== 'mvhs.io') {
-    console.log(...data);
-  }
-};
-
 const geolocation = () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -110,12 +104,14 @@ const geolocation = () => {
         };
       },
       error => {
-        debug(error);
+        document.getElementById('result').innerHTML =
+          "Your computer isn't able to use Geolocation.";
       },
       { enableHighAccuracy: true, timeout: Infinity, maximumAge: 0 }
     );
   } else {
-    alert('no geolocation');
+    document.getElementById('result').innerHTML =
+      "Your computer isn't able to use Geolocation.";
   }
 };
 
