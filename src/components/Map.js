@@ -51,7 +51,6 @@ const debug = (...data) => {
 };
 
 const geolocation = () => {
-  debug('asdf');
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -102,20 +101,25 @@ const geolocation = () => {
           ctx.lineWidth = 5;
           ctx.strokeStyle = '#003300';
           ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, 2 * Math.PI, false);
+          ctx.lineWidth = 5;
+          ctx.fillStyle = '#FF0000';
+          ctx.fill();
         };
       },
       error => {
-        debug('err');
+        debug(error);
       },
       { enableHighAccuracy: true, timeout: Infinity, maximumAge: 0 }
     );
   } else {
-    debug('no geolocation');
+    alert('no geolocation');
   }
 };
 
 const loadImage = () => {
-  debug('image onload');
   // makes canvas the size of the map
   let canvas = document.getElementById('map');
   let ctx = canvas.getContext('2d');
@@ -124,12 +128,8 @@ const loadImage = () => {
     canvas.width = img.naturalWidth;
     canvas.height = img.naturalHeight;
     ctx.drawImage(img, 0, 0);
-    debug('img loaded');
-    debug(img);
   };
   img.src = map;
-  debug(img);
-  debug(canvas);
 };
 
 const Map = (props: Props) => {
@@ -194,7 +194,7 @@ const Map = (props: Props) => {
             border: 'none'
           }}
         >
-          Locate yourself (may be very inaccurate)
+          Click to locate yourself (mobile devices strongly recommended)
         </button>
         <br />
         <p id="result" />
