@@ -73,10 +73,13 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
 
     try {
       const response = await fetch(url);
+      //console.log(url);
       const json = await response.json();
 
       const eventList: SchoolEvent[] = json.items
-        .filter(e => e.start && e.status !== 'cancelled')
+        .filter(
+          e => e.start && e.status !== 'cancelled' && recCheck(e.recurrence)
+        )
         .sort((e1, e2) => {
           const e1Date = moment(e1.start.date || e1.start.dateTime);
           const e2Date = moment(e2.start.date || e2.start.dateTime);
@@ -144,6 +147,17 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
       />
     );
   }
+}
+
+function recCheck(rec) {
+  if (rec === undefined) {
+    //console.log(rec);
+    return true;
+  } else {
+    //console.log(rec[0]);
+    if (rec[0].includes('FREQ=WEEKLY')) return false;
+  }
+  return true;
 }
 
 export default DatePickerContainer;
