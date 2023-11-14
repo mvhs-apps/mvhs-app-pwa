@@ -28,15 +28,6 @@
     }
   },
   {
-    "name": "Elist",
-    "role": "mvhs.myelists.net",
-    "desc": "",
-    "image": "mail.png",
-    "links": {
-      "Link": "https://mvhs.myelists.net/"
-    }
-  },
-  {
     "name": "MVHS Staff",
     "role": "mvhs.mvla.net/Staff-Directory/index.html",
     "desc": "",
