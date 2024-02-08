@@ -55,13 +55,23 @@
     }
   },
   {
-    "name": "Mental Health & Wellness",
+    "name": "Mental Health Referral",
     "role": "",
     "desc": "",
     "image": "district.png",
     "links": {
       "Link":
-        "https://mvhs.mvla.net/Student-Services/Student-Services/Mental-Health--Wellness/index.html"
+        "https://www.mvla.net/Departments/Educational-Services/Mental-Health-and-Wellness/MVLA-School-based-Services/index.html"
+    }
+  },
+  {
+    "name": "Sexual Harassment Help",
+    "role": "",
+    "desc": "",
+    "image": "district.png",
+    "links": {
+      "Link":
+        "https://www.mvla.net/Departments/Educational-Services/Title-IX/Sexual-Harassment--Resources/index.html"
     }
   }
 ]
