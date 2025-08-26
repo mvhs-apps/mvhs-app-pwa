@@ -38,11 +38,11 @@
   },
   {
     "name": "Aeries Portal",
-    "role": "mvla.asp.aeries.net/student/",
+    "role": "mvla.aeries.net/student/",
     "desc": "",
     "image": "aeries.png",
     "links": {
-      "Link": "https://mvla.asp.aeries.net/student/"
+      "Link": "https://mvla.aeries.net/student/"
     }
   },
   {
