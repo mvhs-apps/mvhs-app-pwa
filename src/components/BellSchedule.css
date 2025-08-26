@@ -3,7 +3,7 @@
   /*min-width: 300px;*/
   /*width: 100%;*/
   grid-area: schedule;
-  justify-self: end;
+  justify-self: center;
 }
 
 @media (max-width: 840px) {

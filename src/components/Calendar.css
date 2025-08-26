@@ -9,7 +9,7 @@
   hyphens: auto;
   grid-area: calendar;
   height: 100%;
-  justify-self: start;
+  justify-self: center;
 }
 
 @media (max-width: 840px) {
