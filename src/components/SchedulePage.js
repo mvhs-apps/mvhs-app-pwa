@@ -50,10 +50,11 @@ const SchedulePage = ({ date, onDateChange }: Props) => {
       <AsyncDatePicker date={date} onDateChange={onDateChange} />
       <AsyncBellSchedule date={date} />
       <AsyncWeather date={date} />
-      <AsyncCalendar date={date} />
       <Disclaimer />
     </div>
   );
 };
+
+//<AsyncCalendar date={date} /> removed from above until calendar issue gets resolved.
 
 export default SchedulePage;
