@@ -155,7 +155,8 @@ function recCheck(rec) {
     return true;
   } else {
     //console.log(rec[0]);
-    if (rec[0].includes('FREQ=WEEKLY')) return false;
+    //Check if the event recurs weekly, if so, filter it out
+    //if (rec[0].includes('FREQ=WEEKLY')) return false;
   }
   return true;
 }
