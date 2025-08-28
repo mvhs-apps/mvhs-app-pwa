@@ -6,7 +6,7 @@
 
   grid-template-columns: auto auto;
   grid-template-rows: auto;
-  grid-template-areas: 'picker picker' 'schedule calendar' 'weather .'
+  grid-template-areas: 'picker picker' 'schedule calendar' 'weather calendar'
     'disclaimer disclaimer';
   margin: 1%;
 }
