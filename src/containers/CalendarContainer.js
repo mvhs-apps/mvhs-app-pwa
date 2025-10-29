@@ -78,7 +78,10 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
 
       const eventList: SchoolEvent[] = json.items
         .filter(
-          e => e.start && e.status !== 'cancelled' && recCheck(e.recurrence)
+          e =>
+            e.start &&
+            e.status !== 'cancelled' &&
+            recCheck(e.recurrence, e.summary)
         )
         .sort((e1, e2) => {
           const e1Date = moment(e1.start.date || e1.start.dateTime);
@@ -149,14 +152,15 @@ class DatePickerContainer extends React.PureComponent<Props, State> {
   }
 }
 
-function recCheck(rec) {
+function recCheck(rec, summary) {
   if (rec === undefined) {
     //console.log(rec);
     return true;
   } else {
-    //console.log(rec[0]);
+    //console.log("test: " + rec[0] + " 1: " + summary);
     //Check if the event recurs weekly, if so, filter it out
-    //if (rec[0].includes('FREQ=WEEKLY')) return false;
+    if (rec[0].includes('FREQ=WEEKLY') && summary.includes('Schedule'))
+      return false;
   }
   return true;
 }
