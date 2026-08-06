@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 
 import './BellSchedule.css';
@@ -49,6 +47,16 @@ const BellSchedule = ({
   scheduleName,
   date
 }: Props) => {
+  // choosing the background color based on schedule (A, B, C, or irregular)
+  const backgroundColorBellSchedule =
+    scheduleName.split(' ')[1] === 'A'
+      ? '#8DE3FF'
+      : scheduleName.split(' ')[1] === 'B'
+        ? '#E0DBFF'
+        : scheduleName.split(' ')[1] === 'C' ? '#ffddf4' : '#ff8088';
+  const bellBackground = {
+    backgroundColor: backgroundColorBellSchedule
+  };
   return (
     <div className="bell-schedule">
       <Paper>
@@ -62,7 +70,11 @@ const BellSchedule = ({
         >
           <div>
             {scheduleName !== 'none' && (
-              <Typography type="title" className="bell-schedule-name">
+              <Typography
+                type="title"
+                className="bell-schedule-name"
+                style={bellBackground}
+              >
                 <div
                   style={{
                     display: 'flex',
