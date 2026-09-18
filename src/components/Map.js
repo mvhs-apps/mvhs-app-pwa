@@ -84,6 +84,19 @@ const Map = (props: Props) => {
       </center>
     </div>
   );
+  /*
+ return (
+    <div className="map-container">
+      <iframe 
+        src="/map.html" 
+        title="Embedded HTML Page"
+        width="100%" 
+        height="1000px"
+        style={{ border: 'none' }}
+      />
+    </div>
+  );
+  */
 };
 
 export default Map;
